@@ -4,10 +4,37 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <div class="card mb-4">
+                <div class="card-header">{{ __('Developer Login') }}</div>
+
+                <div class="card-body">
+                    @env('local')
+                        <form method="POST" action="{{ route('dev-login') }}" id="dev-login-form">
+                            @csrf
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="custom-select" name="email" onchange="event.preventDefault(); document.getElementById('dev-login-form').submit();">
+                                        <option value="">-- {{ __('Select a user to login as') }} --</option>
+                                        @foreach(\App\Models\User::all() as $user)
+                                            <option value="{{ $user->email }}">{{ $user->email }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    @endenv
+                </div>
+            </div>
+
+
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

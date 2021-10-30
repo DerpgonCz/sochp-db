@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LitterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StationController;
-use App\Models\Animal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+if (app()->environment('local')) {
+    Route::post('dev-login', [LoginController::class, 'devLogin'])->name('dev-login');
+}
 
 // Resources
 Route::resource('animals', AnimalController::class);
