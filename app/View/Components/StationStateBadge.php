@@ -11,7 +11,6 @@ class StationStateBadge extends Component
 
     public function __construct(Station $station)
     {
-
         $this->station = $station;
     }
 

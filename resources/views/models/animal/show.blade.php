@@ -60,7 +60,7 @@
                     <dt class="col-9">{{ $animal->litter->happened_on->format('j. n. Y') }}</dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.status', \App\Models\Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->died_on ? sprintf('%s (%s)', __('Dead'), $animal->litter->happened_on->diff($animal->died_on)->format('%yr %mm')) : sprintf('%s (%s)', __('Alive'), $animal->litter->happened_on->diff('now')->format('%yr %mm')) }}</dt>
+                    <dt class="col-9">{{ $animal->isAlive() ? sprintf('%s (%s)', __('Alive'), $animal->litter->happened_on->diff('now')->format('%yr %mm')) : sprintf('%s (%s)', __('Dead'), $animal->litter->happened_on->diff($animal->died_on)->format('%yr %mm')) }}</dt>
                 </dl>
             </div>
             <div class="col-md-6">

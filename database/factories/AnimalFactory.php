@@ -14,10 +14,13 @@ class AnimalFactory extends Factory
 
     public function definition(): array
     {
+        $gender = $this->faker->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]);
+
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name($gender === GenderEnum::MALE ? 'male' : 'female'),
             'registration_no' => $this->faker->unique()->numerify('P ###/##'),
             'died_on' => $this->faker->optional(0.8)->dateTimeThisDecade(),
+            'gender' => $gender,
             'fur' => $this->faker->randomElement(
                 [
                     '',
@@ -126,7 +129,6 @@ class AnimalFactory extends Factory
                 'Husky (husky / roan)',
                 'Nestandardní',
             ]),
-            'gender' => $this->faker->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]),
         ];
     }
 }

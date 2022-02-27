@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\LitterStateEnum;
+use App\Enums\StationStateEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,15 +12,35 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Scout\Searchable;
 
-
+/**
+ * @property string $name
+ * @property \Carbon\Carbon $happened_on
+ * @property LitterStateEnum $state
+ */
 class Litter extends Model
 {
     use HasFactory;
     use Searchable;
 
+    protected $fillable = [
+        'name',
+        'happened_on',
+    ];
+
     protected $casts = [
         'happened_on' => 'datetime',
+        'state' => LitterStateEnum::class,
     ];
+
+    public function scopeApproved(): Builder
+    {
+        return $this->where('state', LitterStateEnum::APPROVED);
+    }
+
+    public function shouldBeSearchable(): bool
+    {
+        return $this->state->is(StationStateEnum::APPROVED);
+    }
 
     public function mother(): BelongsTo
     {

@@ -6,19 +6,15 @@ use App\Enums\StationStateEnum;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Gate;
 
 class StationPolicy
 {
     use HandlesAuthorization;
 
-    private function isAdmin(User $user): bool
-    {
-        return true;
-    }
-
     public function approve(User $user): bool
     {
-        return $this->isAdmin($user);
+        return Gate::forUser($user)->check('admin');
     }
 
     private function owns(?User $user, Station $station): bool
@@ -42,7 +38,7 @@ class StationPolicy
         $ownerCanUpdate = $this->owns($user, $station)
             && $station->state->in([StationStateEnum::DRAFT, StationStateEnum::REQUIRES_CHANGES]);
 
-        $adminCanUpdate = $this->isAdmin($user)
+        $adminCanUpdate = Gate::forUser($user)->check('admin')
             && $station->state->is(StationStateEnum::FOR_APPROVAL);
 
         return $ownerCanUpdate || $adminCanUpdate;

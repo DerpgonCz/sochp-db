@@ -31,6 +31,11 @@ class Animal extends Model
         ])->toArray();
     }
 
+    public function isAlive(): bool
+    {
+        return $this->died_on === null;
+    }
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(Station::class, 'owner_id');

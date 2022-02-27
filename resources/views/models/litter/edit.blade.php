@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2>{{ __('Edit a station') }}</h2>
-                <h5>{{ __('State') }}: <x-station-state-badge :station="$station" /></h5>
+                <h2>{{ __('Edit a litter') }}</h2>
+                <h5>{{ __('State') }}: <x-litter-state-badge :station="$station" /></h5>
             </div>
         </div>
         <div class="row justify-content-center">

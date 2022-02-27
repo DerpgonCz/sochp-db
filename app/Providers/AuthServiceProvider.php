@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Litter;
+use App\Models\Station;
+use App\Models\User;
+use App\Policies\LitterPolicy;
+use App\Policies\StationPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Station::class => StationPolicy::class,
+        Litter::class => LitterPolicy::class,
     ];
 
     /**
@@ -25,6 +31,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('admin', static fn(User $user): bool => true); // TODO: Implements admins
     }
 }

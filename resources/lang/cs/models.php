@@ -56,6 +56,8 @@ return [
     Litter::class => [
         'fields' => [
             'happened_on' => 'Datum narození',
+            'name' => 'Označení',
+            'state' => 'Status',
             'mother' => [
                 'name' => 'Samice',
             ],

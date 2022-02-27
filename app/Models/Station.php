@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Enums\StationStateEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Laravel\Scout\Searchable;
 
 /**
@@ -25,7 +27,7 @@ class Station extends Model
         'state' => StationStateEnum::class,
     ];
 
-    public function scopeApproved()
+    public function scopeApproved(): Builder
     {
         return $this->where('state', StationStateEnum::APPROVED);
     }
@@ -40,8 +42,13 @@ class Station extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function animals(): HasMany
+    public function litters(): HasMany
     {
-        return $this->hasMany(Animal::class, 'owner_id');
+        return $this->hasMany(Litter::class, 'station_id');
+    }
+
+    public function animals(): HasManyThrough
+    {
+        return $this->hasManyThrough(Animal::class, Litter::class, 'station_id', 'litter_id');
     }
 }

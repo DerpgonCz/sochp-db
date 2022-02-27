@@ -24,7 +24,6 @@
                                 <a href="{{ route('stations.show', $userStation) }}" class="btn btn-success">{{ __('Approved') }}</a>
                                 @break
                         @endswitch
-
                     @else
                         <a href="{{ route('stations.create') }}" class="btn btn-primary">{{ __('Create') }}</a>
                     @endif
@@ -53,7 +52,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                @endauth
+                @endcan
 
                 <div class="my-4"></div>
                 <h2>{{ __('Approved stations') }}</h2>
