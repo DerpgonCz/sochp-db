@@ -7,6 +7,12 @@ namespace App\Enums;
 use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
+/**
+ * @method static self DRAFT()
+ * @method static self FOR_APPROVAL()
+ * @method static self APPROVED()
+ * @method static self REQUIRES_CHANGES()
+ */
 class StationStateEnum extends Enum implements LocalizedEnum
 {
     public const DRAFT = 0;

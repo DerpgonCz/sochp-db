@@ -21,7 +21,7 @@
                 <label class="form-group text-right">
                     <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     @if($station->state->in([\App\Enums\StationStateEnum::DRAFT, \App\Enums\StationStateEnum::REQUIRES_CHANGES]))
-                        <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::FOR_APPROVAL }}" class="btn btn-success">{{ __('Send for Approval') }}</button>
+                        <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::FOR_APPROVAL }}" class="btn btn-success">{{ __('Send for approval') }}</button>
                     @endif
                     @if($station->state->is(\App\Enums\StationStateEnum::FOR_APPROVAL))
                         <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::REQUIRES_CHANGES }}" class="btn btn-warning">{{ __('Requires Changes') }}</button>

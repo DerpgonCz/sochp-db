@@ -8,10 +8,10 @@
     @break
 
     @case(\App\Enums\StationStateEnum::REQUIRES_CHANGES)
-        <span class="badge badge-warning">{{ __('Requires Changes') }}</span>
+        <span class="badge badge-warning">{{ __('Requires changes') }}</span>
     @break
 
     @case(\App\Enums\StationStateEnum::FOR_APPROVAL)
-        <span class="badge badge-primary">{{ __('Sent for Approval') }}</span>
+        <span class="badge badge-primary">{{ __('Sent for approval') }}</span>
     @break
 @endswitch

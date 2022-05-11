@@ -19,8 +19,8 @@ class LitterStationRelationshipSeeder extends Seeder
         foreach ($litters as $litter) {
             $stationsToSearch = $stations;
             if ($litter->state->is(StationStateEnum::APPROVED)) {
-                // Limit search space to only approved stations
-                $stationsToSearch = $stations->where('state', StationStateEnum::APPROVED);
+                // Limit search space to only approved stations for approved litters
+                $stationsToSearch = $stations->where('state', StationStateEnum::APPROVED());
             }
 
             $station = $stationsToSearch->random();

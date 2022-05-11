@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
+use App\Enums\StationStateEnum;
 use App\Http\Requests\LitterStoreRequest;
+use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
+use App\Models\Station;
+use App\Services\Models\Animal\AnimalSelectDataService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,40 +22,33 @@ use Illuminate\View\View;
 
 class LitterController extends Controller
 {
-    const SHOW_FIELDS = [
-        'mother.name',
-        'father.name',
-    ];
-
     public function index(): View
     {
         return view('models.litter.index', [
             'stationLitters' => Auth::check() ? optional(Auth::user()->station)->litters ?? [] : [],
-            'litters' => Litter::approved()->orderByDesc('happened_on')->get(),
+            'litters' => Litter::approved()->orderByDesc('happened_on')->with(['children', 'father', 'mother'])->get(),
+            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])->get(),
         ]);
     }
 
-    public function create(): View
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function create(AnimalSelectDataService $animalSelectDataService): View
     {
         $this->authorize('create', Litter::class);
 
         $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
 
-        $stationAnimals = $station->animals
-            ->sortBy('litter.happened_on');
-        $otherAnimals = Animal::with('litter', 'litter.station')->get()
-            ->sortBy('litter.happened_on')
-            ->except($station->animals->keys()->toArray());
-
         return view('models.litter.create', [
             'station' => $station,
-            'stationAnimalsMale' => $stationAnimals->where('gender', GenderEnum::MALE()),
-            'stationAnimalsFemale' => $stationAnimals->where('gender', GenderEnum::FEMALE()),
-            'otherAnimalsMale' => $otherAnimals->where('gender', GenderEnum::MALE()),
-            'otherAnimalsFemale' => $otherAnimals->where('gender', GenderEnum::FEMALE()),
+            ...$animalSelectDataService->buildViewDataForParentSelection($station)
         ]);
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function store(LitterStoreRequest $request): RedirectResponse
     {
         $this->authorize('create', Litter::class);
@@ -61,7 +62,6 @@ class LitterController extends Controller
         $litter->state = LitterStateEnum::DRAFT;
         $litter->save();
 
-
         return response()->redirectToRoute('litters.show', $litter);
     }
 
@@ -72,16 +72,34 @@ class LitterController extends Controller
         ]);
     }
 
-    public function edit(Litter $litter): View
+    public function edit(Litter $litter, AnimalSelectDataService $animalSelectDataService): View|RedirectResponse
     {
+        try {
+            $this->authorize('update', $litter);
+        } catch (AuthorizationException) {
+            return response()->redirectToRoute('litters.show', $litter);
+        }
+
+        $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
+
         return view('models.litter.edit', [
-            'litter' => $litter
+            'litter' => $litter,
+            ...$animalSelectDataService->buildViewDataForParentSelection($station)
         ]);
     }
 
-    public function update(Request $request, Litter $litter)
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(LitterUpdateRequest $request, Litter $litter)
     {
         $this->authorize('update', $litter);
+
+        // TODO: Authorize editing only some fields - admin can edit only state, for example
+        $litter->fill($request->validated());
+        $litter->save();
+
+        return response()->redirectToRoute('litters.edit', $litter);
     }
 
     /**

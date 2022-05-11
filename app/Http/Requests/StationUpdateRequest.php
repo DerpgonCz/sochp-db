@@ -13,9 +13,10 @@ class StationUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable',
-            'state' => [
+            'name' => [
                 'nullable',
+            ],
+            'state' => [
                 'integer',
                 'numeric',
                 Rule::in(StationStateEnum::getValues()),

@@ -51,6 +51,35 @@
                     @endcan
                 @endif
 
+                @can('approve', \App\Models\Litter::class)
+                    <div class="my-4"></div>
+                    <h2>{{ __('For approval') }}</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ __(sprintf('models.%s.fields.name', \App\Models\Litter::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.owner', \App\Models\Litter::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.state', \App\Models\Litter::class)) }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($littersForApproval as $litter)
+                                <tr class="position-relative">
+                                    <th scope="row">
+                                        <a href="{{ route('litters.edit', $litter) }}" class="stretched-link">
+                                            {{ $litter->name }}
+                                        </a>
+                                    </th>
+                                    <td>{{ $litter->station->owner->name }}</td>
+                                    <td>
+                                        <x-litter-state-badge :litter="$litter" />
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endcan
+
                 <h2>{{ __('Approved litters') }}</h2>
                 <table class="table table-hover">
                     <thead>

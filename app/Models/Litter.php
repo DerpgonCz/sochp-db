@@ -25,6 +25,9 @@ class Litter extends Model
     protected $fillable = [
         'name',
         'happened_on',
+        'father_id',
+        'mother_id',
+        'state',
     ];
 
     protected $casts = [
@@ -34,7 +37,7 @@ class Litter extends Model
 
     public function scopeApproved(): Builder
     {
-        return $this->where('state', LitterStateEnum::APPROVED);
+        return $this->where('state', LitterStateEnum::FINALIZED);
     }
 
     public function shouldBeSearchable(): bool

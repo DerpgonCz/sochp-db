@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Enums\LitterStateEnum;
+use App\Enums\PermissionsEnum;
 use App\Enums\StationStateEnum;
 use App\Models\Litter;
 use App\Models\User;
@@ -16,6 +17,11 @@ class LitterPolicy
     private function owns(?User $user, Litter $litter): bool
     {
         return optional($user)->id === $litter->station->owner_id;
+    }
+
+    public function approve(User $user): bool
+    {
+        return $user->hasPermissionTo(PermissionsEnum::MANAGE_LITTERS->value);
     }
 
     public function view(User $user, Litter $litter)
@@ -38,7 +44,7 @@ class LitterPolicy
                 LitterStateEnum::REQUIRES_BREEDING_CHANGES,
             ]);
 
-        $adminCanUpdate = Gate::forUser($user)->check('admin')
+        $adminCanUpdate = $user->hasPermissionTo(PermissionsEnum::MANAGE_LITTERS->value)
             && $litter->state->in([
                 LitterStateEnum::REQUIRES_BREEDING_APPROVAL,
                 LitterStateEnum::REQUIRES_FINAL_APPROVAL

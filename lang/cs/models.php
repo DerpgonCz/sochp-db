@@ -70,6 +70,7 @@ return [
             'children' => [
                 'name' => 'Jméno',
             ],
+            'owner' => 'Vlastník ChS',
         ],
         'children_count' => 'Počet potomků',
     ],

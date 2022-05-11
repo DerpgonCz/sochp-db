@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Litter;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class LitterStateBadge extends Component
@@ -14,7 +15,7 @@ class LitterStateBadge extends Component
         $this->litter = $litter;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.litter-state-badge', [
             'value' => $this->litter->state->value,

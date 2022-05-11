@@ -13,11 +13,11 @@
                                 @break
 
                             @case(\App\Enums\StationStateEnum::FOR_APPROVAL)
-                                <a href="{{ route('stations.show', $userStation) }}" class="btn btn-primary">{{ __('Sent for Approval') }}</a>
+                                <a href="{{ route('stations.show', $userStation) }}" class="btn btn-primary">{{ __('Sent for approval') }}</a>
                                 @break
 
                             @case(\App\Enums\StationStateEnum::REQUIRES_CHANGES)
-                                <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-warning">{{ __('Requires Changes') }}</a>
+                                <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-warning">{{ __('Requires changes') }}</a>
                                 @break
 
                             @case(\App\Enums\StationStateEnum::APPROVED)

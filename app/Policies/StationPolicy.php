@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\PermissionsEnum;
 use App\Enums\StationStateEnum;
 use App\Models\Station;
 use App\Models\User;
@@ -14,7 +15,7 @@ class StationPolicy
 
     public function approve(User $user): bool
     {
-        return Gate::forUser($user)->check('admin');
+        return $user->hasPermissionTo(PermissionsEnum::MANAGE_STATIONS->value);
     }
 
     private function owns(?User $user, Station $station): bool
@@ -38,7 +39,7 @@ class StationPolicy
         $ownerCanUpdate = $this->owns($user, $station)
             && $station->state->in([StationStateEnum::DRAFT, StationStateEnum::REQUIRES_CHANGES]);
 
-        $adminCanUpdate = Gate::forUser($user)->check('admin')
+        $adminCanUpdate = $user->hasPermissionTo(PermissionsEnum::MANAGE_STATIONS->value)
             && $station->state->is(StationStateEnum::FOR_APPROVAL);
 
         return $ownerCanUpdate || $adminCanUpdate;

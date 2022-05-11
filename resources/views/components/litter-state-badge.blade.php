@@ -23,7 +23,7 @@
         <span class="badge badge-primary">{{ __('Sent for final approval') }}</span>
     @break
 
-    @case(\App\Enums\LitterStateEnum::APPROVED)
+    @case(\App\Enums\LitterStateEnum::FINALIZED)
         <span class="badge badge-success">{{ __('Approved') }}</span>
     @break
 
