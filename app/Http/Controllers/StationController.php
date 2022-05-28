@@ -14,11 +14,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class StationController extends Controller
 {
-    public const SHOW_FIELDS = [
-        'name',
-        'state',
-    ];
-
     public function index(): View
     {
         return view('models.station.index', [
@@ -64,9 +59,9 @@ class StationController extends Controller
     {
         $this->authorize('update', $station);
 
-       return view('models.station.edit', [
-           'station' => $station,
-       ]);
+        return view('models.station.edit', [
+            'station' => $station,
+        ]);
     }
 
     /**
@@ -78,15 +73,13 @@ class StationController extends Controller
 
         $station->fill($request->validated());
 
+        // State logic
         $redirect = ['stations.edit', $station];
         $flashMessage = 'flashes.stations.updated';
         if ($request->has('state')) {
-            $allowedTransitions = [
-                StationStateEnum::DRAFT => [StationStateEnum::FOR_APPROVAL],
-                StationStateEnum::FOR_APPROVAL => [StationStateEnum::APPROVED, StationStateEnum::REQUIRES_CHANGES],
-                StationStateEnum::APPROVED => [],
-                StationStateEnum::REQUIRES_CHANGES => [StationStateEnum::FOR_APPROVAL],
-            ];
+            $toState = StationStateEnum::fromValue((int)$request->get('state'));
+            $this->authorize('updateState', [$station, $toState]);
+
             $redirectTransitions = [
                 StationStateEnum::FOR_APPROVAL => ['stations.show', $station],
                 StationStateEnum::APPROVED => ['stations.show', $station],
@@ -98,15 +91,10 @@ class StationController extends Controller
                 StationStateEnum::REQUIRES_CHANGES => 'flashes.stations.state.requires_changes',
             ];
 
-            $fromState = $station->state->value;
-            $toState = (int)$request->get('state');
-            if (!in_array($toState, $allowedTransitions[$fromState], true)) {
-                throw new UnexpectedValueException('Invalid state transfer');
-            }
-            $station->state = StationStateEnum::fromValue($toState);
+            $station->state = $toState;
 
-            $redirect = $redirectTransitions[$toState];
-            $flashMessage = $flashMessages[$toState] ?: $flashMessage;
+            $redirect = $redirectTransitions[$toState->value];
+            $flashMessage = $flashMessages[$toState->value] ?: $flashMessage;
         }
 
         $station->save();

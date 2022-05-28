@@ -14,6 +14,11 @@
                 @csrf
 
                 <label class="form-group">
+                    <strong>{{ __(sprintf('models.%s.fields.owner.name', \App\Models\Station::class)) }}</strong>
+                    <input type="text" class="form-control" name="owner" value="{{ $station->owner->name }}" disabled>
+                </label>
+
+                <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}</strong>
                     <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}" value="{{ $station->name }}" required>
                 </label>
@@ -24,7 +29,7 @@
                         <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::FOR_APPROVAL }}" class="btn btn-success">{{ __('Send for approval') }}</button>
                     @endif
                     @if($station->state->is(\App\Enums\StationStateEnum::FOR_APPROVAL))
-                        <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::REQUIRES_CHANGES }}" class="btn btn-warning">{{ __('Requires Changes') }}</button>
+                        <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::REQUIRES_CHANGES }}" class="btn btn-warning">{{ __('Requires changes') }}</button>
                         <button type="submit" name="state" value="{{ \App\Enums\StationStateEnum::APPROVED }}" class="btn btn-success">{{ __('Approve') }}</button>
                     @endif
                 </label>

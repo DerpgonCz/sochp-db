@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AnimalFactory extends Factory
 {
-    protected string $model = Animal::class;
+    protected $model = Animal::class;
 
     public function definition(): array
     {

@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
-use App\Enums\StationStateEnum;
+use App\Facades\Flashes;
 use App\Http\Requests\LitterStoreRequest;
 use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
-use App\Models\Station;
 use App\Services\Models\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -27,7 +21,8 @@ class LitterController extends Controller
         return view('models.litter.index', [
             'stationLitters' => Auth::check() ? optional(Auth::user()->station)->litters ?? [] : [],
             'litters' => Litter::approved()->orderByDesc('happened_on')->with(['children', 'father', 'mother'])->get(),
-            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])->get(),
+            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])
+                ->get(),
         ]);
     }
 
@@ -42,7 +37,7 @@ class LitterController extends Controller
 
         return view('models.litter.create', [
             'station' => $station,
-            ...$animalSelectDataService->buildViewDataForParentSelection($station)
+            ...$animalSelectDataService->buildViewDataForParentSelection($station),
         ]);
     }
 
@@ -84,7 +79,7 @@ class LitterController extends Controller
 
         return view('models.litter.edit', [
             'litter' => $litter,
-            ...$animalSelectDataService->buildViewDataForParentSelection($station)
+            ...$animalSelectDataService->buildViewDataForParentSelection($station),
         ]);
     }
 
@@ -95,11 +90,43 @@ class LitterController extends Controller
     {
         $this->authorize('update', $litter);
 
-        // TODO: Authorize editing only some fields - admin can edit only state, for example
         $litter->fill($request->validated());
+
+        // State logic
+        $redirect = ['litters.edit', $litter];
+        $flashMessage = 'flashes.litters.updated';
+        if ($request->has('state')) {
+            $toState = LitterStateEnum::fromValue((int)$request->get('state'));
+            $this->authorize('updateState', [$litter, $toState]);
+
+            $redirectTransitions = [
+                LitterStateEnum::REQUIRES_DRAFT_CHANGES => ['litters.index'],
+                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => ['litters.show', $litter],
+                LitterStateEnum::BREEDING => ['litters.index'],
+                LitterStateEnum::REQUIRES_BREEDING_CHANGES => ['litters.index'],
+                LitterStateEnum::REQUIRES_FINAL_APPROVAL => ['litters.show', $litter],
+                LitterStateEnum::FINALIZED => ['litters.index'],
+            ];
+            $flashMessages = [
+                LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.stations.state.requires_draft_changes',
+                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.stations.state.requires_breeding_approval',
+                LitterStateEnum::BREEDING => 'flashes.stations.state.breeding',
+                LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.stations.state.requires_breeding_changes',
+                LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.stations.state.requires_final_approval',
+                LitterStateEnum::FINALIZED => 'flashes.stations.state.finalized',
+            ];
+
+            $litter->state = $toState;
+
+            $redirect = $redirectTransitions[$toState->value];
+            $flashMessage = $flashMessages[$toState->value] ?: $flashMessage;
+        }
+
         $litter->save();
 
-        return response()->redirectToRoute('litters.edit', $litter);
+        Flashes::success(__($flashMessage));
+
+        return response()->redirectToRoute(...$redirect);
     }
 
     /**

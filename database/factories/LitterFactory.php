@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class LitterFactory extends Factory
 {
-    protected string $model = Litter::class;
+    protected $model = Litter::class;
 
     public function definition(): array
     {
