@@ -15,7 +15,7 @@ class StationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => sprintf('ChS %s', $this->faker->name),
             'state' => StationStateEnum::getRandomInstance(),
         ];
     }

@@ -2097,6 +2097,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -37721,7 +37724,7 @@ var render = function() {
                   ? _c(
                       "span",
                       { staticClass: "dropdown-item font-weight-bold pl-2" },
-                      [_vm._v("Animals")]
+                      [_vm._v("Zvířata")]
                     )
                   : _vm._e(),
                 _vm._v(" "),
@@ -37737,7 +37740,7 @@ var render = function() {
                         "\n                " +
                           _vm._s(animal.name) +
                           " (" +
-                          _vm._s(animal.litter.station.name) +
+                          _vm._s(animal.station_name) +
                           ", " +
                           _vm._s(animal.color) +
                           ")\n            "
@@ -37777,6 +37780,12 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
+                _vm.results.stations && _vm.results.stations.length > 5
+                  ? _c("span", { staticClass: "dropdown-item" }, [
+                      _vm._v("+ " + _vm._s(_vm.results.stations.length - 5))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _vm.results.litters && _vm.results.litters.length
                   ? _c(
                       "span",
@@ -37795,12 +37804,20 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                " +
-                          _vm._s(litter.id) +
-                          "\n            "
+                          _vm._s(litter.name) +
+                          " (" +
+                          _vm._s(litter.station_name) +
+                          ")\n            "
                       )
                     ]
                   )
-                })
+                }),
+                _vm._v(" "),
+                _vm.results.litters && _vm.results.litters.length > 5
+                  ? _c("span", { staticClass: "dropdown-item" }, [
+                      _vm._v("+ " + _vm._s(_vm.results.litters.length - 5))
+                    ])
+                  : _vm._e()
               ],
               2
             )

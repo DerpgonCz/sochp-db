@@ -34,6 +34,14 @@ class Litter extends Model
         'state' => LitterStateEnum::class,
     ];
 
+    public function toSearchableArray(): array
+    {
+        return collect($this->toArray())->only([
+            'id',
+            'name',
+        ])->toArray();
+    }
+
     public function scopeApproved(): Builder
     {
         return $this->where('state', LitterStateEnum::FINALIZED);

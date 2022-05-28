@@ -17,24 +17,22 @@ class AnimalFactory extends Factory
         $gender = $this->faker->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]);
 
         return [
-            'name' => $this->faker->name($gender === GenderEnum::MALE ? 'male' : 'female'),
+            'name' => sprintf('ANI %s', $this->faker->name($gender === GenderEnum::MALE ? 'male' : 'female')),
             'registration_no' => $this->faker->unique()->numerify('P ###/##'),
             'died_on' => $this->faker->optional(0.8)->dateTimeThisDecade(),
             'gender' => $gender,
-            'fur' => $this->faker->randomElement(
-                [
-                    '',
-                    'Rex (rex)',
-                    'Standardní (standard)',
-                    'Fuzz (fuzz)',
-                    'Fuzz saténový (fuzz satin)',
-                    'Velvetýn (velveteen)',
-                    'Dvojitý rex (double-rex)',
-                    'Dlouhosrstý (longhaired)',
-                    'Saténový (satin)',
-                    'Dvojitý velvetýn (double-velv.)',
-                ]
-            ),
+            'fur' => $this->faker->randomElement([
+                '',
+                'Rex (rex)',
+                'Standardní (standard)',
+                'Fuzz (fuzz)',
+                'Fuzz saténový (fuzz satin)',
+                'Velvetýn (velveteen)',
+                'Dvojitý rex (double-rex)',
+                'Dlouhosrstý (longhaired)',
+                'Saténový (satin)',
+                'Dvojitý velvetýn (double-velv.)',
+            ]),
             'color' => $this->faker->randomElement([
                 '',
                 'Ruská modrá (russian blue)',
