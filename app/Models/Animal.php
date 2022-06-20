@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\GenderEnum;
+use App\Enums\LitterStateEnum;
+use App\Enums\StationStateEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +31,11 @@ class Animal extends Model
             'marks_primary',
             'marks_secondary'
         ])->toArray();
+    }
+
+    public function shouldBeSearchable(): bool
+    {
+        return $this->litter?->state?->is(LitterStateEnum::FINALIZED) ?? false;
     }
 
     public function isAlive(): bool

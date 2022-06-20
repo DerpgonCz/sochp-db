@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->dateTime('happened_on')->nullable();
+            $table->date('happened_on')->nullable();
             $table->string('name');
 
             $table->foreignId('mother_id')->nullable()->constrained('animals');

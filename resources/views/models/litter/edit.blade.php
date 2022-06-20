@@ -19,6 +19,11 @@
                 </label>
 
                 <label class="form-group">
+                    <strong>{{ __(sprintf('models.%s.fields.happened_on', \App\Models\Litter::class)) }}</strong>
+                    <input type="date" class="form-control" name="happened_on" placeholder="{{ __(sprintf('models.%s.fields.happened_on', \App\Models\Litter::class)) }}" value="{{ optional($litter->happened_on)->format('Y-m-d') }}" required>
+                </label>
+
+                <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.mother.name', \App\Models\Litter::class)) }}</strong>
                     <select name="mother_id" class="custom-select">
                         <option value="">-- {{ __(sprintf('models.%s.fields.mother.name', \App\Models\Litter::class)) }} --</option>

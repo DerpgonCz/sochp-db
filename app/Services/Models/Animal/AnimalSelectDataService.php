@@ -10,13 +10,16 @@ use App\Models\Station;
 
 class AnimalSelectDataService
 {
-    public function buildViewDataForParentSelection(Station $station): array
+    public function buildViewDataForParentSelection(?Station $station = null): array
     {
-        $stationAnimals = $station->animals
-            ->sortBy('litter.happened_on');
+        $stationAnimals = collect([]);
         $otherAnimals = Animal::with('litter', 'litter.station')->get()
-            ->sortBy('litter.happened_on')
-            ->except($station->animals->pluck('id')->toArray());
+            ->sortBy('litter.happened_on');
+
+        if ($station) {
+            $otherAnimals = $otherAnimals->except($station->animals->pluck('id')->toArray());
+            $stationAnimals = $station->animals->sortBy('litter.happened_on');
+        }
 
         return [
             'stationAnimalsMale' => $stationAnimals->where('gender', GenderEnum::MALE()),

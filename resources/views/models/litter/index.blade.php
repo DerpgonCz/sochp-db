@@ -11,7 +11,7 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th>{{ __(sprintf('models.%s.fields.name', \App\Models\Litter::class)) }}</th>
                                 <th>{{ __(sprintf('models.%s.fields.happened_on', \App\Models\Litter::class)) }}</th>
                                 <th>{{ __(sprintf('models.%s.fields.mother.name', \App\Models\Litter::class)) }}</th>
                                 <th>{{ __(sprintf('models.%s.fields.father.name', \App\Models\Litter::class)) }}</th>

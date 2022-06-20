@@ -108,12 +108,12 @@ class LitterController extends Controller
                 LitterStateEnum::FINALIZED => ['litters.index'],
             ];
             $flashMessages = [
-                LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.stations.state.requires_draft_changes',
-                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.stations.state.requires_breeding_approval',
-                LitterStateEnum::BREEDING => 'flashes.stations.state.breeding',
-                LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.stations.state.requires_breeding_changes',
-                LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.stations.state.requires_final_approval',
-                LitterStateEnum::FINALIZED => 'flashes.stations.state.finalized',
+                LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.litters.state.requires_draft_changes',
+                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.litters.state.requires_breeding_approval',
+                LitterStateEnum::BREEDING => 'flashes.litters.state.breeding',
+                LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.litters.state.requires_breeding_changes',
+                LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.litters.state.requires_final_approval',
+                LitterStateEnum::FINALIZED => 'flashes.litters.state.finalized',
             ];
 
             $litter->state = $toState;
