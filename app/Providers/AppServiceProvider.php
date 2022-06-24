@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('flashes', static fn(): FlashesFacadeService => new FlashesFacadeService());;
+        $this->app->bind('flashes', static fn (): FlashesFacadeService => new FlashesFacadeService());
     }
 
     /**

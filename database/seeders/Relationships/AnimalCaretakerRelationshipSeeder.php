@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Seeders\Relationships;
 
 use App\Models\Animal;
-use App\Models\Station;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

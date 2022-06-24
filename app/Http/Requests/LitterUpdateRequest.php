@@ -9,7 +9,6 @@ use App\Enums\LitterStateEnum;
 use App\Models\Animal;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Traits\HasPermissions;
 
 class LitterUpdateRequest extends FormRequest
 {

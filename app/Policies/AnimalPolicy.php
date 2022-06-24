@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Enums\AnimalStateEnum;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

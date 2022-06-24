@@ -10,11 +10,13 @@ use Illuminate\Auth\Events\Logout;
 
 class UserEventSubscriber
 {
-    public function handleUserLogin($event): void {
+    public function handleUserLogin($event): void
+    {
         Flashes::success(__('Logged in successfully'));
     }
 
-    public function handleUserLogout($event): void {
+    public function handleUserLogout($event): void
+    {
         Flashes::success(__('Logged out successfully'));
     }
 

@@ -6,7 +6,6 @@ namespace Database\Seeders\Relationships;
 
 use App\Models\Animal;
 use App\Models\Litter;
-use App\Models\Station;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 
