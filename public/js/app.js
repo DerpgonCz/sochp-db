@@ -2054,6 +2054,193 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlagCheckboxes */ "./resources/js/components/FlagCheckboxes.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    FlagCheckboxes: _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    animals: Array,
+    animalBuilds: Object,
+    animalBuildsGroups: Array
+  },
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    flagsWithTitles: Object,
+    selected: {
+      type: Number,
+      "default": 0
+    },
+    groups: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    inputName: String
+  },
+  data: function data() {
+    var selection = {};
+
+    for (var _i = 0, _Object$keys = Object.keys(this.flagsWithTitles); _i < _Object$keys.length; _i++) {
+      var flag = _Object$keys[_i];
+      selection[flag] = {
+        selected: (this.selected & parseInt(flag)) !== 0,
+        disabled: false
+      };
+    }
+
+    this.ensureGroups(selection, this.groups);
+    return {
+      selection: selection
+    };
+  },
+  methods: {
+    ensureGroups: function ensureGroups(currentSelected, groups) {
+      for (var _i2 = 0, _Object$entries = Object.entries(currentSelected); _i2 < _Object$entries.length; _i2++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
+            key = _Object$entries$_i[0],
+            selected = _Object$entries$_i[1].selected;
+
+        if (selected === false) continue;
+
+        var _iterator = _createForOfIteratorHelper(groups),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var group = _step.value;
+            if (!group.includes(parseInt(key))) continue;
+            this.disableAllNotInGroup(currentSelected, group);
+            return;
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+
+      this.enableAll(currentSelected);
+    },
+    disableAllNotInGroup: function disableAllNotInGroup(currentSelected, group) {
+      for (var _i3 = 0, _Object$keys2 = Object.keys(currentSelected); _i3 < _Object$keys2.length; _i3++) {
+        var key = _Object$keys2[_i3];
+        var shouldDisable = !group.includes(parseInt(key));
+        currentSelected[key].disabled = shouldDisable;
+
+        if (shouldDisable) {
+          currentSelected[key].selected = false;
+        }
+      }
+    },
+    enableAll: function enableAll(currentSelected) {
+      for (var _i4 = 0, _Object$keys3 = Object.keys(currentSelected); _i4 < _Object$keys3.length; _i4++) {
+        var key = _Object$keys3[_i4];
+        currentSelected[key].disabled = false;
+      }
+    }
+  },
+  computed: {
+    finalValue: function finalValue() {
+      var out = 0;
+
+      for (var _i5 = 0, _Object$entries2 = Object.entries(this.selection); _i5 < _Object$entries2.length; _i5++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i5], 2),
+            key = _Object$entries2$_i[0],
+            selected = _Object$entries2$_i[1].selected;
+
+        out |= selected ? parseInt(key) : 0;
+      }
+
+      return out || null;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NavbarSearch.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NavbarSearch.vue?vue&type=script&lang=js& ***!
@@ -2171,6 +2358,13 @@ files.keys().map(function (key) {
 
 var app = new Vue({
   el: '#app'
+});
+/**
+ * Initialize tooltips
+ */
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 /***/ }),
@@ -37602,6 +37796,84 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalBuilder.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/AnimalBuilder.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalBuilder.vue?vue&type=template&id=1b078a24& */ "./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24&");
+/* harmony import */ var _AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalBuilder.vue?vue&type=script&lang=js& */ "./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AnimalBuilder.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FlagCheckboxes.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/FlagCheckboxes.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlagCheckboxes.vue?vue&type=template&id=260dcce8& */ "./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8&");
+/* harmony import */ var _FlagCheckboxes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FlagCheckboxes.vue?vue&type=script&lang=js& */ "./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FlagCheckboxes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FlagCheckboxes.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/NavbarSearch.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/NavbarSearch.vue ***!
@@ -37641,6 +37913,38 @@ component.options.__file = "resources/js/components/NavbarSearch.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalBuilder.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlagCheckboxes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FlagCheckboxes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlagCheckboxes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/NavbarSearch.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/NavbarSearch.vue?vue&type=script&lang=js& ***!
@@ -37657,6 +37961,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalBuilder.vue?vue&type=template&id=1b078a24& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FlagCheckboxes_vue_vue_type_template_id_260dcce8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FlagCheckboxes.vue?vue&type=template&id=260dcce8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/NavbarSearch.vue?vue&type=template&id=529fe9c3&":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/NavbarSearch.vue?vue&type=template&id=529fe9c3& ***!
@@ -37670,6 +38008,168 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavbarSearch_vue_vue_type_template_id_529fe9c3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavbarSearch_vue_vue_type_template_id_529fe9c3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NavbarSearch.vue?vue&type=template&id=529fe9c3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NavbarSearch.vue?vue&type=template&id=529fe9c3&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col" },
+      _vm._l(_vm.animals, function(animal, index) {
+        return _c("div", { staticClass: "row mb-2" }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "animals[" + index + "][id]" },
+            domProps: { value: animal.id + 5 }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header" },
+                [_vm._t("animal-build-header")],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("flag-checkboxes", {
+                    attrs: {
+                      selected: animal.build,
+                      "flags-with-titles": _vm.animalBuilds,
+                      groups: _vm.animalBuildsGroups,
+                      "input-name": "animals[" + index + "][build]"
+                    }
+                  })
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FlagCheckboxes.vue?vue&type=template&id=260dcce8& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.flagsWithTitles, function(title, flag) {
+        return _c("div", [
+          _c("label", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model:value",
+                  value: _vm.selection[flag].selected,
+                  expression: "selection[flag].selected",
+                  arg: "value"
+                }
+              ],
+              attrs: {
+                type: "checkbox",
+                disabled: _vm.selection[flag].disabled
+              },
+              domProps: {
+                checked: Array.isArray(_vm.selection[flag].selected)
+                  ? _vm._i(_vm.selection[flag].selected, null) > -1
+                  : _vm.selection[flag].selected
+              },
+              on: {
+                change: [
+                  function($event) {
+                    var $$a = _vm.selection[flag].selected,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.selection[flag],
+                            "selected",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.selection[flag],
+                            "selected",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.selection[flag], "selected", $$c)
+                    }
+                  },
+                  function($event) {
+                    return _vm.ensureGroups(_vm.selection, _vm.groups)
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(title))])
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", name: _vm.inputName },
+        domProps: { value: _vm.finalValue }
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),
@@ -49997,6 +50497,8 @@ Vue.compile = compileToFunctions;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./components/AnimalBuilder.vue": "./resources/js/components/AnimalBuilder.vue",
+	"./components/FlagCheckboxes.vue": "./resources/js/components/FlagCheckboxes.vue",
 	"./components/NavbarSearch.vue": "./resources/js/components/NavbarSearch.vue"
 };
 

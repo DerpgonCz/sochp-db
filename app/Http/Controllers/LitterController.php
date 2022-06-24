@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Animal\AnimalBuildEnum;
 use App\Enums\LitterStateEnum;
 use App\Facades\Flashes;
 use App\Http\Requests\LitterStoreRequest;
@@ -12,6 +13,8 @@ use App\Services\Models\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class LitterController extends Controller
@@ -91,6 +94,20 @@ class LitterController extends Controller
         $this->authorize('update', $litter);
 
         $litter->fill($request->validated());
+        $litter->save();
+
+        // Animals logic
+        $animals = collect($request->get('animals'));
+        $existingAnimas = $animals
+            ->filter(static fn(array $animal): bool => array_key_exists('id', $animal))
+            ->keyBy('id');
+        $newAnimals = $animals
+            ->filter(static fn(array $animal): bool => !array_key_exists('id', $animal));
+
+        dd($request->all());
+        // TODO: Sanity check that animals belongs to litter
+
+        dd($existingAnimas, $newAnimals);
 
         // State logic
         $redirect = ['litters.edit', $litter];

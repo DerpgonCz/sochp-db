@@ -57,6 +57,17 @@
                     </select>
                 </label>
 
+                <h3>{{ __('Children') }}</h3>
+                <animal-builder
+                    :animals="{{ json_encode($litter->children->toArray()) }}"
+                    :animal-builds="{{ json_encode(\App\Enums\Animal\AnimalBuildEnum::flagsWithTitles()) }}"
+                    :animal-builds-groups="{{ json_encode(\App\Enums\Animal\AnimalBuildEnum::selectableGroups()) }}"
+                >
+                    <template v-slot:animal-build-header>
+                        {{ __('Body build') }}
+                    </template>
+                </animal-builder>
+
                 <label class="form-group text-right">
                     <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     @if($litter->state->in([\App\Enums\LitterStateEnum::DRAFT, \App\Enums\LitterStateEnum::REQUIRES_DRAFT_CHANGES]))

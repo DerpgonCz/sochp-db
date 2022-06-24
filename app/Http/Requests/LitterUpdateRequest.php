@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Enums\Animal\AnimalBuildEnum;
 use App\Enums\LitterStateEnum;
-use App\Models\Litter;
+use App\Models\Animal;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Traits\HasPermissions;
 
 class LitterUpdateRequest extends FormRequest
 {
@@ -33,6 +35,21 @@ class LitterUpdateRequest extends FormRequest
                 'integer',
                 'numeric',
                 Rule::in(LitterStateEnum::getValues()),
+            ],
+            'animals' => [
+                'array',
+            ],
+            'animals.*' => [
+                'array:build,id',
+            ],
+            'animals.*.build' => [
+                'numeric',
+                Rule::in(AnimalBuildEnum::values()),
+            ],
+            'animals.*.id' => [
+                'nullable',
+                'numeric',
+                Rule::exists(Animal::class, 'id')->where('litter_id', $this->litter->id),
             ],
         ];
     }

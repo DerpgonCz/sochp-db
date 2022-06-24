@@ -10,6 +10,7 @@ return [
     ],
     Animal::class => [
         'status' => 'Stav',
+        'variety' => 'Varieta',
         'fields' => [
             'name' => 'Jméno',
             'registration_no' => 'Registrační číslo',

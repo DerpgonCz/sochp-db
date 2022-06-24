@@ -50,17 +50,22 @@
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.name', \App\Models\Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->name }}</dt>
 
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.gender', \App\Models\Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->gender->description }}</dt>
-
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.note', \App\Models\Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->note ?: '--' }}</dt>
-
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.happened_on', \App\Models\Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->litter->happened_on->format('j. n. Y') }}</dt>
 
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.gender', \App\Models\Animal::class)) }}</dd>
+                    <dt class="col-9">{{ $animal->gender->description }}</dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.variety', \App\Models\Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ __(sprintf('enums.%s.%d', \App\Enums\Animal\AnimalBuildEnum::class, $animal->build)) }}
+                    </dt>
+
                     <dd class="col-3">{{ __(sprintf('models.%s.status', \App\Models\Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->isAlive() ? sprintf('%s (%s)', __('Alive'), $animal->litter->happened_on->diff('now')->format('%yr %mm')) : sprintf('%s (%s)', __('Dead'), $animal->litter->happened_on->diff($animal->died_on)->format('%yr %mm')) }}</dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.note', \App\Models\Animal::class)) }}</dd>
+                    <dt class="col-9">{{ $animal->note ?: '--' }}</dt>
                 </dl>
             </div>
             <div class="col-md-6">

@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Enums\LitterStateEnum;
-use App\Enums\PermissionsEnum;
+use App\Enums\Auth\PermissionsEnum;
 use App\Enums\StationStateEnum;
 use App\Models\Litter;
 use App\Models\User;

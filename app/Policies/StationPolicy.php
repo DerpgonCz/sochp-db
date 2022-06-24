@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Enums\PermissionsEnum;
+use App\Enums\Auth\PermissionsEnum;
 use App\Enums\StationStateEnum;
 use App\Models\Station;
 use App\Models\User;
