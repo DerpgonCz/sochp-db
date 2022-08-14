@@ -2,7 +2,7 @@
     <div>
         <div v-for="(title, flag) in flagsWithTitles">
             <label>
-                <input type="checkbox" v-model:value="selection[flag].selected" :disabled="selection[flag].disabled" @change="ensureGroups(selection, groups)">
+                <input type="checkbox" v-model:value="selection[flag].selected" :disabled="selection[flag].disabled" @change="ensureGroups(selection, groups)" :required="isInputRequired">
                 <span>{{ title }}</span>
             </label>
         </div>
@@ -23,6 +23,10 @@ export default {
             default: () => [],
         },
         inputName: String,
+        required: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         const selection = {};
@@ -79,6 +83,10 @@ export default {
             }
 
             return out || null;
+        },
+        isInputRequired() {
+            console.log(this.required, this.finalValue);
+            return this.required && this.finalValue === null;
         }
     }
 }

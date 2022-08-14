@@ -30,9 +30,9 @@ class AnimalPolicy
         //
     }
 
-    public function delete(User $user, Animal $animal)
+    public function delete(User $user, Animal $animal): bool
     {
-        //
+        return $user->can('update', $animal->litter);
     }
 
     public function restore(User $user, Animal $animal)

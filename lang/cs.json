@@ -146,6 +146,7 @@
     "Country": "Země",
     "Coupon": "Kupón",
     "Create": "Vytvořit",
+    "Create private": "Vytvořit soukromý",
     "Create & Add Another": "Vytvořit a přidat další",
     "Create :resource": "Vytvořit :resource",
     "Create a new team to collaborate with others on projects.": "Vytvořte nový tým, který bude spolupracovat s ostatními na projektech.",
@@ -752,6 +753,5 @@
     "Other animals": "Ostatní zvířata",
     "Dead": "✝",
     "Alive": "Žije",
-    "Body build": "Stavba těla",
-    "Standard": "Standardní"
+    "standard": "standardní"
 }

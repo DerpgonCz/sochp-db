@@ -14,12 +14,15 @@ return [
         'fields' => [
             'name' => 'Jméno',
             'registration_no' => 'Registrační číslo',
+            'build' => 'Stavba těla',
             'fur' => 'Srst',
             'color' => 'Barva',
             'effect' => 'Efekt',
-            'mark_primary' => 'Hlavní znak',
-            'mark_secondary' => 'Vedlejší znak',
+            'eyes' => 'Barva očí',
+            'mark_primary' => 'Kresba I',
+            'mark_secondary' => 'Kresba II',
             'gender' => 'Pohlaví',
+            'breeding_type' => 'Chovnost',
             'caretaker' => [
                 'name' => 'Jméno',
                 'station' => [

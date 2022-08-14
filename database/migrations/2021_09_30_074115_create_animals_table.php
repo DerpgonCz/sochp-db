@@ -15,14 +15,21 @@ return new class () extends Migration {
 
             $table->string('name')->nullable();
             $table->string('registration_no')->unique()->nullable();
-            $table->string('fur')->nullable();
-            $table->string('color')->nullable();
-            $table->string('effect')->nullable();
-            $table->string('mark_primary')->nullable();
-            $table->string('mark_secondary')->nullable();
             $table->text('note')->nullable();
-            $table->tinyInteger('gender')->default(0);
             $table->dateTime('died_on')->nullable();
+
+            // Flag enums
+            $table->unsignedTinyInteger('fur');
+            $table->unsignedTinyInteger('build');
+            $table->string('color')->nullable();
+
+            // Single value enums
+            $table->unsignedTinyInteger('breeding_type')->nullable();
+            $table->unsignedTinyInteger('effect')->nullable();
+            $table->unsignedTinyInteger('mark_primary')->nullable();
+            $table->unsignedTinyInteger('mark_secondary')->nullable();
+            $table->unsignedTinyInteger('gender');
+            $table->unsignedTinyInteger('eyes');
 
             $table->foreignId('caretaker_id')->nullable()->constrained('users');
         });

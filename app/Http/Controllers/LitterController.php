@@ -62,6 +62,8 @@ class LitterController extends Controller
 
     public function show(Litter $litter): View
     {
+        $this->authorize('view', $litter);
+
         return view('models.litter.show', [
             'litter' => $litter->load(['mother', 'father']),
         ]);
@@ -94,17 +96,16 @@ class LitterController extends Controller
         $litter->save();
 
         // Animals logic
-        $animals = collect($request->get('animals'));
-        $existingAnimas = $animals
-            ->filter(static fn (array $animal): bool => array_key_exists('id', $animal))
-            ->keyBy('id');
-        $newAnimals = $animals
-            ->filter(static fn (array $animal): bool => !array_key_exists('id', $animal));
-
-        dd($request->all());
-        // TODO: Sanity check that animals belongs to litter
-
-        dd($existingAnimas, $newAnimals);
+        collect($request->get('animals'))
+            ->each(static function (array $animal) use ($litter): Animal {
+                return Animal::updateOrCreate(
+                    ['id' => $animal],
+                    [
+                        ...collect($animal)->except('id')->toArray(),
+                        'litter_id' => $litter->id,
+                    ]
+                );
+            });
 
         // State logic
         $redirect = ['litters.edit', $litter];

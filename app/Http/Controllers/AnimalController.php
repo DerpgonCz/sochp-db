@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AnimalController extends Controller
 {
@@ -40,8 +41,15 @@ class AnimalController extends Controller
         //
     }
 
-    public function destroy(Animal $animal)
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Animal $animal): Response
     {
-        //
+        $this->authorize('delete', $animal);
+
+        $animal->delete();
+
+        return response()->noContent();
     }
 }

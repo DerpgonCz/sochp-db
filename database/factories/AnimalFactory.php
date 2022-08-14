@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\Animal\AnimalBreedingTypeEnum;
+use App\Enums\Animal\AnimalBuildEnum;
+use App\Enums\Animal\AnimalEffectEnum;
+use App\Enums\Animal\AnimalEyesEnum;
+use App\Enums\Animal\AnimalFurEnum;
+use App\Enums\Animal\AnimalPrimaryMarkEnum;
+use App\Enums\Animal\AnimalSecondaryMarkEnum;
 use App\Enums\GenderEnum;
 use App\Models\Animal;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,18 +28,8 @@ class AnimalFactory extends Factory
             'registration_no' => $this->faker->unique()->numerify('P ###/##'),
             'died_on' => $this->faker->optional(0.8)->dateTimeThisDecade(),
             'gender' => $gender,
-            'fur' => $this->faker->randomElement([
-                '',
-                'Rex (rex)',
-                'Standardní (standard)',
-                'Fuzz (fuzz)',
-                'Fuzz saténový (fuzz satin)',
-                'Velvetýn (velveteen)',
-                'Dvojitý rex (double-rex)',
-                'Dlouhosrstý (longhaired)',
-                'Saténový (satin)',
-                'Dvojitý velvetýn (double-velv.)',
-            ]),
+            'fur' => $this->faker->randomElement(AnimalFurEnum::values()), // TODO: Choose multiple valid
+            'build' => $this->faker->randomElement(AnimalBuildEnum::values()), // TODO: Choose multiple valid
             'color' => $this->faker->randomElement([
                 '',
                 'Ruská modrá (russian blue)',
@@ -80,53 +77,11 @@ class AnimalFactory extends Factory
                 'Double mink (double mink)',
                 'Ruská platina (russian platinum)',
             ]),
-            'effect' => $this->faker->randomElement([
-                '',
-                'Černooká siamská s barevnými znaky (coulour point BES)',
-                'Barmská (burmese)',
-                'Červenooká kuní (red eyed devil / marten)',
-                'Siamská s barevnými znaky (colour point siamese)',
-                'Himálajská s barevnými znaky (colour point himalayan)',
-                'Barmská aguti (wheaten burmese)',
-                'Černooká himálajská s bar.znaky (BE colour point himalayan)',
-                'Postříbřená (silvered)',
-                'Černooká kuní (black eyed devil / marten)',
-                'Sobolí (sable burmese)',
-                'Černooká kuní aguti (black eyed devil agouti)',
-                'Himálajská zlatá (golden himalayan)',
-                'Mramorovaná (merle)',
-                'Červenooká kuní aguti (red eyed devil agouti)',
-            ]),
-            'mark_primary' => $this->faker->optional(0.75, '')->randomElement([
-                'Bez bílé kresby (solid / self)',
-                'Strakovaná berkšírská (varieberk)',
-                'Americká (american berkshire)',
-                'Japonská (hooded)',
-                'Berkšírská (berkshire)',
-                'Husky (husky / roan)',
-                'Se širokým pruhem (banded)',
-                'Strakovaná (variegated)',
-                'S lysinou (blazed)',
-                'Australská (berkshire down under)',
-                'S bílými zády (bareback)',
-                'Irská (irish)',
-                'S maskou (masked)',
-                'S čepicí (capped)',
-                'Australská strakovaná berk. (varieberk D-U)',
-                'Bílá černooká (BEW, black eyed white)',
-                'Essex',
-                'S hvězdou (spotted)',
-                'Australská s pruhem (hooded down under)',
-                'Australská strakovaná (variegated D-U)',
-                'S flíčkem (patched)',
-                'Australská se širokým pruhem (banded D-U)',
-            ]),
-            'mark_secondary' => $this->faker->optional(0.25, '')->randomElement([
-                'S hvězdou (spotted)',
-                'S lysinou (blazed)',
-                'Husky (husky / roan)',
-                'Nestandardní',
-            ]),
+            'effect' => $this->faker->randomElement(AnimalEffectEnum::values()),
+            'mark_primary' => $this->faker->optional(0.75)->randomElement(AnimalPrimaryMarkEnum::values()),
+            'mark_secondary' => $this->faker->optional(0.25)->randomElement(AnimalSecondaryMarkEnum::values()),
+            'eyes' => $this->faker->randomElement(AnimalEyesEnum::values()),
+            'breeding_type' => $this->faker->randomElement(AnimalBreedingTypeEnum::values()),
         ];
     }
 }
