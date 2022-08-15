@@ -48,7 +48,7 @@ class Litter extends Model
 
     public function shouldBeSearchable(): bool
     {
-        return $this->state->is(StationStateEnum::APPROVED);
+        return $this->state->is(LitterStateEnum::FINALIZED);
     }
 
     public function mother(): BelongsTo
