@@ -9,6 +9,7 @@ use App\Enums\Animal\AnimalPrimaryMarkEnum;
 use App\Enums\Animal\AnimalSecondaryMarkEnum;
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,6 +55,11 @@ class Animal extends Model
             'marks_primary',
             'marks_secondary'
         ])->toArray();
+    }
+
+    public function scopeListable($query): Builder
+    {
+        return $query->whereRelation('litter', 'state', LitterStateEnum::FINALIZED);
     }
 
     public function shouldBeSearchable(): bool

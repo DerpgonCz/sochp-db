@@ -11,7 +11,12 @@ class AnimalController extends Controller
 {
     public function index(): View
     {
-        return view('models.animal.index', ['animals' => Animal::all()]);
+        return view(
+            'models.animal.index',
+            [
+                'animals' => Animal::listable()->with('litter', 'litter.station')->paginate(50),
+            ]
+        );
     }
 
     public function create()

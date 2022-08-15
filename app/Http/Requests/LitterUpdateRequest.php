@@ -54,6 +54,11 @@ class LitterUpdateRequest extends FormRequest
                 Rule::in(LitterStateEnum::getValues()),
             ],
             'animals' => [
+                Rule::excludeIf($litter->state->in([
+                    LitterStateEnum::DRAFT,
+                    LitterStateEnum::REQUIRES_DRAFT_CHANGES,
+                    LitterStateEnum::REQUIRES_BREEDING_APPROVAL,
+                ])),
                 'array',
             ],
             'animals.*' => [

@@ -35,7 +35,7 @@ class LitterPolicy
         ],
         LitterStateEnum::REQUIRES_FINAL_APPROVAL => [
             LitterStateEnum::REQUIRES_BREEDING_CHANGES,
-            LitterStateEnum::REQUIRES_FINAL_APPROVAL,
+            LitterStateEnum::FINALIZED,
         ],
     ];
 

@@ -1,3 +1,6 @@
+@php
+    use App\Models\Station;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -5,7 +8,9 @@
         <div class="row">
             <div class="col">
                 <h2>{{ __('Edit a station') }}</h2>
-                <h5>{{ __('State') }}: <x-station-state-badge :station="$station" /></h5>
+                <h5>{{ __('State') }}:
+                    <x-station-state-badge :station="$station"/>
+                </h5>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -14,13 +19,13 @@
                 @csrf
 
                 <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.owner.name', \App\Models\Station::class)) }}</strong>
+                    <strong>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</strong>
                     <input type="text" class="form-control" name="owner" value="{{ $station->owner->name }}" disabled>
                 </label>
 
                 <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}</strong>
-                    <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}" value="{{ $station->name }}" required>
+                    <strong>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</strong>
+                    <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', Station::class)) }}" value="{{ $station->name }}" required>
                 </label>
 
                 <label class="form-group text-right">

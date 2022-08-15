@@ -19,10 +19,6 @@ return [
         AnimalBuildEnum::FLAG_DUMBO->value => 'dumbo',
         AnimalBuildEnum::FLAG_DWARF->value => 'minipotkan',
         AnimalBuildEnum::FLAG_MANX->value => 'bezocasý',
-        AnimalBuildEnum::FLAG_DUMBO->value | AnimalBuildEnum::FLAG_DWARF->value => 'dumbo minipotkan',
-        AnimalBuildEnum::FLAG_DUMBO->value | AnimalBuildEnum::FLAG_MANX->value => 'dumbo bezocasý',
-        AnimalBuildEnum::FLAG_DWARF->value | AnimalBuildEnum::FLAG_MANX->value => 'minipotkan bezocasý',
-        AnimalBuildEnum::FLAG_DUMBO->value | AnimalBuildEnum::FLAG_DWARF->value | AnimalBuildEnum::FLAG_MANX->value => 'dumbo minipotkan bezocasý',
     ],
     AnimalFurEnum::class => [
         AnimalFurEnum::FLAG_STANDARD->value => 'standardní',

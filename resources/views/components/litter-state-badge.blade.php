@@ -1,30 +1,33 @@
+@php
+    use App\Enums\LitterStateEnum;
+@endphp
 @switch($value)
-    @case(\App\Enums\LitterStateEnum::DRAFT)
+    @case(LitterStateEnum::DRAFT)
         <span class="badge badge-secondary">{{ __('Created') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::REQUIRES_DRAFT_CHANGES)
+    @case(LitterStateEnum::REQUIRES_DRAFT_CHANGES)
         <span class="badge badge-warning">{{ __('Requires changes before breeding') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::REQUIRES_BREEDING_APPROVAL)
+    @case(LitterStateEnum::REQUIRES_BREEDING_APPROVAL)
         <span class="badge badge-primary">{{ __('Sent for breeding approval') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::BREEDING)
+    @case(LitterStateEnum::BREEDING)
         <span class="badge badge-success">{{ __('Approved for breeding') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::REQUIRES_BREEDING_CHANGES)
+    @case(LitterStateEnum::REQUIRES_BREEDING_CHANGES)
         <span class="badge badge-warning">{{ __('Requires changes before final approval') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::REQUIRES_FINAL_APPROVAL)
+    @case(LitterStateEnum::REQUIRES_FINAL_APPROVAL)
         <span class="badge badge-primary">{{ __('Sent for final approval') }}</span>
-    @break
+        @break
 
-    @case(\App\Enums\LitterStateEnum::FINALIZED)
+    @case(LitterStateEnum::FINALIZED)
         <span class="badge badge-success">{{ __('Approved') }}</span>
-    @break
+        @break
 
 @endswitch
