@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Enums\Animal\AnimalBreedingTypeEnum;
+use App\Enums\Animal\AnimalColorFull;
+use App\Enums\Animal\AnimalColorMink;
+use App\Enums\Animal\AnimalColorShaded;
 use App\Enums\Animal\AnimalEffectEnum;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
@@ -29,6 +32,9 @@ class Animal extends Model
         'effect',
         'mark_primary',
         'mark_secondary',
+        'color_shaded',
+        'color_full',
+        'color_mink',
         'breeding_type',
         'note',
         'litter_id',
@@ -41,6 +47,9 @@ class Animal extends Model
         'mark_primary' => AnimalPrimaryMarkEnum::class,
         'mark_secondary' => AnimalSecondaryMarkEnum::class,
         'breeding_type' => AnimalBreedingTypeEnum::class,
+        'color_shaded' => AnimalColorShaded::class,
+        'color_full' => AnimalColorFull::class,
+        'color_mink' => AnimalColorMink::class,
     ];
 
     public function toSearchableArray(): array
@@ -53,7 +62,8 @@ class Animal extends Model
             'color',
             'effect',
             'marks_primary',
-            'marks_secondary'
+            'marks_secondary',
+            'color',
         ])->toArray();
     }
 

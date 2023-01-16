@@ -102,8 +102,40 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-3 col-md-6">
-                                                    TODO: Zbarvení
+                                                    <div class="card mb-3">
+                                                        <div class="card-header">
+                                                            <slot name="animal-color-header"></slot>*
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <color-builder
+                                                                :name="`animals[${index}][color]`"
+                                                                :shaded-label="colorBuilderShadedLabel"
+                                                                :full-color-label="colorBuilderFullColorLabel"
+                                                                :most-used-label="colorBuilderMostUsedLabel"
+                                                                :others-label="colorBuilderOthersLabel"
+                                                                :full-color-labels="fullColorLabels"
+                                                                :shaded-color-labels="shadedColorLabels"
+                                                                :mink-color-labels="minkColorLabels"
+                                                                :value="animal.color"
+                                                            ></color-builder>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <slot name="animal-effect-header"></slot>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <flag-checkboxes
+                                                                :selected="animal.effect"
+                                                                :flags-with-titles="animalEffects"
+                                                                :groups="animalFurGroups"
+                                                                :input-name="`animals[${index}][effect]`"
+                                                                :required="false">
+                                                            </flag-checkboxes>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </template>
@@ -144,9 +176,11 @@
 <script>
 import FlagCheckboxes from './FlagCheckboxes';
 import AnimalService from '../services/AnimalService';
+import ColorBuilder from "./ColorBuilder.vue";
 
 export default {
     components: {
+        ColorBuilder,
         FlagCheckboxes,
     },
     props: {
@@ -164,6 +198,13 @@ export default {
         canManage: Boolean,
         deleteExistingAnimalMessage: String,
         deleteNewAnimalMessage: String,
+        colorBuilderMostUsedLabel: String,
+        colorBuilderOthersLabel: String,
+        colorBuilderShadedLabel: String,
+        colorBuilderFullColorLabel: String,
+        fullColorLabels: Array,
+        shadedColorLabels: Array,
+        minkColorLabels: Array,
     },
     data() {
         return {

@@ -2067,6 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlagCheckboxes */ "./resources/js/components/FlagCheckboxes.vue");
 /* harmony import */ var _services_AnimalService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/AnimalService */ "./resources/js/services/AnimalService.js");
+/* harmony import */ var _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorBuilder.vue */ "./resources/js/components/ColorBuilder.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2228,10 +2229,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
+    ColorBuilder: _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     FlagCheckboxes: _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
@@ -2248,7 +2283,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     animalBreedingTypes: Object,
     canManage: Boolean,
     deleteExistingAnimalMessage: String,
-    deleteNewAnimalMessage: String
+    deleteNewAnimalMessage: String,
+    colorBuilderMostUsedLabel: String,
+    colorBuilderOthersLabel: String,
+    colorBuilderShadedLabel: String,
+    colorBuilderFullColorLabel: String,
+    fullColorLabels: Array,
+    shadedColorLabels: Array,
+    minkColorLabels: Array
   },
   data: function data() {
     return {
@@ -2306,6 +2348,929 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     allAnimals: function allAnimals() {
       return [].concat(_toConsumableArray(this.existingAnimals), _toConsumableArray(this.newAnimals));
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RecursiveSelect_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecursiveSelect.vue */ "./resources/js/components/RecursiveSelect.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    RecursiveSelect: _RecursiveSelect_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    name: String,
+    shadedLabel: String,
+    fullColorLabel: String,
+    mostUsedLabel: String,
+    othersLabel: String,
+    fullColorLabels: Array,
+    shadedColorLabels: Array,
+    minkColorLabels: Array,
+    value: {
+      type: Array,
+      value: function value() {
+        return [];
+      }
+    }
+  },
+  data: function data() {
+    var _values, _values2, _values3, _values4, _values5, _values6;
+
+    return {
+      selectedColor: this.value,
+      selections: [{
+        label: this.shadedLabel,
+        value: 'shaded',
+        values: [{
+          label: this.shadedColorLabels[0],
+          value: 0
+        }, {
+          label: this.shadedColorLabels[1],
+          value: 1,
+          values: (_values = {}, _defineProperty(_values, this.mostUsedLabel, [// null,
+          {
+            label: this.fullColorLabels[0],
+            value: 0
+          }, {
+            label: this.fullColorLabels[23],
+            value: 23
+          }, {
+            label: this.fullColorLabels[24],
+            value: 24
+          }]), _defineProperty(_values, this.othersLabel, [{
+            label: this.fullColorLabels[1],
+            value: 1
+          }, {
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[27],
+            value: 27
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values)
+        }, {
+          label: this.shadedColorLabels[13],
+          value: 13,
+          values: [{
+            label: this.fullColorLabels[0],
+            value: 0
+          }]
+        }, {
+          label: this.shadedColorLabels[3],
+          value: 3
+        }, {
+          label: this.shadedColorLabels[2],
+          value: 2
+        }, {
+          label: this.shadedColorLabels[4],
+          value: 4,
+          values: (_values2 = {}, _defineProperty(_values2, this.mostUsedLabel, [// 's hnědými znaky (seal point)',
+          {
+            label: this.fullColorLabels[0],
+            value: 0
+          }, {
+            label: this.fullColorLabels[23],
+            value: 23
+          }, {
+            label: this.fullColorLabels[24],
+            value: 24
+          }, {
+            label: this.fullColorLabels[1],
+            value: 1
+          }, {
+            label: this.fullColorLabels[27],
+            value: 27
+          }]), _defineProperty(_values2, this.othersLabel, [{
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values2)
+        }, {
+          label: this.shadedColorLabels[5],
+          value: 5,
+          values: (_values3 = {}, _defineProperty(_values3, this.mostUsedLabel, [// null,
+          this.fullColorLabels[0]]), _defineProperty(_values3, this.othersLabel, [{
+            label: this.fullColorLabels[1],
+            value: 1
+          }, {
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[23],
+            value: 23
+          }, {
+            label: this.fullColorLabels[24],
+            value: 24
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[27],
+            value: 27
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values3)
+        }, {
+          label: this.fullColorLabels[6],
+          value: 6,
+          values: (_values4 = {}, _defineProperty(_values4, this.mostUsedLabel, [// 's hnědými znaky (seal point)',
+          {
+            label: this.fullColorLabels[0],
+            value: 0
+          }, {
+            label: this.fullColorLabels[23],
+            value: 23
+          }, {
+            label: this.fullColorLabels[24],
+            value: 24
+          }, {
+            label: this.fullColorLabels[1],
+            value: 1
+          }, {
+            label: this.fullColorLabels[27],
+            value: 27
+          }]), _defineProperty(_values4, this.othersLabel, [{
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values4)
+        }, {
+          label: this.shadedColorLabels[7],
+          value: 7,
+          values: (_values5 = {}, _defineProperty(_values5, this.mostUsedLabel, [// null,
+          {
+            label: this.fullColorLabels[0],
+            value: 0
+          }]), _defineProperty(_values5, this.othersLabel, [{
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values5)
+        }, {
+          label: this.shadedColorLabels[8],
+          value: 8
+        }, {
+          label: this.shadedColorLabels[9],
+          value: 9,
+          values: (_values6 = {}, _defineProperty(_values6, this.mostUsedLabel, [// null,
+          {
+            label: this.fullColorLabels[0],
+            value: 0
+          }, {
+            label: this.fullColorLabels[23],
+            value: 23
+          }, {
+            label: this.fullColorLabels[24],
+            value: 24
+          }]), _defineProperty(_values6, this.othersLabel, [{
+            label: this.fullColorLabels[2],
+            value: 2
+          }, {
+            label: this.fullColorLabels[3],
+            value: 3
+          }, {
+            label: this.fullColorLabels[5],
+            value: 5
+          }, {
+            label: this.fullColorLabels[6],
+            value: 6
+          }, {
+            label: this.fullColorLabels[7],
+            value: 7
+          }, {
+            label: this.fullColorLabels[8],
+            value: 8
+          }, {
+            label: this.fullColorLabels[9],
+            value: 9
+          }, {
+            label: this.fullColorLabels[10],
+            value: 10
+          }, {
+            label: this.fullColorLabels[11],
+            value: 11
+          }, {
+            label: this.fullColorLabels[12],
+            value: 12
+          }, {
+            label: this.fullColorLabels[13],
+            value: 13
+          }, {
+            label: this.fullColorLabels[14],
+            value: 14
+          }, {
+            label: this.fullColorLabels[15],
+            value: 15
+          }, {
+            label: this.fullColorLabels[16],
+            value: 16
+          }, {
+            label: this.fullColorLabels[17],
+            value: 17
+          }, {
+            label: this.fullColorLabels[18],
+            value: 18
+          }, {
+            label: this.fullColorLabels[20],
+            value: 20
+          }, {
+            label: this.fullColorLabels[21],
+            value: 21
+          }, {
+            label: this.fullColorLabels[22],
+            value: 22
+          }, {
+            label: this.fullColorLabels[25],
+            value: 25
+          }, {
+            label: this.fullColorLabels[26],
+            value: 26
+          }, {
+            label: this.fullColorLabels[28],
+            value: 28
+          }, {
+            label: this.fullColorLabels[29],
+            value: 29
+          }, {
+            label: this.fullColorLabels[30],
+            value: 30
+          }, {
+            label: this.fullColorLabels[31],
+            value: 31
+          }, {
+            label: this.fullColorLabels[32],
+            value: 32
+          }, {
+            label: this.fullColorLabels[33],
+            value: 33
+          }, {
+            label: this.fullColorLabels[35],
+            value: 35
+          }, {
+            label: this.fullColorLabels[36],
+            value: 36
+          }]), _values6)
+        }, {
+          label: this.shadedColorLabels[10],
+          value: 10
+        }, {
+          label: this.shadedColorLabels[11],
+          value: 11
+        }, {
+          label: this.shadedColorLabels[12],
+          value: 12
+        }]
+      }, {
+        label: this.fullColorLabel,
+        value: 'full',
+        values: [{
+          label: this.fullColorLabels[0],
+          value: 0
+        }, {
+          label: this.fullColorLabels[1],
+          value: 1
+        }, {
+          label: this.fullColorLabels[2],
+          value: 2
+        }, {
+          label: this.fullColorLabels[3],
+          value: 3,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[4],
+          value: 4
+        }, {
+          label: this.fullColorLabels[5],
+          value: 5
+        }, {
+          label: this.fullColorLabels[6],
+          value: 6
+        }, {
+          label: this.fullColorLabels[7],
+          value: 7,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[8],
+          value: 8,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[9],
+          value: 9,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[10],
+          value: 10,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[11],
+          value: 11
+        }, {
+          label: this.fullColorLabels[12],
+          value: 12
+        }, {
+          label: this.fullColorLabels[13],
+          value: 13
+        }, {
+          label: this.fullColorLabels[14],
+          value: 14,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[15],
+          value: 15
+        }, {
+          label: this.fullColorLabels[16],
+          value: 16
+        }, {
+          label: this.fullColorLabels[17],
+          value: 17
+        }, {
+          label: this.fullColorLabels[18],
+          value: 18,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[19],
+          value: 19,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[20],
+          value: 20
+        }, {
+          label: this.fullColorLabels[21],
+          value: 21
+        }, {
+          label: this.fullColorLabels[22],
+          value: 22
+        }, {
+          label: this.fullColorLabels[23],
+          value: 23
+        }, {
+          label: this.fullColorLabels[24],
+          value: 24
+        }, {
+          label: this.fullColorLabels[25],
+          value: 25,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[26],
+          value: 26,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[27],
+          value: 27
+        }, {
+          label: this.fullColorLabels[28],
+          value: 28
+        }, {
+          label: this.fullColorLabels[29],
+          value: 29,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[30],
+          value: 30,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[31],
+          value: 31
+        }, {
+          label: this.fullColorLabels[32],
+          value: 32
+        }, {
+          label: this.fullColorLabels[33],
+          value: 33
+        }, {
+          label: this.fullColorLabels[34],
+          value: 34,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[35],
+          value: 35,
+          values: [{
+            label: this.minkColorLabels[0],
+            value: 0
+          }, {
+            label: this.minkColorLabels[1],
+            value: 1
+          }]
+        }, {
+          label: this.fullColorLabels[36],
+          value: 36
+        }]
+      }]
+    };
   }
 });
 
@@ -2649,6 +3614,144 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         return _this2.results = data ? data.results : null;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'RecursiveSelect',
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
+  props: {
+    name: {
+      type: String,
+      "default": null
+    },
+    options: {},
+    value: {}
+  },
+  data: function data() {
+    var _, _slice;
+
+    return {
+      selectedValue: (_ = (this.value || [])[0]) !== null && _ !== void 0 ? _ : null,
+      subSelectedValues: (_slice = (this.value || []).slice(1)) !== null && _slice !== void 0 ? _slice : []
+    };
+  },
+  watch: {
+    subSelectedValues: function subSelectedValues() {
+      this.handleInput(this.selectedValue);
+    },
+    selectedValue: function selectedValue() {
+      this.subSelectedValues = [];
+      this.handleInput(this.selectedValue);
+    }
+  },
+  methods: {
+    handleInput: function handleInput(value) {
+      this.$emit('input', [value].concat(_toConsumableArray(this.subSelectedValues)));
     }
   }
 });
@@ -38612,6 +39715,45 @@ component.options.__file = "resources/js/components/AnimalBuilder.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/ColorBuilder.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/ColorBuilder.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorBuilder.vue?vue&type=template&id=73bbaaba& */ "./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba&");
+/* harmony import */ var _ColorBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorBuilder.vue?vue&type=script&lang=js& */ "./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ColorBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ColorBuilder.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/FlagCheckboxes.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/FlagCheckboxes.vue ***!
@@ -38731,6 +39873,45 @@ component.options.__file = "resources/js/components/NavbarSearch.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/RecursiveSelect.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/RecursiveSelect.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecursiveSelect.vue?vue&type=template&id=6ee6e59a& */ "./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a&");
+/* harmony import */ var _RecursiveSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RecursiveSelect.vue?vue&type=script&lang=js& */ "./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RecursiveSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RecursiveSelect.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js& ***!
@@ -38744,6 +39925,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalBuilder.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ColorBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ColorBuilder.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ColorBuilder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -38795,6 +39992,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecursiveSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RecursiveSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RecursiveSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Modal.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/Modal.vue?vue&type=style&index=0&lang=css& ***!
@@ -38821,6 +40034,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalBuilder.vue?vue&type=template&id=1b078a24& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ColorBuilder_vue_vue_type_template_id_73bbaaba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ColorBuilder.vue?vue&type=template&id=73bbaaba& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba&");
 
 
 /***/ }),
@@ -38872,6 +40102,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavbarSearch_vue_vue_type_template_id_529fe9c3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavbarSearch_vue_vue_type_template_id_529fe9c3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NavbarSearch.vue?vue&type=template&id=529fe9c3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NavbarSearch.vue?vue&type=template&id=529fe9c3&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RecursiveSelect_vue_vue_type_template_id_6ee6e59a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RecursiveSelect.vue?vue&type=template&id=6ee6e59a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a&");
 
 
 /***/ }),
@@ -39617,9 +40864,84 @@ var render = function() {
                                       "div",
                                       { staticClass: "col-lg-3 col-md-6" },
                                       [
-                                        _vm._v(
-                                          "\n                                                TODO: Zbarvení\n                                            "
-                                        )
+                                        _c(
+                                          "div",
+                                          { staticClass: "card mb-3" },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-header" },
+                                              [
+                                                _vm._t("animal-color-header"),
+                                                _vm._v(
+                                                  "*\n                                                    "
+                                                )
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-body" },
+                                              [
+                                                _c("color-builder", {
+                                                  attrs: {
+                                                    name:
+                                                      "animals[" +
+                                                      index +
+                                                      "][color]",
+                                                    "shaded-label":
+                                                      _vm.colorBuilderShadedLabel,
+                                                    "full-color-label":
+                                                      _vm.colorBuilderFullColorLabel,
+                                                    "most-used-label":
+                                                      _vm.colorBuilderMostUsedLabel,
+                                                    "others-label":
+                                                      _vm.colorBuilderOthersLabel,
+                                                    "full-color-labels":
+                                                      _vm.fullColorLabels,
+                                                    "shaded-color-labels":
+                                                      _vm.shadedColorLabels,
+                                                    "mink-color-labels":
+                                                      _vm.minkColorLabels,
+                                                    value: animal.color
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "card" }, [
+                                          _c(
+                                            "div",
+                                            { staticClass: "card-header" },
+                                            [_vm._t("animal-effect-header")],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "card-body" },
+                                            [
+                                              _c("flag-checkboxes", {
+                                                attrs: {
+                                                  selected: animal.effect,
+                                                  "flags-with-titles":
+                                                    _vm.animalEffects,
+                                                  groups: _vm.animalFurGroups,
+                                                  "input-name":
+                                                    "animals[" +
+                                                    index +
+                                                    "][effect]",
+                                                  required: false
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ])
                                       ]
                                     )
                                   ])
@@ -39726,6 +41048,53 @@ var render = function() {
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ColorBuilder.vue?vue&type=template&id=73bbaaba& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("recursive-select", {
+        attrs: { options: _vm.selections },
+        model: {
+          value: _vm.selectedColor,
+          callback: function($$v) {
+            _vm.selectedColor = $$v
+          },
+          expression: "selectedColor"
+        }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.selectedColor, function(item) {
+        return _c("input", {
+          attrs: { type: "hidden", name: _vm.name + "[]" },
+          domProps: { value: item }
+        })
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40137,6 +41506,213 @@ var render = function() {
       ]
     )
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RecursiveSelect.vue?vue&type=template&id=6ee6e59a& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("label", [
+        typeof _vm.options === "object" && Array.isArray(_vm.options)
+          ? _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedValue,
+                    expression: "selectedValue"
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { name: _vm.name },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedValue = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { domProps: { value: null } }, [_vm._v("--")]),
+                _vm._v(" "),
+                _vm._l(Object.entries(_vm.options), function(ref) {
+                  var key = ref[0]
+                  var row = ref[1]
+                  return row !== null &&
+                    typeof row === "object" && !Array.isArray(row)
+                    ? _c(
+                        "option",
+                        {
+                          domProps: { value: "value" in row ? row.value : key },
+                          model: {
+                            value: _vm.selectedValue,
+                            callback: function($$v) {
+                              _vm.selectedValue = $$v
+                            },
+                            expression: "selectedValue"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(row.label) +
+                              "\n            "
+                          )
+                        ]
+                      )
+                    : _c("option", { domProps: { value: row } }, [
+                        _vm._v(
+                          "\n                " + _vm._s(row) + "\n            "
+                        )
+                      ])
+                })
+              ],
+              2
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        typeof _vm.options === "object" && !Array.isArray(_vm.options)
+          ? _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedValue,
+                    expression: "selectedValue"
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { name: _vm.name },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedValue = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { domProps: { value: null } }, [_vm._v("--")]),
+                _vm._v(" "),
+                _vm._l(Object.entries(_vm.options), function(ref) {
+                  var optGroupLabel = ref[0]
+                  var optGroupOptions = ref[1]
+                  return _c(
+                    "optgroup",
+                    { attrs: { label: optGroupLabel } },
+                    _vm._l(optGroupOptions, function(row) {
+                      return row !== null &&
+                        typeof row === "object" && !Array.isArray(row)
+                        ? _c(
+                            "option",
+                            {
+                              domProps: {
+                                value: "value" in row ? row.value : null
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(row.label) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        : _c("option", { domProps: { value: row } }, [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(row) +
+                                "\n                "
+                            )
+                          ])
+                    }),
+                    0
+                  )
+                })
+              ],
+              2
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm._l(Object.entries(_vm.options), function(ref) {
+        var key = ref[0]
+        var row = ref[1]
+        return typeof row === "object" && !Array.isArray(row) && "values" in row
+          ? _c(
+              "label",
+              [
+                _vm.selectedValue ===
+                (typeof row === "object" &&
+                !Array.isArray(row) &&
+                "value" in row
+                  ? row.value
+                  : key)
+                  ? _c("recursive-select", {
+                      attrs: {
+                        name: _vm.name,
+                        options: row.values,
+                        value: _vm.value.slice(1) || []
+                      },
+                      model: {
+                        value: _vm.subSelectedValues,
+                        callback: function($$v) {
+                          _vm.subSelectedValues = $$v
+                        },
+                        expression: "subSelectedValues"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          : _vm._e()
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52310,9 +53886,11 @@ Vue.compile = compileToFunctions;
 
 var map = {
 	"./components/AnimalBuilder.vue": "./resources/js/components/AnimalBuilder.vue",
+	"./components/ColorBuilder.vue": "./resources/js/components/ColorBuilder.vue",
 	"./components/FlagCheckboxes.vue": "./resources/js/components/FlagCheckboxes.vue",
 	"./components/Modal.vue": "./resources/js/components/Modal.vue",
-	"./components/NavbarSearch.vue": "./resources/js/components/NavbarSearch.vue"
+	"./components/NavbarSearch.vue": "./resources/js/components/NavbarSearch.vue",
+	"./components/RecursiveSelect.vue": "./resources/js/components/RecursiveSelect.vue"
 };
 
 

@@ -8,6 +8,7 @@ use App\Http\Requests\LitterStoreRequest;
 use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
+use App\Services\Frontend\AnimalColorBuilderValueSerializer;
 use App\Services\Models\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -97,11 +98,15 @@ class LitterController extends Controller
 
         // Animals logic
         collect($request->get('animals'))
-            ->each(static function (array $animal) use ($litter): Animal {
-                return Animal::updateOrCreate(
-                    ['id' => $animal],
+            ->each(static function (array $animal) use ($litter): void {
+                $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animal['color']);
+                Animal::updateOrCreate(
+                    ['id' => $animal['id'] ?? null],
                     [
-                        ...collect($animal)->except('id')->toArray(),
+                        ...collect($animal)->except(['id', 'color'])->toArray(),
+                        'color_shaded' => $deserializedColor[0],
+                        'color_full' => $deserializedColor[1],
+                        'color_mink' => $deserializedColor[2],
                         'litter_id' => $litter->id,
                     ]
                 );

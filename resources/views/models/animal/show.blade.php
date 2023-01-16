@@ -85,14 +85,18 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.mother.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ $animal->litter->mother->name }}
-                        <a href="{{ route('animals.show', $animal->litter->mother) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        {{ $animal->litter->mother?->name ?? '--' }}
+                        @if($animal->littermother)
+                            <a href="{{ route('animals.show', $animal->litter->mother) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        @endif
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.father.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ $animal->litter->father->name }}
-                        <a href="{{ route('animals.show', $animal->litter->father) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        {{ $animal->litter->father?->name ?? '--' }}
+                        @if($animal->litterfather)
+                            <a href="{{ route('animals.show', $animal->litter->father) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        @endif
                     </dt>
                 </dl>
             </div>

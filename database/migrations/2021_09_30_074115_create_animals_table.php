@@ -21,7 +21,9 @@ return new class () extends Migration {
             // Flag enums
             $table->unsignedTinyInteger('fur');
             $table->unsignedTinyInteger('build');
-            $table->string('color')->nullable();
+            $table->integer('color_full')->nullable();
+            $table->integer('color_shaded')->nullable();
+            $table->integer('color_mink')->nullable();
 
             // Single value enums
             $table->unsignedTinyInteger('breeding_type')->nullable();

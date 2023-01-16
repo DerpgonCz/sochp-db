@@ -12,13 +12,14 @@ enum AnimalFurEnum: int
     use Localized;
     use Arrayable;
 
-    case FLAG_STANDARD = 0b0000001;
-    case FLAG_LONG_HAIRED = 0b0000010;
-    case FLAG_DOUBLE_REX = 0b0000100;
-    case FLAG_FUZZ = 0b0001000;
-    case FLAG_REX = 0b0010000;
-    case FLAG_SATIN = 0b0100000;
-    case FLAG_VELVETEEN = 0b1000000;
+    case FLAG_STANDARD = 0b00000001;
+    case FLAG_LONG_HAIRED = 0b00000010;
+    case FLAG_DOUBLE_REX = 0b00000100;
+    case FLAG_FUZZ = 0b00001000;
+    case FLAG_REX = 0b00010000;
+    case FLAG_SATIN = 0b00100000;
+    case FLAG_VELVETEEN = 0b01000000;
+    case FLAG_NON_STANDARD = 0b10000000;
 
     public static function selectableGroups(): array
     {
@@ -33,6 +34,9 @@ enum AnimalFurEnum: int
                 self::FLAG_REX,
                 self::FLAG_SATIN,
                 self::FLAG_VELVETEEN,
+            ],
+            [
+                self::FLAG_NON_STANDARD,
             ],
         ];
     }

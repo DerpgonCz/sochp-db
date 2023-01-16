@@ -6,6 +6,9 @@ namespace Database\Factories;
 
 use App\Enums\Animal\AnimalBreedingTypeEnum;
 use App\Enums\Animal\AnimalBuildEnum;
+use App\Enums\Animal\AnimalColorFull;
+use App\Enums\Animal\AnimalColorMink;
+use App\Enums\Animal\AnimalColorShaded;
 use App\Enums\Animal\AnimalEffectEnum;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalFurEnum;
@@ -30,53 +33,9 @@ class AnimalFactory extends Factory
             'gender' => $gender,
             'fur' => $this->faker->randomElement(AnimalFurEnum::values()), // TODO: Choose multiple valid
             'build' => $this->faker->randomElement(AnimalBuildEnum::values()), // TODO: Choose multiple valid
-            'color' => $this->faker->randomElement([
-                '',
-                'Ruská modrá (russian blue)',
-                'Plavá (fawn)',
-                'Černá (black)',
-                'Skořicová perlová (cinnamon pearl)',
-                'Ruská stříbrná (russian silver)',
-                'Stříbřitá modrá (powder blue)',
-                'Béžová (beige)',
-                'Americká modrá (american blue)',
-                'Topazová (topaz)',
-                'Aguti (agouti)',
-                'Jantarová (amber)',
-                'Skořicová (cinnamon)',
-                'Britský mink (british mink)',
-                'Ruská perlová (russian pearl)',
-                'Hnědé znaky (seal point)',
-                'Platinová (platinum)',
-                'Albín (albino)',
-                'Stříbrná (silver)',
-                'Americký mink (american mink)',
-                'Ruská modrá aguti (russian blue agouti)',
-                'Šampaňská (champagne)',
-                'Perlová (pearl)',
-                'Platinová aguti (platinum agouti)',
-                'Buvolí (buff)',
-                'Modrá aguti (blue agouti)',
-                'Holubičí (russian dove)',
-                'Havanská aguti (havana agouti)',
-                'Ruská stříbrná aguti (russian silver agouti)',
-                'Holubičí aguti (russian dove agouti)',
-                'Čokoládová (chocolate)',
-                'Jiná (other)',
-                'Kávová (coffee)',
-                'Tmavá perlová (dark pearl)',
-                'Lila (lilac)',
-                'Perlová platina (platinum pearl)',
-                'Slonovinová (ivory, (milk / BE) cream)',
-                'Havanská (havana)',
-                'Kakaová (cocoa)',
-                'Ruská perlová aguti (russian pearl ag.)',
-                'Čokoládová aguti (chocolate agouti)',
-                'Karamelová (caramel)',
-                'Lila aguti (lilac agouti)',
-                'Double mink (double mink)',
-                'Ruská platina (russian platinum)',
-            ]),
+            'color_shaded' => $this->faker->randomElement(AnimalColorShaded::cases()), // TODO: Valid color combinations
+            'color_full' => $this->faker->randomElement(AnimalColorFull::cases()), // TODO: Valid color combinations
+            'color_mink' => $this->faker->randomElement(AnimalColorMink::cases()), // TODO: Valid color combinations
             'effect' => $this->faker->randomElement(AnimalEffectEnum::values()),
             'mark_primary' => $this->faker->optional(0.75)->randomElement(AnimalPrimaryMarkEnum::values()),
             'mark_secondary' => $this->faker->optional(0.25)->randomElement(AnimalSecondaryMarkEnum::values()),

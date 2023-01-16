@@ -2,6 +2,9 @@
 
 use App\Enums\Animal\AnimalBreedingTypeEnum;
 use App\Enums\Animal\AnimalBuildEnum;
+use App\Enums\Animal\AnimalColorFull;
+use App\Enums\Animal\AnimalColorMink;
+use App\Enums\Animal\AnimalColorShaded;
 use App\Enums\Animal\AnimalEffectEnum;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalFurEnum;
@@ -28,6 +31,7 @@ return [
         AnimalFurEnum::FLAG_REX->value => 'rex',
         AnimalFurEnum::FLAG_SATIN->value => 'saténový',
         AnimalFurEnum::FLAG_VELVETEEN->value => 'velvetýn',
+        AnimalFurEnum::FLAG_NON_STANDARD->value => 'nestandardní',
     ],
     AnimalEyesEnum::class => [
         AnimalEyesEnum::PINK->value => 'růžová',
@@ -83,4 +87,63 @@ return [
         AnimalEffectEnum::SILVERED->value => 'postříbřená',
         AnimalEffectEnum::ODD_EYED->value => 'různooká',
     ],
+    AnimalColorShaded::class => [
+        AnimalColorShaded::ALBINO->value => 'albín',
+        AnimalColorShaded::BURMESE->value => 'barmská',
+        AnimalColorShaded::BISCUIT_CREAM->value => 'barmský albín',
+        AnimalColorShaded::WHEATEN_BISCUIT_CREAM->value => 'barmský albín aguti',
+        AnimalColorShaded::HIMALAYAN->value => 'himalájská',
+        AnimalColorShaded::DEVIL_MARTEN->value => 'kuní',
+        AnimalColorShaded::SIAMESE->value => 'siamská',
+        AnimalColorShaded::SIAMESE_DEVIL->value => 'siamská kuní',
+        AnimalColorShaded::IVORY->value => 'slonovinová',
+        AnimalColorShaded::SABLE_BURMESE->value => 'sobolí',
+        AnimalColorShaded::GOLDEN->value => 'zlatý albín',
+        AnimalColorShaded::GOLDEN_SIAMESE->value => 'zlatý siamský',
+        AnimalColorShaded::GOLDEN_HIMALAYAN->value => 'zlatý himalájský',
+        AnimalColorShaded::PALE_BURMESE->value => 'světlá barmská',
+    ],
+    AnimalColorFull::class => [
+        AnimalColorFull::AGOUTI->value => 'aguti',
+        AnimalColorFull::AMERICAN_BLUE->value => 'americká modrá',
+        AnimalColorFull::BEIGE->value => 'béžová',
+        AnimalColorFull::BUFF->value => 'buvolí',
+        AnimalColorFull::BLACK->value => 'černá',
+        AnimalColorFull::CHOCOLATE->value => 'čokoládová',
+        AnimalColorFull::CHOCOLATE_AGOUTI->value => 'čokoládová aguti',
+        AnimalColorFull::HAVANA->value => 'havanská',
+        AnimalColorFull::HAVANA_AGOUTI->value => 'havanská aguti',
+        AnimalColorFull::RUSSIAN_DOVE->value => 'holubičí',
+        AnimalColorFull::RUSSIAN_DOVE_AGOUTI->value => 'holubičí aguti',
+        AnimalColorFull::AMBER->value => 'jantarová',
+        AnimalColorFull::LILAC->value => 'lila',
+        AnimalColorFull::LILAC_AGOUTI->value => 'lila aguti',
+        AnimalColorFull::MINK->value => 'mink',
+        AnimalColorFull::BLUE_AGOUTI->value => 'modrá aguti',
+        AnimalColorFull::GRAPHITE->value => 'německá modrá',
+        AnimalColorFull::GRAPHITE_AGOUTI->value => 'německá modrá aguti',
+        AnimalColorFull::PEARL->value => 'perlová',
+        AnimalColorFull::SILVER_MINK->value => 'perlový mink',
+        AnimalColorFull::PLATINUM->value => 'platinová',
+        AnimalColorFull::PLATINUM_AGOUTI->value => 'platinová aguti',
+        AnimalColorFull::FAWN->value => 'plavá',
+        AnimalColorFull::RUSSIAN_BLUE->value => 'ruská modrá',
+        AnimalColorFull::RUSSIAN_BLUE_AGOUTI->value => 'ruská modrá aguti',
+        AnimalColorFull::RUSSIAN_PEARL->value => 'ruská perlová',
+        AnimalColorFull::RUSSIAN_PEARL_AGOUTI->value => 'ruská perlová aguti',
+        AnimalColorFull::RUSSIAN_SILVER->value => 'ruská stříbrná',
+        AnimalColorFull::RUSSIAN_SILVER_AGOUTI->value => 'ruská stříbrná aguti',
+        AnimalColorFull::CINNAMON->value => 'skořicová',
+        AnimalColorFull::CINNAMON_PEARL->value => 'skořicová perlová',
+        AnimalColorFull::SILVER->value => 'stříbrná',
+        AnimalColorFull::SILVER_AGOUTI->value => 'stříbrná aguti',
+        AnimalColorFull::CHAMPAGNE->value => 'šampanská',
+        AnimalColorFull::DARK_PEARL->value => 'tmavá perlová',
+        AnimalColorFull::TOPAZ->value => 'topazová',
+        AnimalColorFull::ANOTHER_COLOUR->value => 'jiná',
+    ],
+    AnimalColorMink::class => [
+        AnimalColorMink::AMERICAN->value => 'americký mink',
+        AnimalColorMink::BRITISH->value => 'britský mink',
+    ]
 ];

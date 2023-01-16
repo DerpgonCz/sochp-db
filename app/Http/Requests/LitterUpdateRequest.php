@@ -62,7 +62,7 @@ class LitterUpdateRequest extends FormRequest
                 'array',
             ],
             'animals.*' => [
-                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,breeding_type,note',
+                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,color,effect,breeding_type,note',
             ],
             'animals.*.id' => [
                 'nullable',
@@ -85,6 +85,12 @@ class LitterUpdateRequest extends FormRequest
             'animals.*.mark_secondary' => [
                 'nullable',
                 Rule::in(AnimalSecondaryMarkEnum::values()),
+            ],
+            'animas.*.color' => [
+                'required',
+            ],
+            'animas.*.effect' => [
+                'nullable',
             ],
             'animals.*.breeding_type' => [
                 Rule::excludeIf(Gate::check(PermissionsEnum::MANAGE_LITTERS->value, Litter::class)),
