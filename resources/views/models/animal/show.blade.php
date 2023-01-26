@@ -1,7 +1,7 @@
 @php
     use App\Enums\StationStateEnum;
     use App\Services\Models\Animal\AnimalBuildService;
-    use App\Models\Animal;
+    use App\Models\Animal;use App\Services\Models\Animal\AnimalColorService;use App\Services\Models\Animal\AnimalEffectService;use App\Services\Models\Animal\AnimalFurService;
 @endphp
 @extends('layouts.app')
 
@@ -18,7 +18,8 @@
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.name', Animal::class)) }}</dd>
                     <dt class="col-9">
                         {{ $animal->litter->station->name }}
-                        <a href="{{ route('stations.show', $animal->litter->station) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        <a href="{{ route('stations.show', $animal->litter->station) }}"><span
+                                class="badge badge-secondary">{{ __('Detail') }}</span></a>
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.owner.name', Animal::class)) }}</dd>
@@ -38,7 +39,8 @@
                     <dt class="col-9">
                         @if(optional($animal->caretaker)->station && $animal->caretaker->station->state->is(StationStateEnum::APPROVED))
                             {{ $animal->caretaker->station->name }}
-                            <a href="{{ route('stations.show', $animal->caretaker->station) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                            <a href="{{ route('stations.show', $animal->caretaker->station) }}"><span
+                                    class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @else
                             --
                         @endif
@@ -63,7 +65,17 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.variety', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ (new AnimalBuildService())($animal) }}
+                        {{ (new AnimalBuildService())($animal) }}, {{ (new AnimalFurService())($animal) }}
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ (new AnimalEffectService())($animal) }}
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ (new AnimalColorService())($animal) }}
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.status', Animal::class)) }}</dd>
@@ -80,14 +92,16 @@
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.name', Animal::class)) }}</dd>
                     <dt class="col-9">
                         {{ $animal->litter->name }}
-                        <a href="{{ route('litters.show', $animal->litter) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        <a href="{{ route('litters.show', $animal->litter) }}"><span
+                                class="badge badge-secondary">{{ __('Detail') }}</span></a>
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.mother.name', Animal::class)) }}</dd>
                     <dt class="col-9">
                         {{ $animal->litter->mother?->name ?? '--' }}
                         @if($animal->littermother)
-                            <a href="{{ route('animals.show', $animal->litter->mother) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                            <a href="{{ route('animals.show', $animal->litter->mother) }}"><span
+                                    class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @endif
                     </dt>
 
@@ -95,7 +109,8 @@
                     <dt class="col-9">
                         {{ $animal->litter->father?->name ?? '--' }}
                         @if($animal->litterfather)
-                            <a href="{{ route('animals.show', $animal->litter->father) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                            <a href="{{ route('animals.show', $animal->litter->father) }}"><span
+                                    class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @endif
                     </dt>
                 </dl>

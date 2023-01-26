@@ -12,10 +12,10 @@ enum AnimalEffectEnum: int
     use Localized;
     use Arrayable;
 
-    case ROAN = 1;
-    case MARBLE = 2;
-    case MERLE = 3;
-    case SILVERMANE = 4;
-    case SILVERED = 5;
-    case ODD_EYED = 6;
+    case FLAG_ROAN = 0b000001;
+    case FLAG_MARBLE = 0b000010;
+    case FLAG_MERLE = 0b000100;
+    case FLAG_SILVERMANE = 0b001000;
+    case FLAG_SILVERED = 0b010000;
+    case FLAG_ODD_EYED = 0b100000;
 }

@@ -1,6 +1,7 @@
 <template>
     <transition name="modal-trans">
-        <div v-bind:class="{ 'modal': true, 'd-block show': this.show }" v-show="this.show" v-on:click.self.prevent="close">
+        <div v-bind:class="{ 'modal': true, 'd-block show': this.show }" v-show="this.show"
+             v-on:click.self.prevent="close">
             <div v-bind:class="{ 'modal-dialog modal-dialog-centered': true, [`modal-${size}`]: !!size }">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -13,13 +14,15 @@
                     </div>
                     <div class="modal-body">
                         <slot name="body">
-                            <p>Modal body text goes here.</p>
+                            <p>Modal body goes here</p>
                         </slot>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <div>
                             <slot name="footer-left">
-                                <button type="button" class="btn btn-secondary" v-on:click="close">Close</button>
+                                <button type="button" class="btn btn-secondary" v-on:click="close">
+                                    <slot name="footer-close-text">Close</slot>
+                                </button>
                             </slot>
                         </div>
                         <div>
@@ -79,21 +82,29 @@ export default {
     },
     methods: {
         close() {
-            this.$emit('close');
+            this.$emit('close', !this.validated || this.checkValidity(false));
         },
         save() {
-            if (this.validated) {
-                for (const e of Array.from(this.$parent.$el.querySelectorAll('input, select'))) {
-                    if (!e.checkValidity()) {
-                        e.reportValidity();
-                        return;
-                    }
-                }
+            if (this.validated && !this.checkValidity()) {
+                return;
             }
 
             this.$emit('save');
             this.close();
         },
+
+        checkValidity(report = true) {
+            for (const e of Array.from(this.$parent.$el.querySelectorAll('input, select'))) {
+                if (!e.checkValidity()) {
+                    if (report)
+                        e.reportValidity();
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
     },
     watch: {
         show: {

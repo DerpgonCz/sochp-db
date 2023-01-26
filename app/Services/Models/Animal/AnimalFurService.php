@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Models\Animal;
 
-use App\Enums\Animal\AnimalBuildEnum;
 use App\Enums\Animal\AnimalFurEnum;
 use App\Models\Animal;
 
@@ -33,7 +32,8 @@ class AnimalFurService
         }
 
         return collect($validCases)
-            ->sortBy(static fn(AnimalFurEnum $case): int => array_search($case, self::PRIORITY))
-            ->map(static fn(AnimalFurEnum $case): string => __(sprintf('enums.%s.%s', AnimalFurEnum::class, $case->value)))->join(' ');
+            ->sortBy(static fn (AnimalFurEnum $case): int => array_search($case, self::PRIORITY))
+            ->map(static fn (AnimalFurEnum $case): string => __(sprintf('enums.%s.%s', AnimalFurEnum::class, $case->value)))
+            ->join(' ');
     }
 }

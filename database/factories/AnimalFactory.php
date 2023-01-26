@@ -36,7 +36,7 @@ class AnimalFactory extends Factory
             'color_shaded' => $this->faker->randomElement(AnimalColorShaded::cases()), // TODO: Valid color combinations
             'color_full' => $this->faker->randomElement(AnimalColorFull::cases()), // TODO: Valid color combinations
             'color_mink' => $this->faker->randomElement(AnimalColorMink::cases()), // TODO: Valid color combinations
-            'effect' => $this->faker->randomElement(AnimalEffectEnum::values()),
+            'effect' => $this->faker->randomElement(AnimalEffectEnum::values()),  // TODO: Choose multiple valid
             'mark_primary' => $this->faker->optional(0.75)->randomElement(AnimalPrimaryMarkEnum::values()),
             'mark_secondary' => $this->faker->optional(0.25)->randomElement(AnimalSecondaryMarkEnum::values()),
             'eyes' => $this->faker->randomElement(AnimalEyesEnum::values()),

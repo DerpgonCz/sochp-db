@@ -70,11 +70,11 @@ return [
         AnimalBreedingTypeEnum::UNBREEDABLE->value => 'Unbreadable',
     ],
     AnimalEffectEnum::class => [
-        AnimalEffectEnum::ROAN->value => 'roan',
-        AnimalEffectEnum::MARBLE->value => 'marble',
-        AnimalEffectEnum::MERLE->value => 'merle',
-        AnimalEffectEnum::SILVERMANE->value => 'silvermane',
-        AnimalEffectEnum::SILVERED->value => 'silvered',
-        AnimalEffectEnum::ODD_EYED->value => 'odd-eyed',
+        AnimalEffectEnum::FLAG_ROAN->value => 'roan',
+        AnimalEffectEnum::FLAG_MARBLE->value => 'marble',
+        AnimalEffectEnum::FLAG_MERLE->value => 'merle',
+        AnimalEffectEnum::FLAG_SILVERMANE->value => 'silvermane',
+        AnimalEffectEnum::FLAG_SILVERED->value => 'silvered',
+        AnimalEffectEnum::FLAG_ODD_EYED->value => 'odd-eyed',
     ],
 ];

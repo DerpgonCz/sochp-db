@@ -6,7 +6,6 @@ namespace App\Services\Models\Animal;
 
 use App\Enums\Animal\AnimalBuildEnum;
 use App\Models\Animal;
-use Illuminate\Support\Facades\Log;
 
 class AnimalBuildService
 {
@@ -30,7 +29,8 @@ class AnimalBuildService
         }
 
         return collect($validCases)
-            ->sortBy(static fn(AnimalBuildEnum $case): int => array_search($case, self::PRIORITY))
-            ->map(static fn(AnimalBuildEnum $case): string => __(sprintf('enums.%s.%s', AnimalBuildEnum::class, $case->value)))->join(' ');
+            ->sortBy(static fn (AnimalBuildEnum $case): int => array_search($case, self::PRIORITY))
+            ->map(static fn (AnimalBuildEnum $case): string => __(sprintf('enums.%s.%s', AnimalBuildEnum::class, $case->value)))
+            ->join(' ');
     }
 }

@@ -6,7 +6,6 @@ use App\Enums\Animal\AnimalBreedingTypeEnum;
 use App\Enums\Animal\AnimalColorFull;
 use App\Enums\Animal\AnimalColorMink;
 use App\Enums\Animal\AnimalColorShaded;
-use App\Enums\Animal\AnimalEffectEnum;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
 use App\Enums\Animal\AnimalSecondaryMarkEnum;
@@ -43,7 +42,6 @@ class Animal extends Model
     protected $casts = [
         'gender' => GenderEnum::class,
         'eyes' => AnimalEyesEnum::class,
-        'effect' => AnimalEffectEnum::class,
         'mark_primary' => AnimalPrimaryMarkEnum::class,
         'mark_secondary' => AnimalSecondaryMarkEnum::class,
         'breeding_type' => AnimalBreedingTypeEnum::class,

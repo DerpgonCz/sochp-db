@@ -104,6 +104,9 @@
                         :shaded-color-labels="{{ json_encode(__('enums.' . AnimalColorShaded::class)) }}"
                         :mink-color-labels="{{ json_encode(__('enums.' . AnimalColorMink::class)) }}"
                     >
+                        <template v-slot:modal-header>
+                            {{ __('Edit an animal') }}
+                        </template>
                         <template v-slot:animal-name-header>
                             {{ __(sprintf('models.%s.fields.name', Animal::class)) }}
                         </template>
@@ -137,11 +140,14 @@
                         <template v-slot:animal-note-header>
                             {{ __(sprintf('models.%s.fields.note', Animal::class)) }}
                         </template>
-                        <template v-slot:button-add-label>
-                            {{ __('Add') }}
+                        <template v-slot:modal-footer-close-text>
+                            {{ __('Close') }}
                         </template>
                         <template v-slot:modal-footer-save-text>
                             {{ __('Save') }}
+                        </template>
+                        <template v-slot:button-add-label>
+                            {{ __('Add') }}
                         </template>
                     </animal-builder>
                     <hr>

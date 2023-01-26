@@ -2261,6 +2261,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2296,14 +2340,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       existingAnimals: this.animals,
       newAnimals: [],
-      openRows: Array(this.animals.length).fill(false)
+      openRows: Array(this.animals.length).fill(false),
+      _editCache: null,
+      justCreatedAnimal: false
     };
   },
   methods: {
     addEmptyAnimal: function addEmptyAnimal() {
       this.newAnimals.push({
+        id: null,
         mark_primary: null,
         mark_secondary: null,
+        color_full: null,
+        color_shaded: null,
+        color_mink: null,
         effect: null,
         build: null,
         fur: null,
@@ -2312,36 +2362,68 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         breeding_type: null,
         note: null
       });
-      this.openRows.push(true);
+      this.openRows.push(false);
+      this.justCreatedAnimal = true;
+      this.openRow(this.allAnimals.length - 1);
     },
     openRow: function openRow(index) {
+      // Save current object to edit cache
+      this._editCache = JSON.parse(JSON.stringify(this.allAnimals[index])); // Close all opened
+
+      this.openRows.fill(false); // Open the intended row
+
       this.openRows.splice(index, 1, true);
     },
+    closeAndRevertChangesRow: function closeAndRevertChangesRow(index, isValid) {
+      if (!isValid && this.justCreatedAnimal) {
+        this.deleteRow(index, true);
+        this.justCreatedAnimal = false;
+        return;
+      }
+
+      this.justCreatedAnimal = false; // Load cached edit data
+
+      Object.assign(this.allAnimals[index], this._editCache); // Close the intended row
+
+      this.closeRow(index);
+    },
     closeRow: function closeRow(index) {
-      this.openRows.splice(index, 1, false);
+      // Close the intended row
+      this.openRows.splice(index, 1, false); // Reset edit cache
+
+      this._editCache = null;
+    },
+    saveRow: function saveRow(index) {
+      this.closeRow(index);
     },
     duplicateRow: function duplicateRow(index) {
       var newAnimal = _objectSpread({}, this.allAnimals[index]);
 
-      delete newAnimal.id;
+      newAnimal.id = null;
       this.newAnimals.push(newAnimal);
     },
     deleteRow: function deleteRow(index) {
       var _this = this;
 
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
       if (index < this.animals.length) {
-        if (!confirm(this.deleteExistingAnimalMessage)) return;
+        if (!force && !confirm(this.deleteExistingAnimalMessage)) return false;
         _services_AnimalService__WEBPACK_IMPORTED_MODULE_1__["default"].deleteAnimal(this.existingAnimals[index].id)["catch"](function (e) {
           return alert(e.message);
         }).then(function () {
           return _this.existingAnimals.splice(index, 1);
         });
       } else {
-        if (!confirm(this.deleteNewAnimalMessage)) return;
+        if (!force && !confirm(this.deleteNewAnimalMessage)) return false;
         this.newAnimals.splice(index - this.animals.length - 1, 1);
       }
 
       this.openRows.splice(index, 1);
+      return true;
+    },
+    isIndexNewAnimal: function isIndexNewAnimal(index) {
+      return index >= this.existingAnimals.length;
     }
   },
   computed: {
@@ -3312,59 +3394,50 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     flagsWithTitles: Object,
-    selected: {
-      type: Number,
-      "default": 0
-    },
     groups: {
       type: Array,
       "default": function _default() {
         return [];
       }
     },
-    inputName: String,
     required: {
       type: Boolean,
       "default": false
-    }
+    },
+    value: Number
   },
   data: function data() {
-    var selection = {};
-
-    for (var _i = 0, _Object$keys = Object.keys(this.flagsWithTitles); _i < _Object$keys.length; _i++) {
-      var flag = _Object$keys[_i];
-      selection[flag] = {
-        selected: (this.selected & parseInt(flag)) !== 0,
-        disabled: false
-      };
-    }
-
-    this.ensureGroups(selection, this.groups);
     return {
-      selection: selection
+      selection: this.getRecalculatedSelectionNData()
     };
   },
   methods: {
-    ensureGroups: function ensureGroups(currentSelected, groups) {
-      for (var _i2 = 0, _Object$entries = Object.entries(currentSelected); _i2 < _Object$entries.length; _i2++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
-            key = _Object$entries$_i[0],
+    handleInputChange: function handleInputChange() {
+      this.ensureGroupsAreLocked();
+      console.log(this.finalValue);
+      this.$emit('input', this.finalValue);
+    },
+    ensureGroupsAreLocked: function ensureGroupsAreLocked() {
+      var currentSelection = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.selection;
+
+      for (var _i = 0, _Object$entries = Object.entries(currentSelection); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            flag = _Object$entries$_i[0],
             selected = _Object$entries$_i[1].selected;
 
         if (selected === false) continue;
 
-        var _iterator = _createForOfIteratorHelper(groups),
+        var _iterator = _createForOfIteratorHelper(this.groups),
             _step;
 
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var group = _step.value;
-            if (!group.includes(parseInt(key))) continue;
-            this.disableAllNotInGroup(currentSelected, group);
+            if (!group.includes(parseInt(flag))) continue;
+            this.disableAllNotInGroup(group, currentSelection);
             return;
           }
         } catch (err) {
@@ -3374,27 +3447,55 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         }
       }
 
-      this.enableAll(currentSelected);
+      this.enableAll(currentSelection);
     },
-    disableAllNotInGroup: function disableAllNotInGroup(currentSelected, group) {
-      for (var _i3 = 0, _Object$keys2 = Object.keys(currentSelected); _i3 < _Object$keys2.length; _i3++) {
-        var key = _Object$keys2[_i3];
+    disableAllNotInGroup: function disableAllNotInGroup(group) {
+      var currentSelection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.selection;
+
+      for (var _i2 = 0, _Object$keys = Object.keys(currentSelection); _i2 < _Object$keys.length; _i2++) {
+        var key = _Object$keys[_i2];
         var shouldDisable = !group.includes(parseInt(key));
-        currentSelected[key].disabled = shouldDisable;
+        currentSelection[key].disabled = shouldDisable;
 
         if (shouldDisable) {
-          currentSelected[key].selected = false;
+          currentSelection[key].selected = false;
         }
       }
     },
     enableAll: function enableAll(currentSelected) {
-      for (var _i4 = 0, _Object$keys3 = Object.keys(currentSelected); _i4 < _Object$keys3.length; _i4++) {
-        var key = _Object$keys3[_i4];
+      for (var _i3 = 0, _Object$keys2 = Object.keys(currentSelected); _i3 < _Object$keys2.length; _i3++) {
+        var key = _Object$keys2[_i3];
         currentSelected[key].disabled = false;
       }
+    },
+    getRecalculatedSelectionNData: function getRecalculatedSelectionNData() {
+      var currentSelection = {};
+
+      for (var _i4 = 0, _Object$keys3 = Object.keys(this.flagsWithTitles); _i4 < _Object$keys3.length; _i4++) {
+        var flag = _Object$keys3[_i4];
+        currentSelection[flag] = {
+          selected: (this.value & parseInt(flag)) !== 0,
+          disabled: false
+        };
+      }
+
+      this.ensureGroupsAreLocked(currentSelection);
+      return currentSelection;
+    },
+    recalculateSelectionData: function recalculateSelectionData() {
+      this.selection = this.getRecalculatedSelectionNData();
+      return this.selection;
+    }
+  },
+  watch: {
+    value: function value() {
+      this.recalculateSelectionData();
     }
   },
   computed: {
+    isInputRequired: function isInputRequired() {
+      return this.required && this.finalValue === null;
+    },
     finalValue: function finalValue() {
       var out = 0;
 
@@ -3407,10 +3508,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }
 
       return out || null;
-    },
-    isInputRequired: function isInputRequired() {
-      console.log(this.required, this.finalValue);
-      return this.required && this.finalValue === null;
     }
   }
 });
@@ -3491,6 +3588,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     show: {
@@ -3508,22 +3608,29 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     close: function close() {
-      this.$emit('close');
+      this.$emit('close', !this.validated || this.checkValidity(false));
     },
     save: function save() {
-      if (this.validated) {
-        for (var _i = 0, _Array$from = Array.from(this.$parent.$el.querySelectorAll('input, select')); _i < _Array$from.length; _i++) {
-          var e = _Array$from[_i];
-
-          if (!e.checkValidity()) {
-            e.reportValidity();
-            return;
-          }
-        }
+      if (this.validated && !this.checkValidity()) {
+        return;
       }
 
       this.$emit('save');
       this.close();
+    },
+    checkValidity: function checkValidity() {
+      var report = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      for (var _i = 0, _Array$from = Array.from(this.$parent.$el.querySelectorAll('input, select')); _i < _Array$from.length; _i++) {
+        var e = _Array$from[_i];
+
+        if (!e.checkValidity()) {
+          if (report) e.reportValidity();
+          return false;
+        }
+      }
+
+      return true;
     }
   },
   watch: {
@@ -40169,7 +40276,10 @@ var render = function() {
                         },
                         on: {
                           save: function() {
-                            _vm.closeRow(index)
+                            _vm.saveRow(index)
+                          },
+                          close: function(isValid) {
+                            _vm.closeAndRevertChangesRow(index, isValid)
                           }
                         },
                         scopedSlots: _vm._u(
@@ -40177,7 +40287,7 @@ var render = function() {
                             {
                               key: "header",
                               fn: function() {
-                                return [_vm._v("Edit an animal")]
+                                return [_vm._t("modal-header")]
                               },
                               proxy: true
                             },
@@ -40198,7 +40308,7 @@ var render = function() {
                                               [
                                                 _vm._t("animal-name-header"),
                                                 _vm._v(
-                                                  " *\n                                                            "
+                                                  "\n                                                        *\n                                                        "
                                                 ),
                                                 _c("input", {
                                                   directives: [
@@ -40246,7 +40356,7 @@ var render = function() {
                                               [
                                                 _vm._t("animal-gender-header"),
                                                 _vm._v(
-                                                  " *\n                                                            "
+                                                  "\n                                                        *\n                                                        "
                                                 ),
                                                 _c(
                                                   "select",
@@ -40322,7 +40432,10 @@ var render = function() {
                                                           },
                                                           [
                                                             _vm._v(
-                                                              _vm._s(genderName)
+                                                              _vm._s(
+                                                                genderName
+                                                              ) +
+                                                                "\n                                                            "
                                                             )
                                                           ]
                                                         )
@@ -40420,7 +40533,8 @@ var render = function() {
                                                             _vm._v(
                                                               _vm._s(
                                                                 breedingTypeName
-                                                              )
+                                                              ) +
+                                                                "\n                                                            "
                                                             )
                                                           ]
                                                         )
@@ -40441,7 +40555,7 @@ var render = function() {
                                               [
                                                 _vm._t("animal-eyes-header"),
                                                 _vm._v(
-                                                  " *\n                                                            "
+                                                  "\n                                                        *\n                                                        "
                                                 ),
                                                 _c(
                                                   "select",
@@ -40518,7 +40632,8 @@ var render = function() {
                                                           },
                                                           [
                                                             _vm._v(
-                                                              _vm._s(eyesName)
+                                                              _vm._s(eyesName) +
+                                                                "\n                                                            "
                                                             )
                                                           ]
                                                         )
@@ -40615,7 +40730,8 @@ var render = function() {
                                                             _vm._v(
                                                               _vm._s(
                                                                 primaryMarkName
-                                                              )
+                                                              ) +
+                                                                "\n                                                            "
                                                             )
                                                           ]
                                                         )
@@ -40712,7 +40828,8 @@ var render = function() {
                                                             _vm._v(
                                                               _vm._s(
                                                                 secondaryMarkName
-                                                              )
+                                                              ) +
+                                                                "\n                                                            "
                                                             )
                                                           ]
                                                         )
@@ -40793,7 +40910,7 @@ var render = function() {
                                               [
                                                 _vm._t("animal-build-header"),
                                                 _vm._v(
-                                                  "*\n                                                    "
+                                                  "\n                                                    *\n                                                "
                                                 )
                                               ],
                                               2
@@ -40805,16 +40922,57 @@ var render = function() {
                                               [
                                                 _c("flag-checkboxes", {
                                                   attrs: {
-                                                    selected: animal.build,
                                                     "flags-with-titles":
                                                       _vm.animalBuilds,
                                                     groups:
                                                       _vm.animalBuildGroups,
-                                                    "input-name":
+                                                    required: true
+                                                  },
+                                                  model: {
+                                                    value: animal.build,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        animal,
+                                                        "build",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "animal.build"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: animal.build,
+                                                      expression: "animal.build"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "hidden",
+                                                    name:
                                                       "animals[" +
                                                       index +
-                                                      "][build]",
-                                                    required: true
+                                                      "][build]"
+                                                  },
+                                                  domProps: {
+                                                    value: animal.build
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        animal,
+                                                        "build",
+                                                        $event.target.value
+                                                      )
+                                                    }
                                                   }
                                                 })
                                               ],
@@ -40830,7 +40988,7 @@ var render = function() {
                                             [
                                               _vm._t("animal-fur-header"),
                                               _vm._v(
-                                                "*\n                                                    "
+                                                "\n                                                    *\n                                                "
                                               )
                                             ],
                                             2
@@ -40842,15 +41000,50 @@ var render = function() {
                                             [
                                               _c("flag-checkboxes", {
                                                 attrs: {
-                                                  selected: animal.fur,
                                                   "flags-with-titles":
                                                     _vm.animalFurs,
                                                   groups: _vm.animalFurGroups,
-                                                  "input-name":
+                                                  required: true
+                                                },
+                                                model: {
+                                                  value: animal.fur,
+                                                  callback: function($$v) {
+                                                    _vm.$set(animal, "fur", $$v)
+                                                  },
+                                                  expression: "animal.fur"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: animal.fur,
+                                                    expression: "animal.fur"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "hidden",
+                                                  name:
                                                     "animals[" +
                                                     index +
-                                                    "][fur]",
-                                                  required: true
+                                                    "][fur]"
+                                                },
+                                                domProps: { value: animal.fur },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      animal,
+                                                      "fur",
+                                                      $event.target.value
+                                                    )
+                                                  }
                                                 }
                                               })
                                             ],
@@ -40874,7 +41067,7 @@ var render = function() {
                                               [
                                                 _vm._t("animal-color-header"),
                                                 _vm._v(
-                                                  "*\n                                                    "
+                                                  "\n                                                    *\n                                                "
                                                 )
                                               ],
                                               2
@@ -40927,15 +41120,55 @@ var render = function() {
                                             [
                                               _c("flag-checkboxes", {
                                                 attrs: {
-                                                  selected: animal.effect,
                                                   "flags-with-titles":
                                                     _vm.animalEffects,
-                                                  groups: _vm.animalFurGroups,
-                                                  "input-name":
+                                                  required: false
+                                                },
+                                                model: {
+                                                  value: animal.effect,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      animal,
+                                                      "effect",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "animal.effect"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: animal.effect,
+                                                    expression: "animal.effect"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  type: "hidden",
+                                                  name:
                                                     "animals[" +
                                                     index +
-                                                    "][effect]",
-                                                  required: false
+                                                    "][effect]"
+                                                },
+                                                domProps: {
+                                                  value: animal.effect
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      animal,
+                                                      "effect",
+                                                      $event.target.value
+                                                    )
+                                                  }
                                                 }
                                               })
                                             ],
@@ -40950,16 +41183,16 @@ var render = function() {
                               proxy: true
                             },
                             {
-                              key: "footer-save-text",
+                              key: "footer-close-text",
                               fn: function() {
-                                return [_vm._t("modal-footer-save-text")]
+                                return [_vm._t("modal-footer-close-text")]
                               },
                               proxy: true
                             },
                             {
-                              key: "footer-left",
+                              key: "footer-save-text",
                               fn: function() {
-                                return [_vm._v(" ")]
+                                return [_vm._t("modal-footer-save-text")]
                               },
                               proxy: true
                             }
@@ -40969,9 +41202,9 @@ var render = function() {
                         )
                       }),
                       _vm._v(
-                        "\n                                " +
+                        "\n                            " +
                           _vm._s(animal.name) +
-                          "\n                            "
+                          "\n                        "
                       )
                     ],
                     1
@@ -41121,76 +41354,69 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _vm._l(_vm.flagsWithTitles, function(title, flag) {
-        return _c("div", [
-          _c("label", [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model:value",
-                  value: _vm.selection[flag].selected,
-                  expression: "selection[flag].selected",
-                  arg: "value"
-                }
-              ],
-              attrs: {
-                type: "checkbox",
-                disabled: _vm.selection[flag].disabled,
-                required: _vm.isInputRequired
-              },
-              domProps: {
-                checked: Array.isArray(_vm.selection[flag].selected)
-                  ? _vm._i(_vm.selection[flag].selected, null) > -1
-                  : _vm.selection[flag].selected
-              },
-              on: {
-                change: [
-                  function($event) {
-                    var $$a = _vm.selection[flag].selected,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = null,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(
-                            _vm.selection[flag],
-                            "selected",
-                            $$a.concat([$$v])
-                          )
-                      } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.selection[flag],
-                            "selected",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
-                      }
-                    } else {
-                      _vm.$set(_vm.selection[flag], "selected", $$c)
-                    }
-                  },
-                  function($event) {
-                    return _vm.ensureGroups(_vm.selection, _vm.groups)
-                  }
-                ]
+    _vm._l(_vm.flagsWithTitles, function(title, flag) {
+      return _c("div", [
+        _c("label", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model:value",
+                value: _vm.selection[flag].selected,
+                expression: "selection[flag].selected",
+                arg: "value"
               }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(title))])
-          ])
+            ],
+            attrs: {
+              type: "checkbox",
+              disabled: _vm.selection[flag].disabled,
+              required: _vm.isInputRequired
+            },
+            domProps: {
+              checked: Array.isArray(_vm.selection[flag].selected)
+                ? _vm._i(_vm.selection[flag].selected, null) > -1
+                : _vm.selection[flag].selected
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.selection[flag].selected,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.selection[flag],
+                          "selected",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.selection[flag],
+                          "selected",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.selection[flag], "selected", $$c)
+                  }
+                },
+                function($event) {
+                  return _vm.handleInputChange()
+                }
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(title))])
         ])
-      }),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "hidden", name: _vm.inputName },
-        domProps: { value: _vm.finalValue }
-      })
-    ],
-    2
+      ])
+    }),
+    0
   )
 }
 var staticRenderFns = []
@@ -41285,7 +41511,7 @@ var render = function() {
                 { staticClass: "modal-body" },
                 [
                   _vm._t("body", function() {
-                    return [_c("p", [_vm._v("Modal body text goes here.")])]
+                    return [_c("p", [_vm._v("Modal body goes here")])]
                   })
                 ],
                 2
@@ -41307,7 +41533,12 @@ var render = function() {
                               attrs: { type: "button" },
                               on: { click: _vm.close }
                             },
-                            [_vm._v("Close")]
+                            [
+                              _vm._t("footer-close-text", function() {
+                                return [_vm._v("Close")]
+                              })
+                            ],
+                            2
                           )
                         ]
                       })

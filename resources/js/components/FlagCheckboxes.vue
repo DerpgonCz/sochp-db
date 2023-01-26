@@ -2,11 +2,10 @@
     <div>
         <div v-for="(title, flag) in flagsWithTitles">
             <label>
-                <input type="checkbox" v-model:value="selection[flag].selected" :disabled="selection[flag].disabled" @change="ensureGroups(selection, groups)" :required="isInputRequired">
+                <input type="checkbox" v-model:value="selection[flag].selected" :disabled="selection[flag].disabled" @change="handleInputChange()" :required="isInputRequired">
                 <span>{{ title }}</span>
             </label>
         </div>
-        <input type="hidden" :name="inputName" :value="finalValue">
     </div>
 </template>
 
@@ -14,59 +13,50 @@
 export default {
     props: {
         flagsWithTitles: Object,
-        selected: {
-            type: Number,
-            default: 0,
-        },
         groups: {
             type: Array,
             default: () => [],
         },
-        inputName: String,
         required: {
             type: Boolean,
             default: false,
         },
+        value: Number,
     },
     data() {
-        const selection = {};
-        for (const flag of Object.keys(this.flagsWithTitles)) {
-            selection[flag] = {
-                selected: (this.selected & parseInt(flag)) !== 0,
-                disabled: false,
-            };
-        }
-        this.ensureGroups(selection, this.groups);
-
         return {
-            selection,
+            selection: this.getRecalculatedSelectionNData(),
         }
     },
     methods: {
-        ensureGroups(currentSelected, groups) {
-            for (const [key, {selected}] of Object.entries(currentSelected)) {
+        handleInputChange() {
+            this.ensureGroupsAreLocked();
+            console.log(this.finalValue);
+            this.$emit('input', this.finalValue);
+        },
+        ensureGroupsAreLocked(currentSelection = this.selection) {
+            for (const [flag, {selected}] of Object.entries(currentSelection)) {
                 if (selected === false)
                     continue;
 
-                for (const group of groups) {
-                    if (!group.includes(parseInt(key)))
+                for (const group of this.groups) {
+                    if (!group.includes(parseInt(flag)))
                         continue;
 
-                    this.disableAllNotInGroup(currentSelected, group);
+                    this.disableAllNotInGroup(group, currentSelection);
                     return;
                 }
             }
 
-            this.enableAll(currentSelected);
+            this.enableAll(currentSelection);
         },
-        disableAllNotInGroup(currentSelected, group) {
-            for (const key of Object.keys(currentSelected)) {
+        disableAllNotInGroup(group, currentSelection = this.selection) {
+            for (const key of Object.keys(currentSelection)) {
                 const shouldDisable = !group.includes(parseInt(key));
-                currentSelected[key].disabled = shouldDisable;
+                currentSelection[key].disabled = shouldDisable;
                 if (shouldDisable) {
-                    currentSelected[key].selected = false;
+                    currentSelection[key].selected = false;
                 }
-
             }
         },
         enableAll(currentSelected) {
@@ -74,8 +64,35 @@ export default {
                 currentSelected[key].disabled = false;
             }
         },
+
+        getRecalculatedSelectionNData() {
+            const currentSelection = {};
+            for (const flag of Object.keys(this.flagsWithTitles)) {
+                currentSelection[flag] = {
+                    selected: (this.value & parseInt(flag)) !== 0,
+                    disabled: false,
+                };
+            }
+
+            this.ensureGroupsAreLocked(currentSelection);
+
+            return currentSelection;
+        },
+        recalculateSelectionData() {
+            this.selection = this.getRecalculatedSelectionNData();
+
+            return this.selection;
+        },
+    },
+    watch: {
+        value() {
+            this.recalculateSelectionData();
+        }
     },
     computed: {
+        isInputRequired() {
+            return this.required && this.finalValue === null;
+        },
         finalValue() {
             let out = 0;
             for(const [key, {selected}] of Object.entries(this.selection)) {
@@ -83,10 +100,6 @@ export default {
             }
 
             return out || null;
-        },
-        isInputRequired() {
-            console.log(this.required, this.finalValue);
-            return this.required && this.finalValue === null;
         }
     }
 }

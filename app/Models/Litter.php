@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\LitterStateEnum;
-use App\Enums\StationStateEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

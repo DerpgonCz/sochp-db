@@ -6,6 +6,7 @@ namespace App\Http\Requests;
 
 use App\Enums\Animal\AnimalBreedingTypeEnum;
 use App\Enums\Animal\AnimalBuildEnum;
+use App\Enums\Animal\AnimalEffectEnum;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalFurEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
@@ -91,6 +92,8 @@ class LitterUpdateRequest extends FormRequest
             ],
             'animas.*.effect' => [
                 'nullable',
+                'numeric',
+                new FlagEnumRule(AnimalEffectEnum::class),
             ],
             'animals.*.breeding_type' => [
                 Rule::excludeIf(Gate::check(PermissionsEnum::MANAGE_LITTERS->value, Litter::class)),

@@ -41,6 +41,7 @@
                             <tr>
                                 <th>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</th>
                                 <th>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.state', Station::class)) }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,9 @@
                                         </a>
                                     </th>
                                     <td>{{ $station->owner->name }}</td>
+                                    <td>
+                                        <x-station-state-badge :station="$station" />
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
