@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Frontend;
+namespace App\Services\Frontend\Animal;
 
 use App\Models\Animal;
 

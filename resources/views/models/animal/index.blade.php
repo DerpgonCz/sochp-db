@@ -1,7 +1,5 @@
 @php
-    use App\Models\Animal;
-    use App\Services\Models\Animal\AnimalFurService;
-    use App\Enums\Animal\AnimalEffectEnum;
+    use App\Models\Animal;use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;
 @endphp
 @extends('layouts.app')
 
@@ -12,29 +10,29 @@
                 <h2>{{ __('Animals') }}</h2>
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>{{ __(sprintf('models.%s.fields.name', Animal::class)) }}</th>
-                            <th>{{ __('Station') }}</th>
-                            <th>{{ __(sprintf('models.%s.fields.fur', Animal::class)) }}</th>
-                            <th>{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</th>
-                            <th>{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</th>
-                        </tr>
+                    <tr>
+                        <th>{{ __(sprintf('models.%s.fields.name', Animal::class)) }}</th>
+                        <th>{{ __('Station') }}</th>
+                        <th>{{ __(sprintf('models.%s.fields.fur', Animal::class)) }}</th>
+                        <th>{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</th>
+                        <th>{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach($animals as $animal)
-                            <tr class="position-relative">
-                                <th scope="row">
-                                    <a href="{{ route('animals.show', $animal) }}" class="stretched-link">
-                                        <x-animal-gender :value="$animal"/>
-                                        {{ $animal->name }}
-                                    </a>
-                                </th>
-                                <td>{{ $animal->litter->station->name }}</td>
-                                <td>{{ (new AnimalFurService())($animal) }}</td>
-                                <td>{{ $animal->color }}</td>
-                                <td>{{ __(sprintf('enums.%s.%d', AnimalEffectEnum::class, $animal->effect->value)) }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($animals as $animal)
+                        <tr class="position-relative">
+                            <th scope="row">
+                                <a href="{{ route('animals.show', $animal) }}" class="stretched-link">
+                                    <x-animal-gender :value="$animal"/>
+                                    {{ $animal->name }}
+                                </a>
+                            </th>
+                            <td>{{ $animal->litter->station->name }}</td>
+                            <td>{{ (new AnimalFurTranslationService())($animal) }}</td>
+                            <td>{{ (new AnimalColorTranslationService())($animal) ?: '--' }}</td>
+                            <td>{{ (new AnimalEffectTranslationService())($animal) }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

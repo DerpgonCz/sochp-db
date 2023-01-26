@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Models\Animal;
+namespace App\Services\Frontend\Animal;
 
 use App\Enums\GenderEnum;
 use App\Models\Animal;

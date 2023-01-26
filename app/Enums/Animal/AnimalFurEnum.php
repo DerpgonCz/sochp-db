@@ -40,9 +40,4 @@ enum AnimalFurEnum: int
             ],
         ];
     }
-
-    public function isStandard(): bool
-    {
-        return ($this->value & self::FLAG_STANDARD->value) === self::FLAG_STANDARD->value;
-    }
 }

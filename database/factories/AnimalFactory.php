@@ -26,6 +26,19 @@ class AnimalFactory extends Factory
     {
         $gender = $this->faker->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]);
 
+        $shadedColor = $this->faker->randomElement(AnimalColorShaded::cases());
+        $fullColor = $this->faker->randomElement(AnimalColorFull::cases());
+        $minkColor = in_array($fullColor, AnimalColorFull::MINK_COLORS) ? $this->faker->randomElement(AnimalColorMink::cases()) : null;
+
+        [$shadedColor, $fullColor, $minkColor] = $this->faker->randomElement(
+            [
+                [$shadedColor, null, null],
+                [null, $fullColor, null],
+                [null, $fullColor, $minkColor],
+                [$shadedColor, $fullColor, null]
+            ]
+        );
+
         return [
             'name' => sprintf('ANI %s', $this->faker->name($gender === GenderEnum::MALE ? 'male' : 'female')),
             'registration_no' => $this->faker->unique()->numerify('P ###/##'),
@@ -33,9 +46,9 @@ class AnimalFactory extends Factory
             'gender' => $gender,
             'fur' => $this->faker->randomElement(AnimalFurEnum::values()), // TODO: Choose multiple valid
             'build' => $this->faker->randomElement(AnimalBuildEnum::values()), // TODO: Choose multiple valid
-            'color_shaded' => $this->faker->randomElement(AnimalColorShaded::cases()), // TODO: Valid color combinations
-            'color_full' => $this->faker->randomElement(AnimalColorFull::cases()), // TODO: Valid color combinations
-            'color_mink' => $this->faker->randomElement(AnimalColorMink::cases()), // TODO: Valid color combinations
+            'color_shaded' => $shadedColor,
+            'color_full' => $fullColor,
+            'color_mink' => $minkColor,
             'effect' => $this->faker->randomElement(AnimalEffectEnum::values()),  // TODO: Choose multiple valid
             'mark_primary' => $this->faker->optional(0.75)->randomElement(AnimalPrimaryMarkEnum::values()),
             'mark_secondary' => $this->faker->optional(0.25)->randomElement(AnimalSecondaryMarkEnum::values()),

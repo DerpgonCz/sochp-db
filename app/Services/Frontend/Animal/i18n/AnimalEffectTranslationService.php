@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Models\Animal;
+namespace App\Services\Frontend\Animal\i18n;
 
 use App\Enums\Animal\AnimalEffectEnum;
 use App\Models\Animal;
 
-class AnimalEffectService
+class AnimalEffectTranslationService
 {
     private const PRIORITY = [
         // TODO: Sort

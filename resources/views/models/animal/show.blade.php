@@ -1,7 +1,5 @@
 @php
-    use App\Enums\StationStateEnum;
-    use App\Services\Models\Animal\AnimalBuildService;
-    use App\Models\Animal;use App\Services\Models\Animal\AnimalColorService;use App\Services\Models\Animal\AnimalEffectService;use App\Services\Models\Animal\AnimalFurService;
+    use App\Enums\Animal\AnimalEyesEnum;use App\Enums\Animal\AnimalPrimaryMarkEnum;use App\Enums\Animal\AnimalSecondaryMarkEnum;use App\Enums\StationStateEnum;use App\Models\Animal;use App\Services\Frontend\Animal\i18n\AnimalBuildTranslationService;use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;use App\Services\Frontend\Animal\i18n\AnimalVarietyTranslationService;
 @endphp
 @extends('layouts.app')
 
@@ -65,17 +63,36 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.variety', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ (new AnimalBuildService())($animal) }}, {{ (new AnimalFurService())($animal) }}
-                    </dt>
-
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</dd>
-                    <dt class="col-9">
-                        {{ (new AnimalEffectService())($animal) }}
+                        {{ (new AnimalVarietyTranslationService())($animal) }}
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ (new AnimalColorService())($animal) }}
+                        {{ (new AnimalColorTranslationService())($animal) }}<br>
+                        <i class="small">{{ (new AnimalColorTranslationService())($animal, 'en') }}</i>
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.eyes', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ __(sprintf('enums.%s.%s', AnimalEyesEnum::class, $animal->eyes->value)) }}
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.mark', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        @if($animal->mark_primary === null && $animal->mark_secondary === null)
+                            --
+                        @endif
+                        @if($animal->mark_primary !== null)
+                            {{ __(sprintf('enums.%s.%s', AnimalPrimaryMarkEnum::class, $animal->mark_primary->value)) }}
+                        @endif
+                        @if($animal->mark_secondary !== null)
+                            {{ __(sprintf('enums.%s.%s', AnimalSecondaryMarkEnum::class, $animal->mark_secondary->value)) }}
+                        @endif
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ (new AnimalEffectTranslationService())($animal) }}
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.status', Animal::class)) }}</dd>

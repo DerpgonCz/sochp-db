@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Models\Animal;
+namespace App\Services\Frontend\Animal\i18n;
 
 use App\Enums\Animal\AnimalFurEnum;
 use App\Models\Animal;
 
-class AnimalFurService
+class AnimalFurTranslationService
 {
     private const PRIORITY = [
         AnimalFurEnum::FLAG_STANDARD,
@@ -17,6 +17,7 @@ class AnimalFurService
         AnimalFurEnum::FLAG_REX,
         AnimalFurEnum::FLAG_SATIN,
         AnimalFurEnum::FLAG_VELVETEEN,
+        AnimalFurEnum::FLAG_NON_STANDARD,
     ];
 
     public function __invoke(Animal $animal): string
