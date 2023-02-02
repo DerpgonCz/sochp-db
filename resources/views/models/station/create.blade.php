@@ -1,3 +1,6 @@
+@php
+    use App\Models\Station;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -18,8 +21,8 @@
                 </div>
 
                 <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}</strong>
-                    <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}" value="{{ old('name') }}" required>
+                    <strong>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</strong>
+                    <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', Station::class)) }}" value="{{ old('name') }}" required>
                 </label>
 
                 <label class="form-group">

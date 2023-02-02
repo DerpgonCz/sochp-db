@@ -6,14 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+return new class () extends Migration {
+    public function up(): void
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
@@ -21,25 +15,29 @@ return new class extends Migration
 
             $table->string('name')->nullable();
             $table->string('registration_no')->unique()->nullable();
-            $table->string('fur')->nullable();
-            $table->string('color')->nullable();
-            $table->string('effect')->nullable();
-            $table->string('mark_primary')->nullable();
-            $table->string('mark_secondary')->nullable();
             $table->text('note')->nullable();
-            $table->tinyInteger('gender')->default(0);
             $table->dateTime('died_on')->nullable();
+
+            // Flag enums
+            $table->unsignedTinyInteger('fur');
+            $table->unsignedTinyInteger('build');
+            $table->integer('color_full')->nullable();
+            $table->integer('color_shaded')->nullable();
+            $table->integer('color_mink')->nullable();
+
+            // Single value enums
+            $table->unsignedTinyInteger('breeding_type')->nullable();
+            $table->unsignedTinyInteger('effect')->nullable();
+            $table->unsignedTinyInteger('mark_primary')->nullable();
+            $table->unsignedTinyInteger('mark_secondary')->nullable();
+            $table->unsignedTinyInteger('gender');
+            $table->unsignedTinyInteger('eyes');
 
             $table->foreignId('caretaker_id')->nullable()->constrained('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('animals');
     }

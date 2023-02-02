@@ -16,7 +16,7 @@ class LitterFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Str::upper($this->faker->unique()->bothify('??####')),
+            'name' => sprintf('LTR %s', Str::upper($this->faker->unique()->bothify('??####'))),
             'state' => LitterStateEnum::getRandomInstance(),
             'happened_on' => $this->faker->dateTimeThisDecade(),
         ];

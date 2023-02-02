@@ -38,7 +38,7 @@ Route::get('/', function () {
 // Search
 Route::get('/search', [SearchController::class, 'search']);
 
-Route::middleware('auth')->group(static function(): void {
+Route::middleware('auth')->group(static function (): void {
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });

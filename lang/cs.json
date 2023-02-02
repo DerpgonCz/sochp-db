@@ -126,7 +126,7 @@
     "Christmas Island": "Vánoční Ostrov",
     "City": "Město",
     "Click to choose": "Klikněte pro výběr",
-    "Close": "Uzavřít",
+    "Close": "Zavřít",
     "Cocos (Keeling) Islands": "Cocos (Keeling) Ostrovy",
     "Code": "Kód",
     "Colombia": "Kolumbie",
@@ -146,6 +146,7 @@
     "Country": "Země",
     "Coupon": "Kupón",
     "Create": "Vytvořit",
+    "Create private": "Vytvořit soukromý",
     "Create & Add Another": "Vytvořit a přidat další",
     "Create :resource": "Vytvořit :resource",
     "Create a new team to collaborate with others on projects.": "Vytvořte nový tým, který bude spolupracovat s ostatními na projektech.",
@@ -735,6 +736,7 @@
     "Create a new station": "Vytvořit novou ChS",
     "Edit a station": "Upravit ChS",
     "Edit a litter": "Upravit vrh",
+    "Edit an animal": "Upravit zvíře",
     "Show": "Zobrazit",
     "Every station has to be registered and approved by :org before being able to be approved here": "Každá ChS musí být registrována a schválena :org než může být schálena zde",
     "State": "Status",
@@ -750,6 +752,8 @@
     "Create a new litter": "Vytvořit nový vrh",
     "My animals": "Má zvířata",
     "Other animals": "Ostatní zvířata",
+    "Animals": "Zvířata",
     "Dead": "✝",
-    "Alive": "Žije"
+    "Alive": "Žije",
+    "standard": "standardní"
 }

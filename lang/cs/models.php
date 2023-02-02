@@ -10,15 +10,20 @@ return [
     ],
     Animal::class => [
         'status' => 'Stav',
+        'variety' => 'Varieta',
         'fields' => [
             'name' => 'Jméno',
             'registration_no' => 'Registrační číslo',
+            'build' => 'Stavba těla',
             'fur' => 'Srst',
-            'color' => 'Barva',
+            'color' => 'Barva srsti',
             'effect' => 'Efekt',
-            'mark_primary' => 'Hlavní znak',
-            'mark_secondary' => 'Vedlejší znak',
+            'eyes' => 'Barva očí',
+            'mark' => 'Kresba',
+            'mark_primary' => 'Kresba I',
+            'mark_secondary' => 'Kresba II',
             'gender' => 'Pohlaví',
+            'breeding_type' => 'Chovnost',
             'caretaker' => [
                 'name' => 'Jméno',
                 'station' => [

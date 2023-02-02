@@ -1,3 +1,7 @@
+@php
+    use App\Enums\StationStateEnum;
+    use App\Models\Station;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -8,19 +12,19 @@
                     <h2>{{ __('My station') }}</h2>
                     @if($userStation)
                         @switch($userStation->state->value)
-                            @case(\App\Enums\StationStateEnum::DRAFT)
+                            @case(StationStateEnum::DRAFT)
                                 <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-secondary">{{ __('Edit') }}</a>
                                 @break
 
-                            @case(\App\Enums\StationStateEnum::FOR_APPROVAL)
+                            @case(StationStateEnum::FOR_APPROVAL)
                                 <a href="{{ route('stations.show', $userStation) }}" class="btn btn-primary">{{ __('Sent for approval') }}</a>
                                 @break
 
-                            @case(\App\Enums\StationStateEnum::REQUIRES_CHANGES)
+                            @case(StationStateEnum::REQUIRES_CHANGES)
                                 <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-warning">{{ __('Requires changes') }}</a>
                                 @break
 
-                            @case(\App\Enums\StationStateEnum::APPROVED)
+                            @case(StationStateEnum::APPROVED)
                                 <a href="{{ route('stations.show', $userStation) }}" class="btn btn-success">{{ __('Approved') }}</a>
                                 @break
                         @endswitch
@@ -29,27 +33,31 @@
                     @endif
                 @endauth
 
-                @can('approve', \App\Models\Station::class)
+                @can('approve', Station::class)
                     <div class="my-4"></div>
                     <h2>{{ __('For approval') }}</h2>
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th>{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}</th>
-                            <th>{{ __(sprintf('models.%s.fields.owner.name', \App\Models\Station::class)) }}</th>
-                        </tr>
+                            <tr>
+                                <th>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.state', Station::class)) }}</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach($stationsForApproval as $station)
-                            <tr class="position-relative">
-                                <th scope="row">
-                                    <a href="{{ route('stations.edit', $station) }}" class="stretched-link">
-                                        {{ $station->name }}
-                                    </a>
-                                </th>
-                                <td>{{ $station->owner->name }}</td>
-                            </tr>
-                        @endforeach
+                            @foreach($stationsForApproval as $station)
+                                <tr class="position-relative">
+                                    <th scope="row">
+                                        <a href="{{ route('stations.edit', $station) }}" class="stretched-link">
+                                            {{ $station->name }}
+                                        </a>
+                                    </th>
+                                    <td>{{ $station->owner->name }}</td>
+                                    <td>
+                                        <x-station-state-badge :station="$station" />
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 @endcan
@@ -58,22 +66,22 @@
                 <h2>{{ __('Approved stations') }}</h2>
                 <table class="table table-hover">
                     <thead>
-                    <tr>
-                        <th>{{ __(sprintf('models.%s.fields.name', \App\Models\Station::class)) }}</th>
-                        <th>{{ __(sprintf('models.%s.fields.owner.name', \App\Models\Station::class)) }}</th>
-                    </tr>
+                        <tr>
+                            <th>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</th>
+                            <th>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($stations as $station)
-                        <tr class="position-relative">
-                            <th scope="row">
-                                <a href="{{ route('stations.show', $station) }}" class="stretched-link">
-                                    {{ $station->name }}
-                                </a>
-                            </th>
-                            <td>{{ $station->owner->name }}</td>
-                        </tr>
-                    @endforeach
+                        @foreach($stations as $station)
+                            <tr class="position-relative">
+                                <th scope="row">
+                                    <a href="{{ route('stations.show', $station) }}" class="stretched-link">
+                                        {{ $station->name }}
+                                    </a>
+                                </th>
+                                <td>{{ $station->owner->name }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

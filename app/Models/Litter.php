@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use App\Enums\LitterStateEnum;
-use App\Enums\StationStateEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Scout\Searchable;
 
 /**
@@ -34,6 +32,14 @@ class Litter extends Model
         'state' => LitterStateEnum::class,
     ];
 
+    public function toSearchableArray(): array
+    {
+        return collect($this->toArray())->only([
+            'id',
+            'name',
+        ])->toArray();
+    }
+
     public function scopeApproved(): Builder
     {
         return $this->where('state', LitterStateEnum::FINALIZED);
@@ -41,7 +47,7 @@ class Litter extends Model
 
     public function shouldBeSearchable(): bool
     {
-        return $this->state->is(StationStateEnum::APPROVED);
+        return $this->state->is(LitterStateEnum::FINALIZED);
     }
 
     public function mother(): BelongsTo

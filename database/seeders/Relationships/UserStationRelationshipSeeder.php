@@ -16,7 +16,6 @@ class UserStationRelationshipSeeder extends Seeder
         Assert::greaterThanEq(User::count(), Station::count(), 'User count (%s) should be greater or equal to count of Stations (%s)');
 
         foreach (Station::all() as $station) {
-
             $user = User::whereDoesntHave('station')->inRandomOrder()->first();
             $station->owner()->associate($user)->save();
         }

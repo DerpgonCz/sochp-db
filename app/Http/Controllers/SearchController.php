@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Search\AnimalSearchResource;
+use App\Http\Resources\Search\LitterSearchResource;
+use App\Http\Resources\Search\StationSearchResource;
 use App\Models\Animal;
 use App\Models\Litter;
 use App\Models\Station;
@@ -20,8 +23,16 @@ class SearchController extends Controller
     private const SEARCH = [
         Animal::class => ['litter.station'],
         Station::class => [],
-        Litter::class => [],
+        Litter::class => ['station'],
+    ];
 
+    /**
+     * @var array<string, \Illuminate\Http\Resources\Json\JsonResource>
+     */
+    private const RESOURCES = [
+        Animal::class => AnimalSearchResource::class,
+        Station::class => StationSearchResource::class,
+        Litter::class => LitterSearchResource::class,
     ];
 
     public function search(Request $request): JsonResponse
@@ -33,12 +44,13 @@ class SearchController extends Controller
 
         $results = [];
         foreach (self::SEARCH as $class => $loadRelations) {
-            /** @var \Laravel\Scout\Searchable $class */
+            /** @var \Laravel\Scout\Searchable|string $class */
             $searchResult = $class::search($query)->get();
             if (count($loadRelations)) {
                 $searchResult->load($loadRelations);
             }
-            $results[Str::lower(Str::plural(class_basename($class)))] = $searchResult;
+            $responseArrayKey = Str::lower(Str::plural(class_basename($class)));
+            $results[$responseArrayKey] = array_key_exists($class, self::RESOURCES) ? self::RESOURCES[$class]::collection($searchResult) : $searchResult;
         }
 
         return response()->json([

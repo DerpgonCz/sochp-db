@@ -9,8 +9,8 @@ use BenSampo\Enum\Enum;
 
 class GenderEnum extends Enum implements LocalizedEnum
 {
-    public const NOT_KNOWN = 0;
+    // public const NOT_KNOWN = 0;
     public const MALE = 1;
     public const FEMALE = 2;
-    public const NOT_APPLICABLE = 9;
+    // public const NOT_APPLICABLE = 9;
 }

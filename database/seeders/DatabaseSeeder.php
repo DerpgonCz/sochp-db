@@ -10,7 +10,6 @@ use Database\Seeders\Models\StationSeeder;
 use Database\Seeders\Models\UserSeeder;
 use Database\Seeders\Relationships\AnimalCaretakerRelationshipSeeder;
 use Database\Seeders\Relationships\AnimalLitterRelationshipSeeder;
-use Database\Seeders\Relationships\AnimalStationRelationshipSeeder;
 use Database\Seeders\Relationships\LitterStationRelationshipSeeder;
 use Database\Seeders\Relationships\UserStationRelationshipSeeder;
 use Illuminate\Database\Seeder;

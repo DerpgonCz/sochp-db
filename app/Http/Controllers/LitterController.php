@@ -8,7 +8,8 @@ use App\Http\Requests\LitterStoreRequest;
 use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
-use App\Services\Models\Animal\AnimalSelectDataService;
+use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
+use App\Services\Frontend\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,8 @@ class LitterController extends Controller
 
     public function show(Litter $litter): View
     {
+        $this->authorize('view', $litter);
+
         return view('models.litter.show', [
             'litter' => $litter->load(['mother', 'father']),
         ]);
@@ -91,6 +94,23 @@ class LitterController extends Controller
         $this->authorize('update', $litter);
 
         $litter->fill($request->validated());
+        $litter->save();
+
+        // Animals logic
+        collect($request->get('animals'))
+            ->each(static function (array $animal) use ($litter): void {
+                $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animal['color']);
+                Animal::updateOrCreate(
+                    ['id' => $animal['id'] ?? null],
+                    [
+                        ...collect($animal)->except(['id', 'color'])->toArray(),
+                        'color_shaded' => $deserializedColor[0],
+                        'color_full' => $deserializedColor[1],
+                        'color_mink' => $deserializedColor[2],
+                        'litter_id' => $litter->id,
+                    ]
+                );
+            });
 
         // State logic
         $redirect = ['litters.edit', $litter];
@@ -108,12 +128,12 @@ class LitterController extends Controller
                 LitterStateEnum::FINALIZED => ['litters.index'],
             ];
             $flashMessages = [
-                LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.stations.state.requires_draft_changes',
-                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.stations.state.requires_breeding_approval',
-                LitterStateEnum::BREEDING => 'flashes.stations.state.breeding',
-                LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.stations.state.requires_breeding_changes',
-                LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.stations.state.requires_final_approval',
-                LitterStateEnum::FINALIZED => 'flashes.stations.state.finalized',
+                LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.litters.state.requires_draft_changes',
+                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.litters.state.requires_breeding_approval',
+                LitterStateEnum::BREEDING => 'flashes.litters.state.breeding',
+                LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.litters.state.requires_breeding_changes',
+                LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.litters.state.requires_final_approval',
+                LitterStateEnum::FINALIZED => 'flashes.litters.state.finalized',
             ];
 
             $litter->state = $toState;

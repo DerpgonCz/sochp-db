@@ -4,11 +4,9 @@ namespace App\Providers;
 
 use App\Models\Litter;
 use App\Models\Station;
-use App\Models\User;
 use App\Policies\LitterPolicy;
 use App\Policies\StationPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {

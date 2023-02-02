@@ -15,6 +15,7 @@ use BenSampo\Enum\Enum;
  * @method static self REQUIRES_BREEDING_CHANGES()
  * @method static self REQUIRES_FINAL_APPROVAL()
  * @method static self FINALIZED()
+ * @method static self PRIVATE()
  */
 class LitterStateEnum extends Enum implements LocalizedEnum
 {

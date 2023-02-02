@@ -3,12 +3,11 @@
 namespace App\Policies;
 
 use App\Enums\LitterStateEnum;
-use App\Enums\PermissionsEnum;
+use App\Enums\Auth\PermissionsEnum;
 use App\Enums\StationStateEnum;
 use App\Models\Litter;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Gate;
 
 class LitterPolicy
 {
@@ -36,7 +35,7 @@ class LitterPolicy
         ],
         LitterStateEnum::REQUIRES_FINAL_APPROVAL => [
             LitterStateEnum::REQUIRES_BREEDING_CHANGES,
-            LitterStateEnum::REQUIRES_FINAL_APPROVAL,
+            LitterStateEnum::FINALIZED,
         ],
     ];
 
@@ -45,8 +44,12 @@ class LitterPolicy
         return optional($user)->id === $litter->station->owner_id;
     }
 
-    private function manage(User $user): bool
+    public function manage(?User $user): bool
     {
+        if (!$user) {
+            return false;
+        }
+
         return $user->hasPermissionTo(PermissionsEnum::MANAGE_STATIONS->value);
     }
 
@@ -67,9 +70,11 @@ class LitterPolicy
         return $user->hasPermissionTo(PermissionsEnum::MANAGE_LITTERS->value);
     }
 
-    public function view(User $user, Litter $litter)
+    public function view(?User $user, Litter $litter): bool
     {
-        //
+        return $this->owns($user, $litter)
+            || $this->manage($user)
+            || $litter->state->is(LitterStateEnum::FINALIZED);
     }
 
     public function create(User $user): bool

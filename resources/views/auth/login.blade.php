@@ -19,7 +19,7 @@
                                     <select class="custom-select" name="email" onchange="event.preventDefault(); document.getElementById('dev-login-form').submit();">
                                         <option value="">-- {{ __('Select a user to login as') }} --</option>
                                         @foreach(\App\Models\User::all() as $user)
-                                            <option value="{{ $user->email }}">{{ $user->email }}</option>
+                                            <option value="{{ $user->email }}">{{ $user->email }} {{ $user->hasRole('admin') ? '(Admin)' : '' }}</option>
                                         @endforeach
                                     </select>
                                 </div>

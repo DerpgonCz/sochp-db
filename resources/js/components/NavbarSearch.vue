@@ -10,9 +10,9 @@
                 @focus="focused = true"
                 @input="onSearchChange">
             <div :class="{'dropdown-menu py-0': true, 'show': focused && results }" v-if="results">
-                <span class="dropdown-item font-weight-bold pl-2" v-if="results.animals && results.animals.length">Animals</span>
+                <span class="dropdown-item font-weight-bold pl-2" v-if="results.animals && results.animals.length">Zvířata</span>
                 <a v-for="animal in results.animals.slice(0, 5)" class="dropdown-item" :href="`/animals/${animal.id}`">
-                    {{ animal.name }} ({{ animal.litter.station.name }}, {{ animal.color }})
+                    {{ animal.name }} ({{ animal.station_name }}, {{ animal.color }})
                 </a>
                 <span class="dropdown-item" v-if="results.animals && results.animals.length > 5">+ {{ results.animals.length - 5}}</span>
 
@@ -20,11 +20,14 @@
                 <a v-for="station in results.stations.slice(0, 5)" class="dropdown-item" :href="`/stations/${station.id}`">
                     {{ station.name }}
                 </a>
+                <span class="dropdown-item" v-if="results.stations && results.stations.length > 5">+ {{ results.stations.length - 5}}</span>
 
                 <span class="dropdown-item font-weight-bold pl-2" v-if="results.litters && results.litters.length">Vrhy</span>
                 <a v-for="litter in results.litters.slice(0, 5)" class="dropdown-item" :href="`/litters/${litter.id}`">
-                    {{ litter.id }}
+                    {{ litter.name }} ({{ litter.station_name }})
                 </a>
+                <span class="dropdown-item" v-if="results.litters && results.litters.length > 5">+ {{ results.litters.length - 5}}</span>
+
             </div>
         </div>
     </form>
