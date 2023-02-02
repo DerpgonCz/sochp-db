@@ -31,12 +31,28 @@ class AnimalColorBuilderValueSerializer
 
         return match ($count) {
             2 => match ($colors[0]) {
-                'shaded' => [$colors[1], null, null],
-                'full' => [null, $colors[1], null],
+                'shaded' => [
+                    'shaded' => $colors[1],
+                    'full' => null,
+                    'mink' => null,
+                ],
+                'full' => [
+                    'shaded' => null,
+                    'full' => $colors[1],
+                    'mink' => null,
+                ],
             },
             3 => match ($colors[0]) {
-                'shaded' => [$colors[1], $colors[2], null],
-                'full' => [null, $colors[1], $colors[2]],
+                'shaded' => [
+                    'shaded' => $colors[1],
+                    'full' => $colors[2],
+                    'mink' => null,
+                ],
+                'full' => [
+                    'shaded' => null,
+                    'full' => $colors[1],
+                    'mink' => $colors[2],
+                ],
             },
             default => [],
         };

@@ -104,9 +104,9 @@ class LitterController extends Controller
                     ['id' => $animal['id'] ?? null],
                     [
                         ...collect($animal)->except(['id', 'color'])->toArray(),
-                        'color_shaded' => $deserializedColor[0],
-                        'color_full' => $deserializedColor[1],
-                        'color_mink' => $deserializedColor[2],
+                        'color_shaded' => $deserializedColor['shaded'],
+                        'color_full' => $deserializedColor['full'],
+                        'color_mink' => $deserializedColor['mink'],
                         'litter_id' => $litter->id,
                     ]
                 );
