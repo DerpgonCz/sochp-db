@@ -17,8 +17,4 @@ return new class () extends Migration {
         ];
         $role->syncPermissions($permissions);
     }
-
-    public function down(): void
-    {
-    }
 };

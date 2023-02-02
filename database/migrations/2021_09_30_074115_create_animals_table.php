@@ -36,9 +36,4 @@ return new class () extends Migration {
             $table->foreignId('caretaker_id')->nullable()->constrained('users');
         });
     }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('animals');
-    }
 };

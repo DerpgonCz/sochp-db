@@ -19,13 +19,4 @@ return new class () extends Migration {
             $table->foreignId('owner_id')->nullable()->constrained('users');
         });
     }
-
-    public function down(): void
-    {
-        Schema::table('animals', function (Blueprint $table): void {
-            $table->dropForeign('owner_id');
-        });
-
-        Schema::dropIfExists('stations');
-    }
 };

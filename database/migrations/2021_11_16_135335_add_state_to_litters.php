@@ -13,11 +13,4 @@ return new class () extends Migration {
             $table->unsignedTinyInteger('state');
         });
     }
-
-    public function down(): void
-    {
-        Schema::table('litters', function (Blueprint $table) {
-            $table->dropColumn('state');
-        });
-    }
 };

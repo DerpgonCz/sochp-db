@@ -15,9 +15,4 @@ return new class () extends Migration {
             $table->timestamp('created_at')->nullable();
         });
     }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('password_resets');
-    }
 };
