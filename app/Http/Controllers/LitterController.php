@@ -22,8 +22,8 @@ class LitterController extends Controller
         return view('models.litter.index', [
             'stationLitters' => Auth::check() ? optional(Auth::user()->station)->litters ?? [] : [],
             'litters' => Litter::approved()->orderByDesc('happened_on')->with(['children', 'father', 'mother'])->get(),
-            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])
-                ->get(),
+            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])->get(),
+            'littersForRegistration' => Litter::whereIn('state', [LitterStateEnum::FINALIZED])->get(),
         ]);
     }
 
@@ -108,6 +108,8 @@ class LitterController extends Controller
                         'color_full' => $deserializedColor['full'],
                         'color_mink' => $deserializedColor['mink'],
                         'litter_id' => $litter->id,
+                        'mother_id' => $litter->mother_id,
+                        'father_id' => $litter->father_id,
                     ]
                 );
             });
@@ -126,6 +128,7 @@ class LitterController extends Controller
                 LitterStateEnum::REQUIRES_BREEDING_CHANGES => ['litters.index'],
                 LitterStateEnum::REQUIRES_FINAL_APPROVAL => ['litters.show', $litter],
                 LitterStateEnum::FINALIZED => ['litters.index'],
+                LitterStateEnum::REGISTERED => ['litters.show', $litter],
             ];
             $flashMessages = [
                 LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.litters.state.requires_draft_changes',
@@ -134,6 +137,7 @@ class LitterController extends Controller
                 LitterStateEnum::REQUIRES_BREEDING_CHANGES => 'flashes.litters.state.requires_breeding_changes',
                 LitterStateEnum::REQUIRES_FINAL_APPROVAL => 'flashes.litters.state.requires_final_approval',
                 LitterStateEnum::FINALIZED => 'flashes.litters.state.finalized',
+                LitterStateEnum::REGISTERED => 'flashes.litters.state.registered',
             ];
 
             $litter->state = $toState;

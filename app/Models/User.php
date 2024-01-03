@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\StationStateEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -53,5 +56,12 @@ class User extends Authenticatable
     public function station(): HasOne
     {
         return $this->hasOne(Station::class, 'owner_id');
+    }
+
+    public function approved_station(): HasOne
+    {
+        return $this
+            ->station()
+            ->where('state', '=', StationStateEnum::APPROVED);
     }
 }

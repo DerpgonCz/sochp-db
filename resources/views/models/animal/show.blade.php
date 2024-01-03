@@ -35,9 +35,9 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        @if(optional($animal->caretaker)->station && $animal->caretaker->station->state->is(StationStateEnum::APPROVED))
-                            {{ $animal->caretaker->station->name }}
-                            <a href="{{ route('stations.show', $animal->caretaker->station) }}"><span
+                        @if(optional($animal->caretaker)->approved_station)
+                            {{ $animal->caretaker->approved_station->name }}
+                            <a href="{{ route('stations.show', $animal->caretaker->approved_station) }}"><span
                                     class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @else
                             --
@@ -54,6 +54,11 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.name', Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->name }}</dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ $animal->registration_no ?? '--' }}
+                    </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.happened_on', Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->litter->happened_on->format('j. n. Y') }}</dt>
@@ -113,20 +118,25 @@
                                 class="badge badge-secondary">{{ __('Detail') }}</span></a>
                     </dt>
 
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.registration_no', Animal::class)) }}</dd>
+                    <dt class="col-9">
+                        {{ $animal->litter?->registration_no ?? '--' }}
+                    </dt>
+
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.mother.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ $animal->litter->mother?->name ?? '--' }}
-                        @if($animal->littermother)
-                            <a href="{{ route('animals.show', $animal->litter->mother) }}"><span
+                        {{ $animal->mother?->name ?? '--' }}
+                        @if($animal->mother)
+                            <a href="{{ route('animals.show', $animal->mother) }}"><span
                                     class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @endif
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.father.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ $animal->litter->father?->name ?? '--' }}
-                        @if($animal->litterfather)
-                            <a href="{{ route('animals.show', $animal->litter->father) }}"><span
+                        {{ $animal->father?->name ?? '--' }}
+                        @if($animal->father)
+                            <a href="{{ route('animals.show', $animal->father) }}"><span
                                     class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @endif
                     </dt>

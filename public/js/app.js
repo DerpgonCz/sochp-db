@@ -2305,6 +2305,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2332,9 +2339,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     colorBuilderOthersLabel: String,
     colorBuilderShadedLabel: String,
     colorBuilderFullColorLabel: String,
-    fullColorLabels: Array,
-    shadedColorLabels: Array,
-    minkColorLabels: Array
+    fullColorLabels: Object,
+    shadedColorLabels: Object,
+    minkColorLabels: Array,
+    showRegistrationNo: {
+      type: Boolean,
+      "default": false
+    }
   },
   data: function data() {
     return {
@@ -2360,7 +2371,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         eyes: null,
         gender: null,
         breeding_type: null,
-        note: null
+        note: null,
+        registration_no: null
       });
       this.openRows.push(false);
       this.justCreatedAnimal = true;
@@ -2470,8 +2482,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     fullColorLabel: String,
     mostUsedLabel: String,
     othersLabel: String,
-    fullColorLabels: Array,
-    shadedColorLabels: Array,
+    fullColorLabels: Object,
+    shadedColorLabels: Object,
     minkColorLabels: Array,
     value: {
       type: Array,
@@ -41209,6 +41221,48 @@ var render = function() {
                     ],
                     1
                   ),
+                  _vm._v(" "),
+                  _vm.showRegistrationNo
+                    ? _c(
+                        "td",
+                        [
+                          _vm._t("animal-registration-no-header"),
+                          _vm._v(
+                            "\n                            *\n                            "
+                          ),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: animal.registration_no,
+                                expression: "animal.registration_no"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "animals[" + index + "][registration_no]",
+                              required: ""
+                            },
+                            domProps: { value: animal.registration_no },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  animal,
+                                  "registration_no",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ],
+                        2
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(

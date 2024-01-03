@@ -32,6 +32,7 @@ return [
             ],
             'litter' => [
                 'name' => 'Označení',
+                'registration_no' => 'Číslo registrace',
                 'station' => [
                     'name' => 'Název',
                     'owner' => [
@@ -60,9 +61,10 @@ return [
     ],
     Litter::class => [
         'fields' => [
-            'happened_on' => 'Datum narození',
             'name' => 'Označení',
             'state' => 'Status',
+            'happened_on' => 'Datum narození',
+            'registration_no' => 'Registrační číslo',
             'mother' => [
                 'name' => 'Samice',
             ],

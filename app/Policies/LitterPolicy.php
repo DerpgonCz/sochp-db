@@ -37,6 +37,9 @@ class LitterPolicy
             LitterStateEnum::REQUIRES_BREEDING_CHANGES,
             LitterStateEnum::FINALIZED,
         ],
+        LitterStateEnum::FINALIZED => [
+            LitterStateEnum::REGISTERED,
+        ]
     ];
 
     private function owns(?User $user, Litter $litter): bool
@@ -74,7 +77,7 @@ class LitterPolicy
     {
         return $this->owns($user, $litter)
             || $this->manage($user)
-            || $litter->state->is(LitterStateEnum::FINALIZED);
+            || $litter->state->is(LitterStateEnum::REGISTERED);
     }
 
     public function create(User $user): bool
@@ -96,47 +99,9 @@ class LitterPolicy
             && $litter->state->in([
                 LitterStateEnum::REQUIRES_BREEDING_APPROVAL,
                 LitterStateEnum::REQUIRES_FINAL_APPROVAL,
+                LitterStateEnum::FINALIZED,
             ]);
 
         return $ownerCanUpdate || $adminCanUpdate;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param \App\Models\User $user
-     * @param \App\Models\Litter $litter
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Litter $litter)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param \App\Models\User $user
-     * @param \App\Models\Litter $litter
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Litter $litter)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param \App\Models\User $user
-     * @param \App\Models\Litter $litter
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Litter $litter)
-    {
-        //
     }
 }

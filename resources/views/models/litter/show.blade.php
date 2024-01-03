@@ -32,6 +32,9 @@
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}</dd>
                     <dt class="col-9">{{ $litter->happened_on ? $litter->happened_on->format('j. n. Y') : '--' }}</dt>
 
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}</dd>
+                    <dt class="col-9">{{ $litter->registration_no ?? '--' }}</dt>
+
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</dd>
                     <dt class="col-9">
                         @if($litter->mother)

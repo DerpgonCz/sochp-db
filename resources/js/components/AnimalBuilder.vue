@@ -190,6 +190,13 @@
                                 </Modal>
                                 {{ animal.name }}
                             </td>
+                            <td v-if="showRegistrationNo">
+                                <slot name="animal-registration-no-header"></slot>
+                                *
+                                <input type="text" class="form-control"
+                                       :name="`animals[${index}][registration_no]`" required
+                                       v-model="animal.registration_no">
+                            </td>
                             <td class="text-right">
                                 <button type="button" class="btn btn-sm btn-info" @click="openRow(index)">
                                     <i class="fas fa-pen"></i>
@@ -246,9 +253,13 @@ export default {
         colorBuilderOthersLabel: String,
         colorBuilderShadedLabel: String,
         colorBuilderFullColorLabel: String,
-        fullColorLabels: Array,
-        shadedColorLabels: Array,
+        fullColorLabels: Object,
+        shadedColorLabels: Object,
         minkColorLabels: Array,
+        showRegistrationNo: {
+            type: Boolean,
+            default: false,
+        }
     },
     data() {
         return {
@@ -275,6 +286,7 @@ export default {
                 gender: null,
                 breeding_type: null,
                 note: null,
+                registration_no: null,
             });
             this.openRows.push(false);
             this.justCreatedAnimal = true;

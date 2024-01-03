@@ -19,8 +19,8 @@ export default {
         fullColorLabel: String,
         mostUsedLabel: String,
         othersLabel: String,
-        fullColorLabels: Array,
-        shadedColorLabels: Array,
+        fullColorLabels: Object,
+        shadedColorLabels: Object,
         minkColorLabels: Array,
         value: {
             type: Array,

@@ -33,10 +33,10 @@ class LitterUpdateRequest extends FormRequest
                 'required',
             ],
             'happened_on' => [
-                Rule::excludeIf(
+                Rule::requiredIf(
                     $litter->state->in([
-                        LitterStateEnum::DRAFT,
-                        LitterStateEnum::REQUIRES_DRAFT_CHANGES,
+                        LitterStateEnum::BREEDING,
+                        LitterStateEnum::REQUIRES_BREEDING_CHANGES,
                     ])
                 ),
                 'date',
@@ -54,16 +54,25 @@ class LitterUpdateRequest extends FormRequest
                 'numeric',
                 Rule::in(LitterStateEnum::getValues()),
             ],
+            'registration_no' => [
+                Rule::requiredIf(
+                    $litter->state->in([
+                        LitterStateEnum::FINALIZED,
+                    ])
+                ),
+            ],
             'animals' => [
-                Rule::excludeIf($litter->state->in([
-                    LitterStateEnum::DRAFT,
-                    LitterStateEnum::REQUIRES_DRAFT_CHANGES,
-                    LitterStateEnum::REQUIRES_BREEDING_APPROVAL,
-                ])),
+                Rule::excludeIf(
+                    $litter->state->in([
+                        LitterStateEnum::DRAFT,
+                        LitterStateEnum::REQUIRES_DRAFT_CHANGES,
+                        LitterStateEnum::REQUIRES_BREEDING_APPROVAL,
+                    ])
+                ),
                 'array',
             ],
             'animals.*' => [
-                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,color,effect,breeding_type,note',
+                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,color,effect,breeding_type,note,registration_no',
             ],
             'animals.*.id' => [
                 'nullable',
@@ -111,6 +120,13 @@ class LitterUpdateRequest extends FormRequest
             'animals.*.note' => [
                 'nullable',
                 'string',
+            ],
+            'animals.*.registration_no' => [
+                Rule::requiredIf(
+                    $litter->state->in([
+                        LitterStateEnum::FINALIZED,
+                    ])
+                ),
             ],
         ];
     }

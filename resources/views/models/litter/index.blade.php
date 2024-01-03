@@ -82,6 +82,29 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="my-4"></div>
+                    <h2>{{ __('For registration') }}</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ __(sprintf('models.%s.fields.name', Litter::class)) }}</th>
+                                <th>{{ __(sprintf('models.%s.fields.owner', Litter::class)) }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($littersForRegistration as $litter)
+                                <tr class="position-relative">
+                                    <th scope="row">
+                                        <a href="{{ route('litters.edit', $litter) }}" class="stretched-link">
+                                            {{ $litter->name }}
+                                        </a>
+                                    </th>
+                                    <td>{{ $litter->station->owner->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 @endcan
 
                 <h2>{{ __('Approved litters') }}</h2>

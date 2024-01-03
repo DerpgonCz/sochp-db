@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Flashes;
+use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,14 +39,23 @@ class AnimalController extends Controller
         ]);
     }
 
-    public function edit(Animal $animal)
+    public function edit(Animal $animal): View
     {
-        //
+        return view('models.animal.edit', [
+            'animal' => $animal,
+            'caretakers' => User::all(),
+        ]);
     }
 
-    public function update(Request $request, Animal $animal)
+    public function update(AnimalUpdateRequest $request, Animal $animal)
     {
-        //
+        $this->authorize('update', $animal);
+
+        $animal->update($request->validated());
+
+        Flashes::success(__('flashes.animals.updated'));
+
+        return response()->redirectToRoute('animals.show', $animal);
     }
 
     /**

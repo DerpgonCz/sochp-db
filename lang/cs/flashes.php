@@ -20,6 +20,10 @@ return [
             'requires_breeding_changes' => 'Vrh úspěšně odeslán na vyžádání změn',
             'requires_final_approval' => 'Vrh úspěšně odeslán k finálnímu schválení',
             'finalized' => 'Vrh úspěšně schválen',
+            'registered' => 'Vrh úspěšně registrován',
         ],
     ],
+    'animals' => [
+        'updated' => 'Zvíře úspěšně upraveno'
+    ]
 ];

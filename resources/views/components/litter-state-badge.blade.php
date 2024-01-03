@@ -30,4 +30,8 @@
         <span class="badge badge-success">{{ __('Approved') }}</span>
         @break
 
+    @case(LitterStateEnum::REGISTERED)
+        <span class="badge badge-success">{{ __('Registered') }}</span>
+        @break
+
 @endswitch

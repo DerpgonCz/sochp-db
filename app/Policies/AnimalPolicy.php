@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\LitterStateEnum;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -9,6 +10,11 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class AnimalPolicy
 {
     use HandlesAuthorization;
+
+    private function owns(?User $user, Animal $animal): bool
+    {
+        return optional($user)->id === $animal->litter->station->owner_id;
+    }
 
     public function viewAny(User $user)
     {
@@ -25,9 +31,12 @@ class AnimalPolicy
         //
     }
 
-    public function update(User $user, Animal $animal)
+    public function update(User $user, Animal $animal): bool
     {
-        //
+        $ownsAnimal = $this->owns($user, $animal);
+        $isAnimalRegistered = $animal->litter->state->is(LitterStateEnum::REGISTERED);
+
+        return $ownsAnimal && $isAnimalRegistered;
     }
 
     public function delete(User $user, Animal $animal): bool

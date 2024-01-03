@@ -37,6 +37,10 @@ class Animal extends Model
         'breeding_type',
         'note',
         'litter_id',
+        'mother_id',
+        'father_id',
+        'registration_no',
+        'caretaker_id',
     ];
 
     protected $casts = [
@@ -95,12 +99,22 @@ class Animal extends Model
         return $this->belongsTo(Litter::class, 'litter_id');
     }
 
-    public function scopeMales()
+    public function mother(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class, 'mother_id');
+    }
+
+    public function father(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class, 'father_id');
+    }
+
+    public function scopeMales(): Builder
     {
         return $this->where('gender', GenderEnum::MALE);
     }
 
-    public function scopeFemales()
+    public function scopeFemales(): Builder
     {
         return $this->where('gender', GenderEnum::FEMALE);
     }

@@ -14,6 +14,14 @@
             </div>
         </div>
 
+        @if($errors->isNotEmpty())
+        <div class="row justify-content-center">
+            <div class="col">
+                {!! implode('', $errors->all('<div>:message</div>')) !!}
+            </div>
+        </div>
+        @endif
+
         <div class="row justify-content-center">
             <form method="POST" action="{{ route('litters.update', $litter) }}" class="col">
                 @method('PUT')
@@ -25,6 +33,20 @@
                            placeholder="{{ __(sprintf('models.%s.fields.name', Litter::class)) }}"
                            value="{{ $litter->name }}" required>
                 </label>
+
+                @if(
+                    $litter->state->in([
+                        LitterStateEnum::FINALIZED,
+                    ])
+                )
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}</strong>
+                        <input type="text" class="form-control" name="registration_no"
+                               placeholder="{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}"
+                               value="{{ $litter->registration_no ?? old('registration_no') }}"
+                               required>
+                    </label>
+                @endif
 
                 @if(
                     $litter->state->in([
@@ -92,6 +114,7 @@
                             :full-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class)) }}"
                             :shaded-color-labels="{{ json_encode(__('enums.' . AnimalColorShaded::class)) }}"
                             :mink-color-labels="{{ json_encode(__('enums.' . AnimalColorMink::class)) }}"
+                            :show-registration-no="{{ json_encode($litter->state->is(LitterStateEnum::FINALIZED)) }}"
                     >
                         <template v-slot:modal-header>
                             {{ __('Edit an animal') }}
@@ -129,6 +152,9 @@
                         <template v-slot:animal-note-header>
                             {{ __(sprintf('models.%s.fields.note', Animal::class)) }}
                         </template>
+                        <template v-slot:animal-registration-no-header>
+                            {{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}
+                        </template>
                         <template v-slot:modal-footer-close-text>
                             {{ __('Close') }}
                         </template>
@@ -163,6 +189,10 @@
                         <button type="submit" name="state" value="{{ LitterStateEnum::REQUIRES_BREEDING_CHANGES }}"
                                 class="btn btn-warning">{{ __('Requires changes') }}</button>
                         <button type="submit" name="state" value="{{ LitterStateEnum::FINALIZED }}"
+                                class="btn btn-success">{{ __('Approve') }}</button>
+                    @endif
+                    @if($litter->state->is(LitterStateEnum::FINALIZED))
+                        <button type="submit" name="state" value="{{ LitterStateEnum::REGISTERED }}"
                                 class="btn btn-success">{{ __('Approve') }}</button>
                     @endif
                 </label>

@@ -25,6 +25,7 @@ class Litter extends Model
         'happened_on',
         'father_id',
         'mother_id',
+        'registration_no',
     ];
 
     protected $casts = [

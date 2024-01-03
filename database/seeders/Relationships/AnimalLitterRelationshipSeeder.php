@@ -25,8 +25,9 @@ class AnimalLitterRelationshipSeeder extends Seeder
         $females = Animal::females()->get();
 
         foreach ($litters as $litter) {
-            $litter->father()->associate($males->random())->save();
-            $litter->mother()->associate($females->random())->save();
+            $litter->father()->associate($males->random());
+            $litter->mother()->associate($females->random());
+            $litter->save();
         }
     }
 
@@ -35,7 +36,12 @@ class AnimalLitterRelationshipSeeder extends Seeder
         $children = Animal::all();
 
         foreach ($children as $child) {
-            $child->litter()->associate($litters->random())->save();
+            /** @var Animal $child */
+            $litter = $litters->random();
+            $child->litter()->associate($litter);
+            $child->mother()->associate($litter->mother);
+            $child->father()->associate($litter->father);
+            $child->save();
         }
     }
 }
