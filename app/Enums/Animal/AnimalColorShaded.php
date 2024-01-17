@@ -9,15 +9,14 @@ enum AnimalColorShaded: int
     case ALBINO = 0;
     case BURMESE = 1;
     case BISCUIT_CREAM = 2;
-    case WHEATEN_BISCUIT_CREAM = 3;
-    case HIMALAYAN = 4;
-    case DEVIL_MARTEN = 5;
-    case SIAMESE = 6;
-    case SIAMESE_DEVIL = 7;
-    case IVORY = 8;
-    case SABLE_BURMESE = 9;
-    case GOLDEN = 10;
-    case GOLDEN_SIAMESE = 11;
-    case GOLDEN_HIMALAYAN = 12;
-    case PALE_BURMESE = 13;
+    case HIMALAYAN = 3;
+    case DEVIL_MARTEN = 4;
+    case SIAMESE = 5;
+    case SIAMESE_DEVIL = 6;
+    case IVORY = 7;
+    case SABLE_BURMESE = 8;
+    case GOLDEN = 9;
+    case GOLDEN_SIAMESE = 10;
+    case GOLDEN_HIMALAYAN = 11;
+    case PALE_BURMESE = 12;
 }

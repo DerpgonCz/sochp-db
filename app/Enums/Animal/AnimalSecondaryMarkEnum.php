@@ -14,5 +14,4 @@ enum AnimalSecondaryMarkEnum: int
 
     case BLAZED = 1;
     case SPOTTED = 2;
-    case NON_STANDARD = 3;
 }

@@ -19,7 +19,9 @@ enum AnimalFurEnum: int
     case FLAG_REX = 0b00010000;
     case FLAG_SATIN = 0b00100000;
     case FLAG_VELVETEEN = 0b01000000;
-    case FLAG_NON_STANDARD = 0b10000000;
+    case FLAG_SILK = 0b10000000;
+    case FLAG_SPHYNX = 0b100000000;
+    case FLAG_PATCHWORK = 0b1000000000;
 
     public static function selectableGroups(): array
     {
@@ -33,11 +35,11 @@ enum AnimalFurEnum: int
                 self::FLAG_FUZZ,
                 self::FLAG_REX,
                 self::FLAG_SATIN,
+                self::FLAG_SILK,
                 self::FLAG_VELVETEEN,
-            ],
-            [
-                self::FLAG_NON_STANDARD,
-            ],
+                self::FLAG_SPHYNX,
+                self::FLAG_PATCHWORK,
+            ]
         ];
     }
 }

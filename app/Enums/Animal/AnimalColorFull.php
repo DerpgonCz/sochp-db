@@ -6,43 +6,72 @@ namespace App\Enums\Animal;
 
 enum AnimalColorFull: int
 {
-    case AGOUTI = 0;
-    case AMERICAN_BLUE = 1;
-    case BEIGE = 2;
-    case BUFF = 3;
-    case BLACK = 4;
-    case CHOCOLATE = 5;
-    case CHOCOLATE_AGOUTI = 6;
-    case HAVANA = 7;
-    case HAVANA_AGOUTI = 8;
-    case RUSSIAN_DOVE = 9;
-    case RUSSIAN_DOVE_AGOUTI = 10;
-    case AMBER = 11;
-    case LILAC = 12;
-    case LILAC_AGOUTI = 13;
-    case MINK = 14;
-    case BLUE_AGOUTI = 15;
-    case GRAPHITE = 16;
-    case GRAPHITE_AGOUTI = 17;
-    case PEARL = 18;
-    case SILVER_MINK = 19;
-    case PLATINUM = 20;
-    case PLATINUM_AGOUTI = 21;
-    case FAWN = 22;
-    case RUSSIAN_BLUE = 23;
-    case RUSSIAN_BLUE_AGOUTI = 24;
-    case RUSSIAN_PEARL = 25;
-    case RUSSIAN_PEARL_AGOUTI = 26;
-    case RUSSIAN_SILVER = 27;
-    case RUSSIAN_SILVER_AGOUTI = 28;
-    case CINNAMON = 29;
-    case CINNAMON_PEARL = 30;
-    case SILVER = 31;
-    case SILVER_AGOUTI = 32;
-    case CHAMPAGNE = 33;
-    case DARK_PEARL = 34;
-    case TOPAZ = 35;
-    case ANOTHER_COLOUR = 36;
+    case INDETERMINABLE = 0;
+    case AGOUTI = 1;
+    case AMERICAN_BLUE = 2;
+    case BEIGE = 3;
+    case BUFF = 4;
+    case BLACK = 5;
+    case CHOCOLATE = 6;
+    case CHOCOLATE_AGOUTI = 7;
+    case HAVANA = 8;
+    case HAVANA_AGOUTI = 9;
+    case RUSSIAN_DOVE = 10;
+    case RUSSIAN_DOVE_AGOUTI = 11;
+    case AMBER = 12;
+    case LILAC = 13;
+    case LILAC_AGOUTI = 14;
+    case MINK = 15;
+    case BLUE_AGOUTI = 16;
+    case GRAPHITE = 17;
+    case GRAPHITE_AGOUTI = 18;
+    case PEARL = 19;
+    case SILVER_MINK = 20;
+    case PLATINUM = 21;
+    case PLATINUM_AGOUTI = 22;
+    case FAWN = 23;
+    case RUSSIAN_BLUE = 24;
+    case RUSSIAN_BLUE_AGOUTI = 25;
+    case RUSSIAN_PEARL = 26;
+    case RUSSIAN_PEARL_AGOUTI = 27;
+    case RUSSIAN_SILVER = 28;
+    case RUSSIAN_SILVER_AGOUTI = 29;
+    case CINNAMON = 30;
+    case CINNAMON_PEARL = 31;
+    case SILVER = 32;
+    case SILVER_AGOUTI = 33;
+    case CHAMPAGNE = 34;
+    case DARK_PEARL = 35;
+    case TOPAZ = 36;
+    case ANOTHER_COLOUR = 37;
+    case PLATINUM = 38;
+    case PLATINUM_AGOUTI = 39;
+    case RUSSIAN_PLATINUM = 40;
+    case RUSSIAN_PLATINUM_AGOUTI = 41;
+    case RUSSIAN_BEIGE = 42;
+    case RUSSIAN_FAWN = 43;
+    case RUSSIAN_CHAMPAGNE = 44;
+    case RUSSIAN_AMBER = 45;
+    case POWDER_BLUE = 46;
+    case HONEY = 47;
+    case HONEY_AGOUTI = 48;
+    case RUSSIAN_HONEY = 49;
+    case RUSSIAN_HONEY_AGOUTI = 50;
+    case DOUBLE_MINK = 51;
+    case DOUBLE_MINK_AGOUTI = 52;
+    case COFFEE = 53;
+    case COFFEE_AGOUTI = 54;
+    case PLATINUM_PEARL = 55;
+    case PLATINUM_PEARL_AGOUTI = 56;
+    case RUSSIAN_PLATINUM_PEARL = 57;
+    case RUSSIAN_PLATINUM_PEARL_AGOUTI = 58;
+    case RUSSIAN_BUFF = 59;
+    case RUSSIAN_TOPAZ = 60;
+    case COCOA = 61;
+    case COCOCA_AGOUTI = 62;
+    case CARAMEL = 63;
+    case CARAMEL_AGOUTI = 64;
+
 
     public const MINK_COLORS = [
         self::BUFF,
@@ -59,5 +88,23 @@ enum AnimalColorFull: int
         self::CINNAMON_PEARL,
         self::DARK_PEARL,
         self::TOPAZ,
+        self::PLATINUM,
+        self::PLATINUM_AGOUTI,
+        self::RUSSIAN_PLATINUM,
+        self::RUSSIAN_PLATINUM_AGOUTI,
+        self::HONEY,
+        self::HONEY_AGOUTI,
+        self::RUSSIAN_HONEY,
+        self::RUSSIAN_HONEY_AGOUTI,
+        self::DOUBLE_MINK,
+        self::DOUBLE_MINK_AGOUTI,
+        self::COFFEE,
+        self::COFFEE_AGOUTI,
+        self::PLATINUM_PEARL,
+        self::PLATINUM_PEARL_AGOUTI,
+        self::RUSSIAN_PLATINUM_PEARL,
+        self::RUSSIAN_PLATINUM_PEARL_AGOUTI,
+        self::RUSSIAN_BUFF,
+        self::RUSSIAN_TOPAZ,
     ];
 }

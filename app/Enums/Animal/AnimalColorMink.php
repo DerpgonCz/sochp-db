@@ -8,4 +8,5 @@ enum AnimalColorMink: int
 {
     case AMERICAN = 0;
     case BRITISH = 1;
+    case AUSTRALIAN = 2;
 }
