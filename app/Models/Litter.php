@@ -41,9 +41,9 @@ class Litter extends Model
         ])->toArray();
     }
 
-    public function scopeApproved(): Builder
+    public function scopeApproved(Builder $query): Builder
     {
-        return $this->where('state', LitterStateEnum::FINALIZED);
+        return $query->whereIn('state', [LitterStateEnum::FINALIZED, LitterStateEnum::REGISTERED]);
     }
 
     public function shouldBeSearchable(): bool

@@ -13,7 +13,7 @@ class AnimalPolicy
 
     private function owns(?User $user, Animal $animal): bool
     {
-        return optional($user)->id === $animal->litter->station->owner_id;
+        return $user?->id === $animal->litter->station->owner_id;
     }
 
     public function viewAny(User $user)

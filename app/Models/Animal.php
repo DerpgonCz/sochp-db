@@ -9,16 +9,20 @@ use App\Enums\Animal\AnimalColorShaded;
 use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
 use App\Enums\Animal\AnimalSecondaryMarkEnum;
+use App\Enums\Animal\ColorColorPearlEnum;
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
+use DateTime;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\QueriesRelationships;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 
 /**
+ * @property Litter|null $litter
  * @method static Builder males()
  * @method static Builder females()
  * @method Builder males()
@@ -61,6 +65,8 @@ class Animal extends Model
         'color_shaded' => AnimalColorShaded::class,
         'color_full' => AnimalColorFull::class,
         'color_mink' => AnimalColorMink::class,
+        'color_pearl' => ColorColorPearlEnum::class,
+        'date_of_birth' => 'datetime',
     ];
 
     public function toSearchableArray(): array
@@ -76,6 +82,13 @@ class Animal extends Model
             'marks_secondary',
             'color',
         ])->toArray();
+    }
+
+    protected function dateOfBirth(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value): ?DateTime => $this->castAttribute('date_of_birth', $value) ?? $this->litter?->happened_on
+        );
     }
 
     public function scopeListable(Builder $query): Builder

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\StationStateEnum;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +27,13 @@ class Station extends Model
     protected $casts = [
         'state' => StationStateEnum::class,
     ];
+
+    protected function breeder_name(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value): string => $value ?? $this->owner->name,
+        );
+    }
 
     public function scopeApproved(): Builder
     {

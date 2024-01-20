@@ -128,7 +128,7 @@
                                     </a>
                                 </th>
                                 <td>{{ $litter->station->name }}</td>
-                                <td>{{ $litter->happened_on->format('j. n. Y') }}</td>
+                                <td class="text-right">{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
                                 <td>{{ $litter?->mother?->name ?? '--' }}</td>
                                 <td>{{ $litter?->father?->name ?? '--' }}</td>
                                 <td class="text-right">{{ $litter->children->count()}}</td>

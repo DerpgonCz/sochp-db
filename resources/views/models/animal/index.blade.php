@@ -27,7 +27,7 @@
                                     {{ $animal->name }}
                                 </a>
                             </th>
-                            <td>{{ $animal->litter->station->name }}</td>
+                            <td>{{ $animal?->litter?->station->name }}</td>
                             <td>{{ (new AnimalFurTranslationService())($animal) }}</td>
                             <td>{{ (new AnimalColorTranslationService())($animal) ?: '--' }}</td>
                             <td>{{ (new AnimalEffectTranslationService())($animal) }}</td>

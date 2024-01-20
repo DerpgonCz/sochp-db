@@ -14,9 +14,13 @@ return new class () extends Migration {
             $table->timestamps();
 
             $table->string('name')->nullable();
+            $table->string('breeder_name')->nullable();
             $table->string('registration_no')->unique()->nullable();
             $table->text('note')->nullable();
+            $table->dateTime('date_of_birth')->nullable();
             $table->dateTime('died_on')->nullable();
+            $table->boolean('mark_down_under')->default(false);
+            $table->boolean('non_standard')->default(false);
 
             // Flag enums
             $table->unsignedSmallInteger('fur');
@@ -32,6 +36,7 @@ return new class () extends Migration {
             $table->unsignedTinyInteger('mark_secondary')->nullable();
             $table->unsignedTinyInteger('gender');
             $table->unsignedTinyInteger('eyes');
+            $table->unsignedTinyInteger('color_pearl')->nullable();
 
             $table->foreignId('caretaker_id')->nullable()->constrained('users');
         });

@@ -24,7 +24,7 @@ class StationPolicy
 
     private function owns(?User $user, Station $station): bool
     {
-        return optional($user)->id === $station->owner_id;
+        return $user?->id === $station->owner_id;
     }
 
     private function manage(User $user): bool

@@ -14,6 +14,9 @@ return new class () extends Migration {
             $table->timestamps();
 
             $table->string('name');
+            $table->string('breeder_name')->nullable();
+            $table->boolean('name_is_prefix')->default(true);
+            $table->string('name_part')->default('');
             $table->unsignedTinyInteger('state');
 
             $table->foreignId('owner_id')->nullable()->constrained('users');

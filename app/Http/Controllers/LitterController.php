@@ -20,7 +20,7 @@ class LitterController extends Controller
     public function index(): View
     {
         return view('models.litter.index', [
-            'stationLitters' => Auth::check() ? optional(Auth::user()->station)->litters ?? [] : [],
+            'stationLitters' => Auth::check() ? Auth::user()->station?->litters ?? [] : [],
             'litters' => Litter::approved()->orderByDesc('happened_on')->with(['children', 'father', 'mother'])->get(),
             'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])->get(),
             'littersForRegistration' => Litter::whereIn('state', [LitterStateEnum::FINALIZED])->get(),

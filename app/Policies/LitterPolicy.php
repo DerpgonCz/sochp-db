@@ -44,7 +44,7 @@ class LitterPolicy
 
     private function owns(?User $user, Litter $litter): bool
     {
-        return optional($user)->id === $litter->station->owner_id;
+        return $user?->id === $litter->station->owner_id;
     }
 
     public function manage(?User $user): bool
@@ -77,7 +77,10 @@ class LitterPolicy
     {
         return $this->owns($user, $litter)
             || $this->manage($user)
-            || $litter->state->is(LitterStateEnum::REGISTERED);
+            || $litter->state->in([
+                LitterStateEnum::REGISTERED,
+                LitterStateEnum::FINALIZED,
+            ]);
     }
 
     public function create(User $user): bool
