@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->dateTime('died_on')->nullable();
 
             // Flag enums
-            $table->unsignedTinyInteger('fur');
+            $table->unsignedSmallInteger('fur');
             $table->unsignedTinyInteger('build');
             $table->integer('color_full')->nullable();
             $table->integer('color_shaded')->nullable();

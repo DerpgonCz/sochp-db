@@ -12,7 +12,7 @@ class AnimalSelectDataService
 {
     public function buildViewDataForParentSelection(?Station $station = null): array
     {
-        $stationAnimals = collect([]);
+        $stationAnimals = collect();
         $otherAnimals = Animal::listable()->with('litter', 'litter.station')->get()
             ->sortBy('litter.happened_on');
 

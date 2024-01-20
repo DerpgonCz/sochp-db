@@ -17,7 +17,9 @@ class AnimalFurTranslationService
         AnimalFurEnum::FLAG_REX,
         AnimalFurEnum::FLAG_SATIN,
         AnimalFurEnum::FLAG_VELVETEEN,
-        AnimalFurEnum::FLAG_NON_STANDARD,
+        AnimalFurEnum::FLAG_SILK,
+        AnimalFurEnum::FLAG_SPHYNX,
+        AnimalFurEnum::FLAG_PATCHWORK,
     ];
 
     public function __invoke(Animal $animal): string

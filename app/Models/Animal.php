@@ -12,11 +12,20 @@ use App\Enums\Animal\AnimalSecondaryMarkEnum;
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\QueriesRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 
+/**
+ * @method static Builder males()
+ * @method static Builder females()
+ * @method Builder males()
+ * @method Builder females()
+ * @method static Builder listable()
+ * @method Builder listable()
+ */
 class Animal extends Model
 {
     use HasFactory;
@@ -69,9 +78,11 @@ class Animal extends Model
         ])->toArray();
     }
 
-    public function scopeListable($query): Builder
+    public function scopeListable(Builder $query): Builder
     {
-        return $query->whereRelation('litter', 'state', LitterStateEnum::FINALIZED);
+        return $query
+            ->whereRelation('litter', 'state', LitterStateEnum::FINALIZED)
+            ->orWhereDoesntHave('litter');
     }
 
     public function shouldBeSearchable(): bool
@@ -109,13 +120,13 @@ class Animal extends Model
         return $this->belongsTo(Animal::class, 'father_id');
     }
 
-    public function scopeMales(): Builder
+    public function scopeMales(Builder $query): Builder
     {
-        return $this->where('gender', GenderEnum::MALE);
+        return $query->where('gender', GenderEnum::MALE);
     }
 
-    public function scopeFemales(): Builder
+    public function scopeFemales(Builder $query): Builder
     {
-        return $this->where('gender', GenderEnum::FEMALE);
+        return $query->where('gender', GenderEnum::FEMALE);
     }
 }

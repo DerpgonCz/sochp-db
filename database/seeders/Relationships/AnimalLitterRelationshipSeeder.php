@@ -19,10 +19,13 @@ class AnimalLitterRelationshipSeeder extends Seeder
         $this->associateChildren($litters);
     }
 
+    /**
+     * @param Collection<Litter> $litters
+     */
     private function associateParents(Collection $litters): void
     {
-        $males = Animal::males()->get();
-        $females = Animal::females()->get();
+        $males = Animal::listable()->males()->get();
+        $females = Animal::listable()->females()->get();
 
         foreach ($litters as $litter) {
             $litter->father()->associate($males->random());
@@ -31,7 +34,10 @@ class AnimalLitterRelationshipSeeder extends Seeder
         }
     }
 
-    private function associateChildren(Collection$litters): void
+    /**
+     * @param Collection<Litter> $litters
+     */
+    private function associateChildren(Collection $litters): void
     {
         $children = Animal::all();
 
