@@ -22,25 +22,29 @@
                         @endif
                     </dt>
 
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.owner.name', Animal::class)) }}</dd>
-                    <dt class="col-9">
-                        {{ $animal->litter?->station->breeder_name ?? '--' }}
-                    </dt>
+                    @auth
+                        <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.owner.name', Animal::class)) }}</dd>
+                        <dt class="col-9">
+                            {{ $animal->litter?->station->breeder_name ?? '--' }}
+                        </dt>
+                    @endauth
                 </dl>
             </div>
             <div class="col-md-6">
                 <h3>{{ __('Caretaker') }}</h3>
                 <dl class="row">
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.name', Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->caretaker?->name ?: '--' }}</dt>
-
+                    @auth
+                        <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.name', Animal::class)) }}</dd>
+                        <dt class="col-9">{{ $animal->caretaker?->name ?: '--' }}</dt>
+                    @endauth
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        @if(optional($animal->caretaker)->approved_station)
+                        @if($animal->caretaker?->approved_station)
                             {{ $animal->caretaker->approved_station->name }}
-                            <a href="{{ route('stations.show', $animal->caretaker->approved_station) }}"><span
-                                    class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                            <a href="{{ route('stations.show', $animal->caretaker->approved_station) }}">
+                                <span class="badge badge-secondary">{{ __('Detail') }}</span>
+                            </a>
                         @else
                             --
                         @endif

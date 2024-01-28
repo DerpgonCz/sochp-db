@@ -13,8 +13,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <dl class="row">
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</dd>
-                    <dt class="col-9">{{ $station->breeder_name }}</dt>
+                    @auth
+                        <dd class="col-3">{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</dd>
+                        <dt class="col-9">{{ $station->breeder_name }}</dt>
+                    @endauth
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.name', Station::class)) }}</dd>
                     <dt class="col-9">{{ $station->name }}</dt>

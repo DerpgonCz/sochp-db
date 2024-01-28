@@ -51,8 +51,11 @@ class StationPolicy
 
     public function view(?User $user, Station $station): bool
     {
-        return $this->owns($user, $station)
-            || $this->manage($user)
+        return $user
+            && (
+                $this->owns($user, $station)
+                || $this->manage($user)
+            )
             || $station->state->is(StationStateEnum::APPROVED);
     }
 

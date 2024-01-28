@@ -40,7 +40,7 @@
                     ])
                 )
                     <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}</strong>
+                        <strong>{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }} *</strong>
                         <input type="text" class="form-control" name="registration_no"
                                placeholder="{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}"
                                value="{{ $litter->registration_no ?? old('registration_no') }}"
@@ -194,7 +194,7 @@
                     @endif
                     @if($litter->state->is(LitterStateEnum::FINALIZED))
                         <button type="submit" name="state" value="{{ LitterStateEnum::REGISTERED }}"
-                                class="btn btn-success">{{ __('Approve') }}</button>
+                                class="btn btn-success">{{ __('Approve registration') }}</button>
                     @endif
                 </label>
             </form>

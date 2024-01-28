@@ -37,33 +37,7 @@
 
                 <div class="tab-content">
                     <div class="tab-pane fade {{ $activeTab === 0 ? 'show active' : '' }}" id="approved-stations-content" role="tabpanel">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>{{ __(sprintf('models.%s.fields.name', Station::class)) }}</th>
-                                <th>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($stations as $station)
-                                <tr class="position-relative">
-                                    <th scope="row">
-                                        <a href="{{ route('stations.show', $station) }}" class="stretched-link">
-                                            {{ $station->name }}
-                                        </a>
-                                    </th>
-                                    <td>{{ $station->breeder_name }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <div class="d-inline-block">
-                                    {{ $stations->links() }}
-                                </div>
-                            </div>
-                        </div>
+                        @include('models.station.partial.index-list-public')
                     </div>
                     @if($canApprove)
                         <div class="tab-pane fade {{ $activeTab === 1 ? 'show active' : '' }}" id="for-approval-stations-content" role="tabpanel">
