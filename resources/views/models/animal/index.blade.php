@@ -30,7 +30,7 @@
                             <td>{{ $animal?->litter?->station->name }}</td>
                             <td>{{ (new AnimalFurTranslationService())($animal) }}</td>
                             <td>{{ (new AnimalColorTranslationService())($animal) ?: '--' }}</td>
-                            <td>{{ (new AnimalEffectTranslationService())($animal) }}</td>
+                            <td>{{ (new AnimalEffectTranslationService())($animal)  ?: '--'}}</td>
                         </tr>
                     @endforeach
                     </tbody>

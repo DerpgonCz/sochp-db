@@ -176,7 +176,7 @@ return [
             AnimalColorFull::AMERICAN_BLUE->value => 's americkými modrými znaky',
             AnimalColorFull::BEIGE->value => 's béžovými znaky',
             AnimalColorFull::BUFF->value => 's buvolími znaky',
-            AnimalColorFull::BLACK->value => 's černými znaky',
+            AnimalColorFull::BLACK->value => 's hnědými znaky',
             AnimalColorFull::CHOCOLATE->value => 's čokoládovými znaky',
             AnimalColorFull::CHOCOLATE_AGOUTI->value => 's čokoládovými aguti znaky',
             AnimalColorFull::HAVANA->value => 's havanskými znaky',
@@ -237,8 +237,8 @@ return [
         ],
     ],
     AnimalColorMink::class => [
-        AnimalColorMink::AMERICAN->value => 'americký mink',
-        AnimalColorMink::BRITISH->value => 'britský mink',
-        AnimalColorMink::AUSTRALIAN->value => 'australský mink',
+        AnimalColorMink::AMERICAN->value => 'americký',
+        AnimalColorMink::BRITISH->value => 'britský',
+        AnimalColorMink::AUSTRALIAN->value => 'australský',
     ],
 ];

@@ -17,8 +17,8 @@ class StationController extends Controller
     {
         return view('models.station.index', [
             'userStation' => Auth::check() ? Auth::user()->station : null,
-            'stations' => Station::approved()->with('owner')->get(),
-            'stationsForApproval' => Station::where('state', StationStateEnum::FOR_APPROVAL)->get(),
+            'stations' => Station::approved()->with('owner')->paginate(50, pageName: 'stationsPage'),
+            'stationsForApproval' => Station::where('state', StationStateEnum::FOR_APPROVAL)->paginate(50, pageName: 'stationsForApprovalPage'),
         ]);
     }
 

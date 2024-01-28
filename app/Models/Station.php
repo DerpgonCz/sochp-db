@@ -28,21 +28,29 @@ class Station extends Model
         'state' => StationStateEnum::class,
     ];
 
-    protected function breeder_name(): Attribute
+    public function shouldBeSearchable(): bool
+    {
+        return $this->state->is(StationStateEnum::APPROVED);
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'breeder_name' => $this->breeder_name,
+        ];
+    }
+
+    protected function breederName(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value): string => $value ?? $this->owner->name,
+            get: fn(?string $value): ?string => $value ?? $this->owner?->name,
         );
     }
 
     public function scopeApproved(): Builder
     {
         return $this->where('state', StationStateEnum::APPROVED);
-    }
-
-    public function shouldBeSearchable(): bool
-    {
-        return $this->state->is(StationStateEnum::APPROVED);
     }
 
     public function owner(): BelongsTo

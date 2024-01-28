@@ -114,6 +114,7 @@
                             :full-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class)) }}"
                             :shaded-color-labels="{{ json_encode(__('enums.' . AnimalColorShaded::class)) }}"
                             :mink-color-labels="{{ json_encode(__('enums.' . AnimalColorMink::class)) }}"
+                            :siamese-himalayan-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class . '.siamese_himalayan')) }}"
                             :show-registration-no="{{ json_encode($litter->state->is(LitterStateEnum::FINALIZED)) }}"
                     >
                         <template v-slot:modal-header>

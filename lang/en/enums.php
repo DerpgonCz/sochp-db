@@ -176,7 +176,7 @@ return [
             AnimalColorFull::AMERICAN_BLUE->value => 'american blue point',
             AnimalColorFull::BEIGE->value => 'beige point',
             AnimalColorFull::BUFF->value => 'buff point',
-            AnimalColorFull::BLACK->value => 'black point',
+            AnimalColorFull::BLACK->value => 'seal point',
             AnimalColorFull::CHOCOLATE->value => 'chocolate point',
             AnimalColorFull::CHOCOLATE_AGOUTI->value => 'chocolate agouti point',
             AnimalColorFull::HAVANA->value => 'havana point',

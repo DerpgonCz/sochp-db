@@ -159,6 +159,7 @@
                                                             :full-color-labels="fullColorLabels"
                                                             :shaded-color-labels="shadedColorLabels"
                                                             :mink-color-labels="minkColorLabels"
+                                                            :siamese-himalayan-color-labels="siameseHimalayanColorLabels"
                                                             :value="animal.color"
                                                         ></color-builder>
                                                     </div>
@@ -256,6 +257,7 @@ export default {
         fullColorLabels: Object,
         shadedColorLabels: Object,
         minkColorLabels: Array,
+        siameseHimalayanColorLabels: Array,
         showRegistrationNo: {
             type: Boolean,
             default: false,

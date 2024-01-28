@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\LitterStateEnum;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,13 @@ use Laravel\Scout\Searchable;
  * @property string $name
  * @property \Carbon\Carbon $happened_on
  * @property LitterStateEnum $state
+ *
+ * @method Builder approved
+ * @method static Builder approved
+ * @method Builder toApprove
+ * @method static Builder toApprove
+ * @method Builder toRegister
+ * @method static Builder toRegister
  */
 class Litter extends Model
 {
@@ -35,10 +43,21 @@ class Litter extends Model
 
     public function toSearchableArray(): array
     {
-        return collect($this->toArray())->only([
-            'id',
-            'name',
-        ])->toArray();
+        return [
+            'name' => $this->name,
+        ];
+    }
+
+    public function shouldBeSearchable(): bool
+    {
+        return $this->state->is(LitterStateEnum::FINALIZED);
+    }
+
+    protected function breederName(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value): ?string => $this->station->breeder_name,
+        );
     }
 
     public function scopeApproved(Builder $query): Builder
@@ -46,9 +65,14 @@ class Litter extends Model
         return $query->whereIn('state', [LitterStateEnum::FINALIZED, LitterStateEnum::REGISTERED]);
     }
 
-    public function shouldBeSearchable(): bool
+    public function scopeToApprove(Builder $query): Builder
     {
-        return $this->state->is(LitterStateEnum::FINALIZED);
+        return $query->whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL]);
+    }
+
+    public function scopeToRegister(Builder $query): Builder
+    {
+        return $query->whereIn('state', [LitterStateEnum::FINALIZED]);
     }
 
     public function mother(): BelongsTo

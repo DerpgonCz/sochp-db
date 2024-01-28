@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Facades\Flashes;
 use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
+use App\Models\Litter;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class AnimalController extends Controller
 {
@@ -17,14 +19,19 @@ class AnimalController extends Controller
         return view(
             'models.animal.index',
             [
-                'animals' => Animal::listable()->with('litter', 'litter.station')->paginate(50),
+                'animals' => Animal::listable()->with('litter', 'litter.station')
+                    ->orderBy(
+                        DB::raw('GREATEST(animals.date_of_birth, (SELECT litters.happened_on FROM litters WHERE litters.id = animals.litter_id))'),
+                        'desc'
+                    )
+                    ->paginate(50),
             ]
         );
     }
 
-    public function create()
+    public function create(): View
     {
-        //
+        return view('models.animal.create');
     }
 
     public function store(Request $request)

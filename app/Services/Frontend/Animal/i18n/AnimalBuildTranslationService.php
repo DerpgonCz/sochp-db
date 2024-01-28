@@ -16,7 +16,7 @@ class AnimalBuildTranslationService
         AnimalBuildEnum::FLAG_MANX,
     ];
 
-    public function __invoke(Animal $animal): string
+    public function __invoke(Animal $animal, ?string $locale = null): string
     {
         $validCases = [];
 
@@ -30,7 +30,7 @@ class AnimalBuildTranslationService
 
         return collect($validCases)
             ->sortBy(static fn (AnimalBuildEnum $case): int => array_search($case, self::PRIORITY))
-            ->map(static fn (AnimalBuildEnum $case): string => __(sprintf('enums.%s.%s', AnimalBuildEnum::class, $case->value)))
+            ->map(static fn (AnimalBuildEnum $case): string => __(sprintf('enums.%s.%s', AnimalBuildEnum::class, $case->value), locale: $locale))
             ->join(' ');
     }
 }

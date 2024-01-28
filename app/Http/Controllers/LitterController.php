@@ -8,22 +8,50 @@ use App\Http\Requests\LitterStoreRequest;
 use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
+use App\Models\Station;
 use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
 use App\Services\Frontend\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class LitterController extends Controller
 {
     public function index(): View
     {
+        $stationLitters = null;
+        $litterForApproval = [];
+        $littersForRegistration = [];
+
+        if (Auth::check() && Auth::user()->station) {
+            $stationLitters = Auth::user()->station?->litters()->paginate(
+                50,
+                pageName: 'stationLittersPage'
+            );
+        }
+
+        $approvedLitters = Litter::approved()
+            ->orderByDesc('happened_on')
+            ->with(['children', 'father', 'mother', 'station'])
+            ->paginate(50, pageName: 'littersPage');
+
+        if (Gate::check('approve', Station::class)) {
+            $litterForApproval =
+                Litter::toApprove()
+                    ->with('station')
+                    ->paginate(50, pageName: 'littersForApprovalPage');
+
+            $littersForRegistration = Litter::toRegister()
+                ->with('station')
+                ->paginate(50, pageName: 'littersForRegistrationPage');
+        }
         return view('models.litter.index', [
-            'stationLitters' => Auth::check() ? Auth::user()->station?->litters ?? [] : [],
-            'litters' => Litter::approved()->orderByDesc('happened_on')->with(['children', 'father', 'mother'])->get(),
-            'littersForApproval' => Litter::whereIn('state', [LitterStateEnum::REQUIRES_BREEDING_APPROVAL, LitterStateEnum::REQUIRES_FINAL_APPROVAL])->get(),
-            'littersForRegistration' => Litter::whereIn('state', [LitterStateEnum::FINALIZED])->get(),
+            'litters' => $approvedLitters,
+            'stationLitters' => $stationLitters,
+            'littersForApproval' => $litterForApproval,
+            'littersForRegistration' => $littersForRegistration,
         ]);
     }
 
@@ -118,7 +146,7 @@ class LitterController extends Controller
         $redirect = ['litters.edit', $litter];
         $flashMessage = 'flashes.litters.updated';
         if ($request->has('state')) {
-            $toState = LitterStateEnum::fromValue((int)$request->get('state'));
+            $toState = LitterStateEnum::fromValue((int) $request->get('state'));
             $this->authorize('updateState', [$litter, $toState]);
 
             $redirectTransitions = [
@@ -155,9 +183,7 @@ class LitterController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param \App\Models\Litter $litter
-     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Litter $litter)

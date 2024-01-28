@@ -21,7 +21,7 @@ class AnimalEffectTranslationService
         AnimalEffectEnum::FLAG_ROAN,
     ];
 
-    public function __invoke(Animal $animal): string
+    public function __invoke(Animal $animal, ?string $locale = null): string
     {
         $validCases = [];
 
@@ -35,7 +35,7 @@ class AnimalEffectTranslationService
 
         return collect($validCases)
             ->sortBy(static fn (AnimalEffectEnum $case): int => array_search($case, self::PRIORITY))
-            ->map(static fn (AnimalEffectEnum $case): string => __(sprintf('enums.%s.%s', AnimalEffectEnum::class, $case->value)))
+            ->map(static fn (AnimalEffectEnum $case): string => __(sprintf('enums.%s.%s', AnimalEffectEnum::class, $case->value), locale: $locale))
             ->join(' ');
     }
 }

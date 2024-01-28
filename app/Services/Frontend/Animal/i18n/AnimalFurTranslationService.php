@@ -22,7 +22,7 @@ class AnimalFurTranslationService
         AnimalFurEnum::FLAG_PATCHWORK,
     ];
 
-    public function __invoke(Animal $animal): string
+    public function __invoke(Animal $animal, ?string $locale = null): string
     {
         $validCases = [];
 
@@ -36,7 +36,7 @@ class AnimalFurTranslationService
 
         return collect($validCases)
             ->sortBy(static fn (AnimalFurEnum $case): int => array_search($case, self::PRIORITY))
-            ->map(static fn (AnimalFurEnum $case): string => __(sprintf('enums.%s.%s', AnimalFurEnum::class, $case->value)))
+            ->map(static fn (AnimalFurEnum $case): string => __(sprintf('enums.%s.%s', AnimalFurEnum::class, $case->value), locale: $locale))
             ->join(' ');
     }
 }

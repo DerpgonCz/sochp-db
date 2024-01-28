@@ -11,10 +11,10 @@
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
-        "laravel/scout": "^9.2",
+        "laravel/scout": "^10.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^4.4",
-        "meilisearch/meilisearch-php": "^0.19.1",
+        "meilisearch/meilisearch-php": "^1.6",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {

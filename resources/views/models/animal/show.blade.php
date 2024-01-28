@@ -99,7 +99,7 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ (new AnimalEffectTranslationService())($animal) }}
+                        {{ (new AnimalEffectTranslationService())($animal) ?: '--' }}
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.status', Animal::class)) }}</dd>

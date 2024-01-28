@@ -12,8 +12,12 @@ use App\Enums\Animal\AnimalSecondaryMarkEnum;
 use App\Enums\Animal\ColorColorPearlEnum;
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
+use App\Services\Frontend\Animal\i18n\AnimalBuildTranslationService;
+use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;
+use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;
+use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;
+use App\Services\Frontend\Animal\i18n\AnimalVarietyTranslationService;
 use DateTime;
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -71,23 +75,33 @@ class Animal extends Model
 
     public function toSearchableArray(): array
     {
-        return collect($this->toArray())->only([
-            'id',
-            'name',
-            'registration_no',
-            'fur',
-            'color',
-            'effect',
-            'marks_primary',
-            'marks_secondary',
-            'color',
-        ])->toArray();
+        return [
+            'name' => $this->name,
+            'registration_no' => $this->registration_no,
+            'build_cs' => (new AnimalBuildTranslationService())($this, 'cs'),
+            'color_cs' => (new AnimalColorTranslationService())($this, 'cs'),
+            'effect_cs' => (new AnimalEffectTranslationService())($this, 'cs'),
+            'fur_cs' => (new AnimalFurTranslationService())($this, 'cs'),
+            'variety_cs' => (new AnimalVarietyTranslationService())($this, 'cs'),
+            'build_en' => (new AnimalBuildTranslationService())($this, 'en'),
+            'color_en' => (new AnimalColorTranslationService())($this, 'en'),
+            'effect_en' => (new AnimalEffectTranslationService())($this, 'en'),
+            'fur_en' => (new AnimalFurTranslationService())($this, 'en'),
+            'variety_en' => (new AnimalVarietyTranslationService())($this, 'en'),
+        ];
     }
 
     protected function dateOfBirth(): Attribute
     {
         return Attribute::make(
             get: fn(?string $value): ?DateTime => $this->castAttribute('date_of_birth', $value) ?? $this->litter?->happened_on
+        );
+    }
+
+    protected function breederName(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value): ?string => $value ?? $this->litter?->breeder_name,
         );
     }
 
