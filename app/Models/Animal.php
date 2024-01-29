@@ -114,7 +114,7 @@ class Animal extends Model
 
     public function shouldBeSearchable(): bool
     {
-        return $this->litter?->state->is(LitterStateEnum::FINALIZED)
+        return $this->litter?->state->in([LitterStateEnum::FINALIZED, LitterStateEnum::REGISTERED])
             || $this->litter === null;
     }
 

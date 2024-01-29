@@ -22,8 +22,8 @@ class SearchController extends Controller
      */
     private const SEARCH = [
         Animal::class => ['litter.station'],
-        Station::class => [],
         Litter::class => ['station'],
+        Station::class => [],
     ];
 
     /**
