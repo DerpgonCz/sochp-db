@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Search;
 
+use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnimalSearchResource extends JsonResource
@@ -16,8 +17,8 @@ class AnimalSearchResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'station_name' => $this->litter->station->name,
-            'color' => $this->color,
+            'station_name' => $this->litter?->station->name,
+            'color' => 'TODO', // TODO (new AnimalColorTranslationService())($this)
         ];
     }
 }

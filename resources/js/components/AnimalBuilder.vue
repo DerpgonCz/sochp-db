@@ -20,167 +20,79 @@
                                         <slot name="modal-header"></slot>
                                     </template>
                                     <template v-slot:body>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="row">
-                                                    <div class="col-sm">
-                                                        <label class="form-group">
-                                                            <slot name="animal-name-header"></slot>
-                                                            *
-                                                            <input type="text" class="form-control"
-                                                                   :name="`animals[${index}][name]`" required
-                                                                   v-model="animal.name">
-                                                        </label>
-                                                        <label class="form-group">
-                                                            <slot name="animal-gender-header"></slot>
-                                                            *
-                                                            <select :name="`animals[${index}][gender]`"
-                                                                    class="custom-select" required
-                                                                    v-model="animal.gender">
-                                                                <option :value="null">--</option>
-                                                                <option
-                                                                    v-for="(genderName, genderValue) in animalGenders"
-                                                                    :value="genderValue">{{ genderName }}
-                                                                </option>
-                                                            </select>
-                                                        </label>
-                                                        <label class="form-group">
-                                                            <slot name="animal-breeding-type-header"></slot>
-                                                            <select :name="`animals[${index}][breeding_type]`"
-                                                                    class="custom-select" v-model="animal.breeding_type"
-                                                                    :disabled="!canManage">
-                                                                <option :value="null">--</option>
-                                                                <option
-                                                                    v-for="(breedingTypeName, breedingTypeValue) in animalBreedingTypes"
-                                                                    :value="breedingTypeValue">{{ breedingTypeName }}
-                                                                </option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm">
-                                                        <label class="form-group">
-                                                            <slot name="animal-eyes-header"></slot>
-                                                            *
-                                                            <select :name="`animals[${index}][eyes]`"
-                                                                    class="custom-select" required
-                                                                    v-model="animal.eyes">
-                                                                <option :value="null" disabled>--</option>
-                                                                <option v-for="(eyesName, eyesValue) in animalEyes"
-                                                                        :value="eyesValue">{{ eyesName }}
-                                                                </option>
-                                                            </select>
-                                                        </label>
-                                                        <label class="form-group">
-                                                            <slot name="animal-mark-primary-header"></slot>
-                                                            <select :name="`animals[${index}][mark_primary]`"
-                                                                    class="custom-select" v-model="animal.mark_primary">
-                                                                <option :value="null">--</option>
-                                                                <option
-                                                                    v-for="(primaryMarkName, primaryMarkValue) in animalPrimaryMarks"
-                                                                    :value="primaryMarkValue">{{ primaryMarkName }}
-                                                                </option>
-                                                            </select>
-                                                        </label>
-                                                        <label class="form-group">
-                                                            <slot name="animal-mark-secondary-header"></slot>
-                                                            <select :name="`animals[${index}][mark_secondary]`"
-                                                                    class="custom-select"
-                                                                    v-model="animal.mark_secondary">
-                                                                <option :value="null">--</option>
-                                                                <option
-                                                                    v-for="(secondaryMarkName, secondaryMarkValue) in animalSecondaryMarks"
-                                                                    :value="secondaryMarkValue">{{ secondaryMarkName }}
-                                                                </option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="form-group">
-                                                            <slot name="animal-note-header"></slot>
-                                                            <textarea class="form-control"
-                                                                      :name="`animals[${index}][note]`" cols="30"
-                                                                      rows="10" v-model="animal.note"></textarea>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="card mb-3">
-                                                    <div class="card-header">
-                                                        <slot name="animal-build-header"></slot>
-                                                        *
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <flag-checkboxes
-                                                            :flags-with-titles="animalBuilds"
-                                                            :groups="animalBuildGroups"
-                                                            :required="true"
-                                                            v-model="animal.build"
-                                                        >
-                                                        </flag-checkboxes>
-                                                        <input type="hidden" :name="`animals[${index}][build]`"
-                                                               v-model="animal.build">
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <slot name="animal-fur-header"></slot>
-                                                        *
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <flag-checkboxes
-                                                            :flags-with-titles="animalFurs"
-                                                            :groups="animalFurGroups"
-                                                            :required="true"
-                                                            v-model="animal.fur"
-                                                        >
-                                                        </flag-checkboxes>
-                                                        <input type="hidden" :name="`animals[${index}][fur]`"
-                                                               v-model="animal.fur">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="card mb-3">
-                                                    <div class="card-header">
-                                                        <slot name="animal-color-header"></slot>
-                                                        *
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <color-builder
-                                                            :name="`animals[${index}][color]`"
-                                                            :shaded-label="colorBuilderShadedLabel"
-                                                            :full-color-label="colorBuilderFullColorLabel"
-                                                            :most-used-label="colorBuilderMostUsedLabel"
-                                                            :others-label="colorBuilderOthersLabel"
-                                                            :full-color-labels="fullColorLabels"
-                                                            :shaded-color-labels="shadedColorLabels"
-                                                            :mink-color-labels="minkColorLabels"
-                                                            :siamese-himalayan-color-labels="siameseHimalayanColorLabels"
-                                                            :value="animal.color"
-                                                        ></color-builder>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <slot name="animal-effect-header"></slot>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <flag-checkboxes
-                                                            :flags-with-titles="animalEffects"
-                                                            :required="false"
-                                                            v-model="animal.effect"
-                                                        >
-                                                        </flag-checkboxes>
-                                                        <input type="hidden" :name="`animals[${index}][effect]`"
-                                                               v-model="animal.effect">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <animal-editor
+                                            :input-prefix="`animals[${index}]`"
+                                            :animal="animal"
+                                            :animal-builds="animalBuilds"
+                                            :animal-build-groups="animalBuildGroups"
+                                            :animal-furs="animalFurs"
+                                            :animal-fur-groups="animalFurGroups"
+                                            :animal-eyes="animalEyes"
+                                            :animal-primary-marks="animalPrimaryMarks"
+                                            :animal-secondary-marks="animalSecondaryMarks"
+                                            :animal-effects="animalEffects"
+                                            :animal-breeding-types="animalBreedingTypes"
+                                            :animal-genders="animalGenders"
+                                            :delete-existing-animal-message="deleteExistingAnimalMessage"
+                                            :delete-new-animal-message="deleteNewAnimalMessage"
+                                            :color-builder-most-used-label="colorBuilderMostUsedLabel"
+                                            :color-builder-others-label="colorBuilderOthersLabel"
+                                            :color-builder-shaded-label="colorBuilderShadedLabel"
+                                            :color-builder-full-color-label="colorBuilderFullColorLabel"
+                                            :full-color-labels="fullColorLabels"
+                                            :shaded-color-labels="shadedColorLabels"
+                                            :mink-color-labels="minkColorLabels"
+                                            :siamese-himalayan-color-labels="siameseHimalayanColorLabels"
+                                        >
+                                            <template v-slot:modal-header>
+                                                <slot name="modal-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-name-header>
+                                                <slot name="animal-name-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-build-header>
+                                                <slot name="animal-build-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-fur-header>
+                                                <slot name="animal-fur-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-gender-header>
+                                                <slot name="animal-gender-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-eyes-header>
+                                                <slot name="animal-eyes-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-mark-primary-header>
+                                                <slot name="animal-mark-primary-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-mark-secondary-header>
+                                                <slot name="animal-mark-secondary-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-color-header>
+                                                <slot name="animal-color-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-effect-header>
+                                                <slot name="animal-effect-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-breeding-type-header>
+                                                <slot name="animal-breeding-type-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-note-header>
+                                                <slot name="animal-note-header"></slot>
+                                            </template>
+                                            <template v-slot:animal-registration-no-header>
+                                                <slot name="animal-registration-no-header"></slot>
+                                            </template>
+                                            <template v-slot:modal-footer-close-text>
+                                                <slot name="modal-footer-close-text"></slot>
+                                            </template>
+                                            <template v-slot:modal-footer-save-text>
+                                                <slot name="modal-footer-save-text"></slot>
+                                            </template>
+                                            <template v-slot:button-add-label>
+                                                <slot name="button-add-label"></slot>
+                                            </template>
+                                        </animal-editor>
                                     </template>
                                     <template v-slot:footer-close-text>
                                         <slot name="modal-footer-close-text"></slot>
@@ -229,9 +141,11 @@
 import FlagCheckboxes from './FlagCheckboxes';
 import AnimalService from '../services/AnimalService';
 import ColorBuilder from "./ColorBuilder.vue";
+import AnimalEditor from "./AnimalEditor.vue";
 
 export default {
     components: {
+        AnimalEditor,
         ColorBuilder,
         FlagCheckboxes,
     },
@@ -257,7 +171,7 @@ export default {
         fullColorLabels: Object,
         shadedColorLabels: Object,
         minkColorLabels: Array,
-        siameseHimalayanColorLabels: Array,
+        siameseHimalayanColorLabels: Object,
         showRegistrationNo: {
             type: Boolean,
             default: false,

@@ -24,6 +24,9 @@ return [
             'mark_secondary' => 'Kresba II',
             'gender' => 'Pohlaví',
             'breeding_type' => 'Chovnost',
+            'date_of_birth' => 'Datum narození',
+            'died_on' => 'Datum smrti',
+            'breeder_name' => 'Chovatel',
             'caretaker' => [
                 'name' => 'Jméno',
                 'station' => [

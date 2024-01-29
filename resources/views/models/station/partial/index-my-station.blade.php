@@ -1,3 +1,7 @@
+@php
+    use App\Enums\StationStateEnum;
+@endphp
+
 @auth
     <h2>{{ __('My station') }}</h2>
     @if($userStation)

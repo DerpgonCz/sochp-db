@@ -12,7 +12,7 @@
             <div :class="{'dropdown-menu py-0': true, 'show': focused && results }" v-if="results">
                 <span class="dropdown-item font-weight-bold pl-2" v-if="results.animals && results.animals.length">Zvířata</span>
                 <a v-for="animal in results.animals.slice(0, 5)" class="dropdown-item" :href="`/animals/${animal.id}`">
-                    {{ animal.name }} ({{ animal.station_name }}, {{ animal.color }})
+                    {{ makeAnimalName(animal) }}
                 </a>
                 <span class="dropdown-item" v-if="results.animals && results.animals.length > 5">+ {{ results.animals.length - 5}}</span>
 
@@ -53,6 +53,9 @@
                 axios
                     .get('/search',{ params: {q: term} })
                     .then(({ data }) => this.results = data ? data.results : null);
+            },
+            makeAnimalName(animal) {
+                return `${animal.name} (${animal.station_name ? animal.station_name + ', ' : ''}${animal.color})`
             }
         }
     }

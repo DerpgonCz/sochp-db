@@ -17,8 +17,8 @@ return new class () extends Migration {
             $table->string('breeder_name')->nullable();
             $table->string('registration_no')->unique()->nullable();
             $table->text('note')->nullable();
-            $table->dateTime('date_of_birth')->nullable();
-            $table->dateTime('died_on')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->date('died_on')->nullable();
             $table->boolean('mark_down_under')->default(false);
             $table->boolean('non_standard')->default(false);
 

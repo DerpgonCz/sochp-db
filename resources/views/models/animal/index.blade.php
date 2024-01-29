@@ -7,7 +7,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2>{{ __('Animals') }}</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <h2>{{ __('Animals') }}</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        @auth
+                            <a href="{{ route('animals.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+                        @endauth
+                    </div>
+                </div>
                 <table class="table table-hover">
                     <thead>
                     <tr>

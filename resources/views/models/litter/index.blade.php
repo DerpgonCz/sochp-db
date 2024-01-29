@@ -57,9 +57,8 @@
                         @include('models.litter.partial.index-list-public')
                     </div>
                     @if($stationLitters !== null)
-                        <div class="tab-pane fade {{ $activeTab === 1 ? 'show active' : '' }}" id="my-litters-content"
-                             role="tabpanel">
-
+                        <div class="tab-pane fade {{ $activeTab === 1 ? 'show active' : '' }}" id="my-litters-content" role="tabpanel">
+                            @include('models.litter.partial.index-list-my-litters')
                         </div>
                     @endif
                     @can('approve', Litter::class)

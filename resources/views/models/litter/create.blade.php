@@ -16,46 +16,32 @@
                 @csrf
 
                 <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.name', Litter::class)) }}</strong>
-                    <input type="text" class="form-control" name="name" placeholder="{{ __(sprintf('models.%s.fields.name', Litter::class)) }}" value="{{ old('name') }}" required>
+                    <strong>{{ __(sprintf('models.%s.fields.name', Litter::class)) }}</strong> *
+                    <input type="text" class="form-control" name="name"
+                           placeholder="{{ __(sprintf('models.%s.fields.name', Litter::class)) }}"
+                           value="{{ old('name') }}" required>
                 </label>
 
                 <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
-                    <select name="mother" class="custom-select" value="{{ old('mother') }}">
-                        <option value="">-- {{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }} --</option>
-                        <optgroup label="{{ __('My animals') }}">
-                            @foreach($stationAnimalsFemale as $animal)
-                                <option value="{{ $animal->id }}">{{ $animal->name }} ({{ $animal->litter->name }})</option>
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="{{ __('Other animals') }}">
-                            @foreach($otherAnimalsFemale as $animal)
-                                <option value="{{ $animal->id }}">{{ $animal->name }} ({{ $animal->litter->name }}
-                                    , {{ $animal->litter->station->name }})
-                                </option>
-                            @endforeach
-                        </optgroup>
-                    </select>
+                    <x-parent-select
+                        name="mother_id"
+                        :value="null"
+                        :station-animals="$stationAnimalsFemale"
+                        :other-animals="$otherAnimalsFemale"
+                        i18n-field="mother"
+                    />
                 </label>
 
                 <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
-                    <select name="father" class="custom-select" value="{{ old('father') }}">
-                        <option value="">-- {{ __(sprintf('models.%s.fields.father.name', Litter::class)) }} --</option>
-                        <optgroup label="{{ __('My animals') }}">
-                            @foreach($stationAnimalsMale as $animal)
-                                <option value="{{ $animal->id }}">{{ $animal->name }} ({{ $animal->litter->name }})</option>
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="{{ __('Other animals') }}">
-                            @foreach($otherAnimalsMale as $animal)
-                                <option value="{{ $animal->id }}">{{ $animal->name }} ({{ $animal->litter->name }}
-                                    , {{ $animal->litter->station->name }})
-                                </option>
-                            @endforeach
-                        </optgroup>
-                    </select>
+                    <x-parent-select
+                        name="father_id"
+                        :value="null"
+                        :station-animals="$stationAnimalsFemale"
+                        :other-animals="$otherAnimalsFemale"
+                        i18n-field="mother"
+                    />
                 </label>
 
                 <label class="form-group">

@@ -6,10 +6,10 @@ namespace App\Traits\Enums;
 
 trait Localized
 {
-    public static function casesWithTitles(): array
+    public static function casesWithTitles(): object
     {
-        return collect(self::cases())
-            ->mapWithKeys(static fn (self $case): array => [$case->value => __(sprintf('enums.%s.%s', self::class, $case->value))])
+        return (object) collect(self::cases())
+            ->mapWithKeys(static fn(self $case): array => [$case->value => __(sprintf('enums.%s.%s', self::class, $case->value))])
             ->toArray();
     }
 }

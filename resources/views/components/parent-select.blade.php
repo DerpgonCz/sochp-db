@@ -8,7 +8,7 @@
     @endif
     @foreach($stationAnimals as $animal)
             <option value="{{ $animal->id }}" @selected($animal->id === $value)>{{ $animal->name }}
-                ({{ $animal->litter->name }})
+                ({{ $animal->litter?->name }})
             </option>
     @endforeach
     @if(count($stationAnimals))
@@ -17,11 +17,14 @@
         <optgroup label="{{ __('Other animals') }}">
     @endif
     @foreach($otherAnimals as $animal)
-        <option value="{{ $animal->id }}" @selected($animal->id === $value)>{{ $animal->name }}
-            (
-            @if($animal->litter) {{ $animal->litter->name }}, @endif
-            {{ $animal->breeder_name ?? '?' }}
-            )
+        <option value="{{ $animal->id }}" @selected($animal->id === $value)>
+            {{ $animal->name }}
+            @if($animal->breeder_name)
+                (
+                @if($animal->litter) {{ $animal->litter->name }}, @endif
+                {{ $animal->breeder_name ?? '?' }}
+                )
+            @endif
         </option>
     @endforeach
     @if(count($stationAnimals))

@@ -1,5 +1,20 @@
 @php
-    use App\Enums\Animal\AnimalBreedingTypeEnum;use App\Enums\Animal\AnimalBuildEnum;use App\Enums\Animal\AnimalColorFull;use App\Enums\Animal\AnimalColorMink;use App\Enums\Animal\AnimalColorShaded;use App\Enums\Animal\AnimalEffectEnum;use App\Enums\Animal\AnimalEyesEnum;use App\Enums\Animal\AnimalFurEnum;use App\Enums\Animal\AnimalPrimaryMarkEnum;use App\Enums\Animal\AnimalSecondaryMarkEnum;use App\Enums\GenderEnum;use App\Enums\LitterStateEnum;use App\Models\Animal;use App\Models\Litter;use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;use Illuminate\Support\Facades\Gate;
+    use App\Enums\Animal\AnimalBreedingTypeEnum;
+    use App\Enums\Animal\AnimalBuildEnum;
+    use App\Enums\Animal\AnimalColorFull;
+    use App\Enums\Animal\AnimalColorMink;
+    use App\Enums\Animal\AnimalColorShaded;
+    use App\Enums\Animal\AnimalEffectEnum;
+    use App\Enums\Animal\AnimalEyesEnum;
+    use App\Enums\Animal\AnimalFurEnum;
+    use App\Enums\Animal\AnimalPrimaryMarkEnum;
+    use App\Enums\Animal\AnimalSecondaryMarkEnum;
+    use App\Enums\GenderEnum;
+    use App\Enums\LitterStateEnum;
+    use App\Models\Animal;
+    use App\Models\Litter;
+    use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
+    use Illuminate\Support\Facades\Gate;
 @endphp
 @extends('layouts.app')
 

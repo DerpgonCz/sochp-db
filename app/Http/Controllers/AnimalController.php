@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Facades\Flashes;
 use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
-use App\Models\Litter;
 use App\Models\User;
+use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
+use App\Services\Frontend\Animal\AnimalSelectDataService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AnimalController extends Controller
@@ -21,7 +23,9 @@ class AnimalController extends Controller
             [
                 'animals' => Animal::listable()->with('litter', 'litter.station')
                     ->orderBy(
-                        DB::raw('GREATEST(animals.date_of_birth, (SELECT litters.happened_on FROM litters WHERE litters.id = animals.litter_id))'),
+                        DB::raw(
+                            'GREATEST(animals.date_of_birth, (SELECT litters.happened_on FROM litters WHERE litters.id = animals.litter_id))'
+                        ),
                         'desc'
                     )
                     ->paginate(50),
@@ -29,14 +33,34 @@ class AnimalController extends Controller
         );
     }
 
-    public function create(): View
+    public function create(
+        AnimalSelectDataService $animalSelectDataService,
+    ): View
     {
-        return view('models.animal.create');
+        return view(
+            'models.animal.create',
+            [
+                ...$animalSelectDataService->buildViewDataForParentSelection(Auth::user()?->station),
+            ]
+        );
     }
 
     public function store(Request $request)
     {
-        //
+        $animal = $request->get('animal');
+        $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animal['color']);
+        Animal::updateOrCreate(
+            ['id' => $animal['id'] ?? null],
+            [
+                ...collect($animal)->except(['id', 'color'])->toArray(),
+                'color_shaded' => $deserializedColor['shaded'],
+                'color_full' => $deserializedColor['full'],
+                'color_mink' => $deserializedColor['mink'],
+                // 'litter_id' => $litter->id,
+                // 'mother_id' => $litter->mother_id,
+                // 'father_id' => $litter->father_id,
+            ]
+        );
     }
 
     public function show(Animal $animal): View

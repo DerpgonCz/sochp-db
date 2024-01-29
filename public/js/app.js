@@ -2068,6 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlagCheckboxes */ "./resources/js/components/FlagCheckboxes.vue");
 /* harmony import */ var _services_AnimalService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/AnimalService */ "./resources/js/services/AnimalService.js");
 /* harmony import */ var _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorBuilder.vue */ "./resources/js/components/ColorBuilder.vue");
+/* harmony import */ var _AnimalEditor_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AnimalEditor.vue */ "./resources/js/components/AnimalEditor.vue");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2083,8 +2084,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
+    AnimalEditor: _AnimalEditor_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     ColorBuilder: _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     FlagCheckboxes: _FlagCheckboxes__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2110,7 +2113,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     fullColorLabels: Object,
     shadedColorLabels: Object,
     minkColorLabels: Array,
-    siameseHimalayanColorLabels: Array,
+    siameseHimalayanColorLabels: Object,
     showRegistrationNo: {
       type: Boolean,
       "default": false
@@ -2210,6 +2213,82 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   computed: {
     allAnimals: function allAnimals() {
       return [].concat(_toConsumableArray(this.existingAnimals), _toConsumableArray(this.newAnimals));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js ***!
+  \******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FlagCheckboxes_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlagCheckboxes.vue */ "./resources/js/components/FlagCheckboxes.vue");
+/* harmony import */ var _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorBuilder.vue */ "./resources/js/components/ColorBuilder.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    FlagCheckboxes: _FlagCheckboxes_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ColorBuilder: _ColorBuilder_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    animal: {
+      type: Object,
+      "default": function _default() {
+        return {
+          id: null,
+          mark_primary: null,
+          mark_secondary: null,
+          color_full: null,
+          color_shaded: null,
+          color_mink: null,
+          effect: null,
+          build: null,
+          fur: null,
+          eyes: null,
+          gender: null,
+          breeding_type: null,
+          note: null,
+          registration_no: null
+        };
+      }
+    },
+    inputPrefix: {
+      type: String,
+      "default": ''
+    },
+    animalBuilds: Object,
+    animalBuildGroups: Array,
+    animalFurs: Object,
+    animalFurGroups: Array,
+    animalGenders: Object,
+    animalEyes: Object,
+    animalPrimaryMarks: Object,
+    animalSecondaryMarks: Object,
+    animalEffects: Object,
+    animalBreedingTypes: Object,
+    canManage: Boolean,
+    deleteExistingAnimalMessage: String,
+    deleteNewAnimalMessage: String,
+    colorBuilderMostUsedLabel: String,
+    colorBuilderOthersLabel: String,
+    colorBuilderShadedLabel: String,
+    colorBuilderFullColorLabel: String,
+    fullColorLabels: Object,
+    shadedColorLabels: Object,
+    minkColorLabels: Array,
+    siameseHimalayanColorLabels: Object,
+    showRegistrationNo: {
+      type: Boolean,
+      "default": false
     }
   }
 });
@@ -3469,6 +3548,9 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         return _this2.results = data ? data.results : null;
       });
+    },
+    makeAnimalName: function makeAnimalName(animal) {
+      return "".concat(animal.name, " (").concat(animal.station_name ? animal.station_name + ', ' : '').concat(animal.color, ")");
     }
   }
 });
@@ -3590,384 +3672,129 @@ var render = function render() {
       }, {
         key: "body",
         fn: function fn() {
-          return [_c("div", {
-            staticClass: "row"
-          }, [_c("div", {
-            staticClass: "col-lg-6 col-md-12"
-          }, [_c("div", {
-            staticClass: "row"
-          }, [_c("div", {
-            staticClass: "col-sm"
-          }, [_c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-name-header"), _vm._v("\n                                                        *\n                                                        "), _c("input", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.name,
-              expression: "animal.name"
-            }],
-            staticClass: "form-control",
+          return [_c("animal-editor", {
             attrs: {
-              type: "text",
-              name: "animals[".concat(index, "][name]"),
-              required: ""
-            },
-            domProps: {
-              value: animal.name
-            },
-            on: {
-              input: function input($event) {
-                if ($event.target.composing) return;
-                _vm.$set(animal, "name", $event.target.value);
-              }
-            }
-          })], 2), _vm._v(" "), _c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-gender-header"), _vm._v("\n                                                        *\n                                                        "), _c("select", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.gender,
-              expression: "animal.gender"
-            }],
-            staticClass: "custom-select",
-            attrs: {
-              name: "animals[".concat(index, "][gender]"),
-              required: ""
-            },
-            on: {
-              change: function change($event) {
-                var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                  return o.selected;
-                }).map(function (o) {
-                  var val = "_value" in o ? o._value : o.value;
-                  return val;
-                });
-                _vm.$set(animal, "gender", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-              }
-            }
-          }, [_c("option", {
-            domProps: {
-              value: null
-            }
-          }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalGenders, function (genderName, genderValue) {
-            return _c("option", {
-              domProps: {
-                value: genderValue
-              }
-            }, [_vm._v(_vm._s(genderName) + "\n                                                            ")]);
-          })], 2)], 2), _vm._v(" "), _c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-breeding-type-header"), _vm._v(" "), _c("select", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.breeding_type,
-              expression: "animal.breeding_type"
-            }],
-            staticClass: "custom-select",
-            attrs: {
-              name: "animals[".concat(index, "][breeding_type]"),
-              disabled: !_vm.canManage
-            },
-            on: {
-              change: function change($event) {
-                var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                  return o.selected;
-                }).map(function (o) {
-                  var val = "_value" in o ? o._value : o.value;
-                  return val;
-                });
-                _vm.$set(animal, "breeding_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-              }
-            }
-          }, [_c("option", {
-            domProps: {
-              value: null
-            }
-          }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalBreedingTypes, function (breedingTypeName, breedingTypeValue) {
-            return _c("option", {
-              domProps: {
-                value: breedingTypeValue
-              }
-            }, [_vm._v(_vm._s(breedingTypeName) + "\n                                                            ")]);
-          })], 2)], 2)]), _vm._v(" "), _c("div", {
-            staticClass: "col-sm"
-          }, [_c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-eyes-header"), _vm._v("\n                                                        *\n                                                        "), _c("select", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.eyes,
-              expression: "animal.eyes"
-            }],
-            staticClass: "custom-select",
-            attrs: {
-              name: "animals[".concat(index, "][eyes]"),
-              required: ""
-            },
-            on: {
-              change: function change($event) {
-                var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                  return o.selected;
-                }).map(function (o) {
-                  var val = "_value" in o ? o._value : o.value;
-                  return val;
-                });
-                _vm.$set(animal, "eyes", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-              }
-            }
-          }, [_c("option", {
-            attrs: {
-              disabled: ""
-            },
-            domProps: {
-              value: null
-            }
-          }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalEyes, function (eyesName, eyesValue) {
-            return _c("option", {
-              domProps: {
-                value: eyesValue
-              }
-            }, [_vm._v(_vm._s(eyesName) + "\n                                                            ")]);
-          })], 2)], 2), _vm._v(" "), _c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-mark-primary-header"), _vm._v(" "), _c("select", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.mark_primary,
-              expression: "animal.mark_primary"
-            }],
-            staticClass: "custom-select",
-            attrs: {
-              name: "animals[".concat(index, "][mark_primary]")
-            },
-            on: {
-              change: function change($event) {
-                var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                  return o.selected;
-                }).map(function (o) {
-                  var val = "_value" in o ? o._value : o.value;
-                  return val;
-                });
-                _vm.$set(animal, "mark_primary", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-              }
-            }
-          }, [_c("option", {
-            domProps: {
-              value: null
-            }
-          }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
-            return _c("option", {
-              domProps: {
-                value: primaryMarkValue
-              }
-            }, [_vm._v(_vm._s(primaryMarkName) + "\n                                                            ")]);
-          })], 2)], 2), _vm._v(" "), _c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-mark-secondary-header"), _vm._v(" "), _c("select", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.mark_secondary,
-              expression: "animal.mark_secondary"
-            }],
-            staticClass: "custom-select",
-            attrs: {
-              name: "animals[".concat(index, "][mark_secondary]")
-            },
-            on: {
-              change: function change($event) {
-                var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                  return o.selected;
-                }).map(function (o) {
-                  var val = "_value" in o ? o._value : o.value;
-                  return val;
-                });
-                _vm.$set(animal, "mark_secondary", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-              }
-            }
-          }, [_c("option", {
-            domProps: {
-              value: null
-            }
-          }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalSecondaryMarks, function (secondaryMarkName, secondaryMarkValue) {
-            return _c("option", {
-              domProps: {
-                value: secondaryMarkValue
-              }
-            }, [_vm._v(_vm._s(secondaryMarkName) + "\n                                                            ")]);
-          })], 2)], 2)])]), _vm._v(" "), _c("div", {
-            staticClass: "row"
-          }, [_c("div", {
-            staticClass: "col"
-          }, [_c("label", {
-            staticClass: "form-group"
-          }, [_vm._t("animal-note-header"), _vm._v(" "), _c("textarea", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.note,
-              expression: "animal.note"
-            }],
-            staticClass: "form-control",
-            attrs: {
-              name: "animals[".concat(index, "][note]"),
-              cols: "30",
-              rows: "10"
-            },
-            domProps: {
-              value: animal.note
-            },
-            on: {
-              input: function input($event) {
-                if ($event.target.composing) return;
-                _vm.$set(animal, "note", $event.target.value);
-              }
-            }
-          })], 2)])])]), _vm._v(" "), _c("div", {
-            staticClass: "col-lg-3 col-md-6"
-          }, [_c("div", {
-            staticClass: "card mb-3"
-          }, [_c("div", {
-            staticClass: "card-header"
-          }, [_vm._t("animal-build-header"), _vm._v("\n                                                    *\n                                                ")], 2), _vm._v(" "), _c("div", {
-            staticClass: "card-body"
-          }, [_c("flag-checkboxes", {
-            attrs: {
-              "flags-with-titles": _vm.animalBuilds,
-              groups: _vm.animalBuildGroups,
-              required: true
-            },
-            model: {
-              value: animal.build,
-              callback: function callback($$v) {
-                _vm.$set(animal, "build", $$v);
-              },
-              expression: "animal.build"
-            }
-          }), _vm._v(" "), _c("input", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.build,
-              expression: "animal.build"
-            }],
-            attrs: {
-              type: "hidden",
-              name: "animals[".concat(index, "][build]")
-            },
-            domProps: {
-              value: animal.build
-            },
-            on: {
-              input: function input($event) {
-                if ($event.target.composing) return;
-                _vm.$set(animal, "build", $event.target.value);
-              }
-            }
-          })], 1)]), _vm._v(" "), _c("div", {
-            staticClass: "card"
-          }, [_c("div", {
-            staticClass: "card-header"
-          }, [_vm._t("animal-fur-header"), _vm._v("\n                                                    *\n                                                ")], 2), _vm._v(" "), _c("div", {
-            staticClass: "card-body"
-          }, [_c("flag-checkboxes", {
-            attrs: {
-              "flags-with-titles": _vm.animalFurs,
-              groups: _vm.animalFurGroups,
-              required: true
-            },
-            model: {
-              value: animal.fur,
-              callback: function callback($$v) {
-                _vm.$set(animal, "fur", $$v);
-              },
-              expression: "animal.fur"
-            }
-          }), _vm._v(" "), _c("input", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.fur,
-              expression: "animal.fur"
-            }],
-            attrs: {
-              type: "hidden",
-              name: "animals[".concat(index, "][fur]")
-            },
-            domProps: {
-              value: animal.fur
-            },
-            on: {
-              input: function input($event) {
-                if ($event.target.composing) return;
-                _vm.$set(animal, "fur", $event.target.value);
-              }
-            }
-          })], 1)])]), _vm._v(" "), _c("div", {
-            staticClass: "col-lg-3 col-md-6"
-          }, [_c("div", {
-            staticClass: "card mb-3"
-          }, [_c("div", {
-            staticClass: "card-header"
-          }, [_vm._t("animal-color-header"), _vm._v("\n                                                    *\n                                                ")], 2), _vm._v(" "), _c("div", {
-            staticClass: "card-body"
-          }, [_c("color-builder", {
-            attrs: {
-              name: "animals[".concat(index, "][color]"),
-              "shaded-label": _vm.colorBuilderShadedLabel,
-              "full-color-label": _vm.colorBuilderFullColorLabel,
-              "most-used-label": _vm.colorBuilderMostUsedLabel,
-              "others-label": _vm.colorBuilderOthersLabel,
+              "input-prefix": "animals[".concat(index, "]"),
+              animal: animal,
+              "animal-builds": _vm.animalBuilds,
+              "animal-build-groups": _vm.animalBuildGroups,
+              "animal-furs": _vm.animalFurs,
+              "animal-fur-groups": _vm.animalFurGroups,
+              "animal-eyes": _vm.animalEyes,
+              "animal-primary-marks": _vm.animalPrimaryMarks,
+              "animal-secondary-marks": _vm.animalSecondaryMarks,
+              "animal-effects": _vm.animalEffects,
+              "animal-breeding-types": _vm.animalBreedingTypes,
+              "animal-genders": _vm.animalGenders,
+              "delete-existing-animal-message": _vm.deleteExistingAnimalMessage,
+              "delete-new-animal-message": _vm.deleteNewAnimalMessage,
+              "color-builder-most-used-label": _vm.colorBuilderMostUsedLabel,
+              "color-builder-others-label": _vm.colorBuilderOthersLabel,
+              "color-builder-shaded-label": _vm.colorBuilderShadedLabel,
+              "color-builder-full-color-label": _vm.colorBuilderFullColorLabel,
               "full-color-labels": _vm.fullColorLabels,
               "shaded-color-labels": _vm.shadedColorLabels,
               "mink-color-labels": _vm.minkColorLabels,
-              "siamese-himalayan-color-labels": _vm.siameseHimalayanColorLabels,
-              value: animal.color
-            }
-          })], 1)]), _vm._v(" "), _c("div", {
-            staticClass: "card"
-          }, [_c("div", {
-            staticClass: "card-header"
-          }, [_vm._t("animal-effect-header")], 2), _vm._v(" "), _c("div", {
-            staticClass: "card-body"
-          }, [_c("flag-checkboxes", {
-            attrs: {
-              "flags-with-titles": _vm.animalEffects,
-              required: false
+              "siamese-himalayan-color-labels": _vm.siameseHimalayanColorLabels
             },
-            model: {
-              value: animal.effect,
-              callback: function callback($$v) {
-                _vm.$set(animal, "effect", $$v);
+            scopedSlots: _vm._u([{
+              key: "modal-header",
+              fn: function fn() {
+                return [_vm._t("modal-header")];
               },
-              expression: "animal.effect"
-            }
-          }), _vm._v(" "), _c("input", {
-            directives: [{
-              name: "model",
-              rawName: "v-model",
-              value: animal.effect,
-              expression: "animal.effect"
-            }],
-            attrs: {
-              type: "hidden",
-              name: "animals[".concat(index, "][effect]")
-            },
-            domProps: {
-              value: animal.effect
-            },
-            on: {
-              input: function input($event) {
-                if ($event.target.composing) return;
-                _vm.$set(animal, "effect", $event.target.value);
-              }
-            }
-          })], 1)])])])];
+              proxy: true
+            }, {
+              key: "animal-name-header",
+              fn: function fn() {
+                return [_vm._t("animal-name-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-build-header",
+              fn: function fn() {
+                return [_vm._t("animal-build-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-fur-header",
+              fn: function fn() {
+                return [_vm._t("animal-fur-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-gender-header",
+              fn: function fn() {
+                return [_vm._t("animal-gender-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-eyes-header",
+              fn: function fn() {
+                return [_vm._t("animal-eyes-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-mark-primary-header",
+              fn: function fn() {
+                return [_vm._t("animal-mark-primary-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-mark-secondary-header",
+              fn: function fn() {
+                return [_vm._t("animal-mark-secondary-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-color-header",
+              fn: function fn() {
+                return [_vm._t("animal-color-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-effect-header",
+              fn: function fn() {
+                return [_vm._t("animal-effect-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-breeding-type-header",
+              fn: function fn() {
+                return [_vm._t("animal-breeding-type-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-note-header",
+              fn: function fn() {
+                return [_vm._t("animal-note-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-registration-no-header",
+              fn: function fn() {
+                return [_vm._t("animal-registration-no-header")];
+              },
+              proxy: true
+            }, {
+              key: "modal-footer-close-text",
+              fn: function fn() {
+                return [_vm._t("modal-footer-close-text")];
+              },
+              proxy: true
+            }, {
+              key: "modal-footer-save-text",
+              fn: function fn() {
+                return [_vm._t("modal-footer-save-text")];
+              },
+              proxy: true
+            }, {
+              key: "button-add-label",
+              fn: function fn() {
+                return [_vm._t("button-add-label")];
+              },
+              proxy: true
+            }], null, true)
+          })];
         },
         proxy: true
       }, {
@@ -4057,6 +3884,406 @@ var render = function render() {
       }
     }
   }, [_vm._t("button-add-label")], 2)])])])]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418 ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-lg-6 col-md-12"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-sm"
+  }, [_c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-name-header")], 2), _vm._v("\n                    *\n                    "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.name,
+      expression: "animal.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      name: "".concat(_vm.inputPrefix, "[name]"),
+      required: ""
+    },
+    domProps: {
+      value: _vm.animal.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "name", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-gender-header")], 2), _vm._v("\n                    *\n                    "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.gender,
+      expression: "animal.gender"
+    }],
+    staticClass: "custom-select",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[gender]"),
+      required: ""
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.animal, "gender", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalGenders, function (genderName, genderValue) {
+    return _c("option", {
+      domProps: {
+        value: genderValue
+      }
+    }, [_vm._v(_vm._s(genderName) + "\n                        ")]);
+  })], 2)]), _vm._v(" "), _c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-breeding-type-header")], 2), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.breeding_type,
+      expression: "animal.breeding_type"
+    }],
+    staticClass: "custom-select",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[breeding_type]"),
+      disabled: !_vm.canManage
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.animal, "breeding_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalBreedingTypes, function (breedingTypeName, breedingTypeValue) {
+    return _c("option", {
+      domProps: {
+        value: breedingTypeValue
+      }
+    }, [_vm._v(_vm._s(breedingTypeName) + "\n                        ")]);
+  })], 2)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm"
+  }, [_c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-eyes-header")], 2), _vm._v("\n                    *\n                    "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.eyes,
+      expression: "animal.eyes"
+    }],
+    staticClass: "custom-select",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[eyes]"),
+      required: ""
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.animal, "eyes", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      disabled: ""
+    },
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalEyes, function (eyesName, eyesValue) {
+    return _c("option", {
+      domProps: {
+        value: eyesValue
+      }
+    }, [_vm._v(_vm._s(eyesName) + "\n                        ")]);
+  })], 2)]), _vm._v(" "), _c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-mark-primary-header")], 2), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.mark_primary,
+      expression: "animal.mark_primary"
+    }],
+    staticClass: "custom-select",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[mark_primary]")
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.animal, "mark_primary", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
+    return _c("option", {
+      domProps: {
+        value: primaryMarkValue
+      }
+    }, [_vm._v(_vm._s(primaryMarkName) + "\n                        ")]);
+  })], 2)]), _vm._v(" "), _c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-mark-secondary-header")], 2), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.mark_secondary,
+      expression: "animal.mark_secondary"
+    }],
+    staticClass: "custom-select",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[mark_secondary]")
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.animal, "mark_secondary", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalSecondaryMarks, function (secondaryMarkName, secondaryMarkValue) {
+    return _c("option", {
+      domProps: {
+        value: secondaryMarkValue
+      }
+    }, [_vm._v(_vm._s(secondaryMarkName) + "\n                        ")]);
+  })], 2)])])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("label", {
+    staticClass: "form-group"
+  }, [_c("strong", [_vm._t("animal-note-header")], 2), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.note,
+      expression: "animal.note"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[note]"),
+      cols: "30",
+      rows: "10"
+    },
+    domProps: {
+      value: _vm.animal.note
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "note", $event.target.value);
+      }
+    }
+  })])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-lg-3 col-md-6"
+  }, [_c("div", {
+    staticClass: "card mb-3"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_c("strong", [_vm._t("animal-build-header")], 2), _vm._v("\n                *\n            ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("flag-checkboxes", {
+    attrs: {
+      "flags-with-titles": _vm.animalBuilds,
+      groups: _vm.animalBuildGroups,
+      required: true
+    },
+    model: {
+      value: _vm.animal.build,
+      callback: function callback($$v) {
+        _vm.$set(_vm.animal, "build", $$v);
+      },
+      expression: "animal.build"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.build,
+      expression: "animal.build"
+    }],
+    attrs: {
+      type: "hidden",
+      name: "".concat(_vm.inputPrefix, "[build]")
+    },
+    domProps: {
+      value: _vm.animal.build
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "build", $event.target.value);
+      }
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_c("strong", [_vm._t("animal-fur-header")], 2), _vm._v("\n                *\n            ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("flag-checkboxes", {
+    attrs: {
+      "flags-with-titles": _vm.animalFurs,
+      groups: _vm.animalFurGroups,
+      required: true
+    },
+    model: {
+      value: _vm.animal.fur,
+      callback: function callback($$v) {
+        _vm.$set(_vm.animal, "fur", $$v);
+      },
+      expression: "animal.fur"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.fur,
+      expression: "animal.fur"
+    }],
+    attrs: {
+      type: "hidden",
+      name: "".concat(_vm.inputPrefix, "[fur]")
+    },
+    domProps: {
+      value: _vm.animal.fur
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "fur", $event.target.value);
+      }
+    }
+  })], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-lg-3 col-md-6"
+  }, [_c("div", {
+    staticClass: "card mb-3"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_c("strong", [_vm._t("animal-color-header")], 2), _vm._v("\n                *\n            ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("color-builder", {
+    attrs: {
+      name: "".concat(_vm.inputPrefix, "[color]"),
+      "shaded-label": _vm.colorBuilderShadedLabel,
+      "full-color-label": _vm.colorBuilderFullColorLabel,
+      "most-used-label": _vm.colorBuilderMostUsedLabel,
+      "others-label": _vm.colorBuilderOthersLabel,
+      "full-color-labels": _vm.fullColorLabels,
+      "shaded-color-labels": _vm.shadedColorLabels,
+      "mink-color-labels": _vm.minkColorLabels,
+      "siamese-himalayan-color-labels": _vm.siameseHimalayanColorLabels,
+      value: _vm.animal.color
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_c("strong", [_vm._t("animal-effect-header")], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("flag-checkboxes", {
+    attrs: {
+      "flags-with-titles": _vm.animalEffects,
+      required: false
+    },
+    model: {
+      value: _vm.animal.effect,
+      callback: function callback($$v) {
+        _vm.$set(_vm.animal, "effect", $$v);
+      },
+      expression: "animal.effect"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.effect,
+      expression: "animal.effect"
+    }],
+    attrs: {
+      type: "hidden",
+      name: "".concat(_vm.inputPrefix, "[effect]")
+    },
+    domProps: {
+      value: _vm.animal.effect
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "effect", $event.target.value);
+      }
+    }
+  })], 1)])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -4321,7 +4548,7 @@ var render = function render() {
       attrs: {
         href: "/animals/".concat(animal.id)
       }
-    }, [_vm._v("\n                " + _vm._s(animal.name) + " (" + _vm._s(animal.station_name) + ", " + _vm._s(animal.color) + ")\n            ")]);
+    }, [_vm._v("\n                " + _vm._s(_vm.makeAnimalName(animal)) + "\n            ")]);
   }), _vm._v(" "), _vm.results.animals && _vm.results.animals.length > 5 ? _c("span", {
     staticClass: "dropdown-item"
   }, [_vm._v("+ " + _vm._s(_vm.results.animals.length - 5))]) : _vm._e(), _vm._v(" "), _vm.results.stations && _vm.results.stations.length ? _c("span", {
@@ -40211,6 +40438,45 @@ component.options.__file = "resources/js/components/AnimalBuilder.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalEditor.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/AnimalEditor.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalEditor.vue?vue&type=template&id=f41b9418 */ "./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418");
+/* harmony import */ var _AnimalEditor_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalEditor.vue?vue&type=script&lang=js */ "./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimalEditor_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AnimalEditor.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ColorBuilder.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/ColorBuilder.vue ***!
@@ -40424,6 +40690,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalEditor_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalEditor.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=script&lang=js");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalEditor_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/ColorBuilder.vue?vue&type=script&lang=js ***!
@@ -40517,6 +40799,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalBuilder_vue_vue_type_template_id_1b078a24__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalBuilder.vue?vue&type=template&id=1b078a24 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalBuilder.vue?vue&type=template&id=1b078a24");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418 ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalEditor_vue_vue_type_template_id_f41b9418__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalEditor.vue?vue&type=template&id=f41b9418 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalEditor.vue?vue&type=template&id=f41b9418");
 
 
 /***/ }),
@@ -52701,6 +53000,7 @@ Vue.compile = compileToFunctions;
 
 var map = {
 	"./components/AnimalBuilder.vue": "./resources/js/components/AnimalBuilder.vue",
+	"./components/AnimalEditor.vue": "./resources/js/components/AnimalEditor.vue",
 	"./components/ColorBuilder.vue": "./resources/js/components/ColorBuilder.vue",
 	"./components/FlagCheckboxes.vue": "./resources/js/components/FlagCheckboxes.vue",
 	"./components/Modal.vue": "./resources/js/components/Modal.vue",
