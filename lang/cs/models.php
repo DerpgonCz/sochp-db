@@ -26,11 +26,14 @@ return [
             'breeding_type' => 'Chovnost',
             'date_of_birth' => 'Datum narození',
             'died_on' => 'Datum smrti',
-            'breeder_name' => 'Chovatel',
+            'breeder_name' => 'Jméno chovatele',
+            'breeder_station_name' => 'ChS chovatele',
+            'caretaker_name' => 'Jméno vlastníka',
+            'caretaker_station_name' => 'ChS vlastníka',
             'caretaker' => [
                 'name' => 'Jméno',
                 'station' => [
-                    'name' => 'ChS',
+                    'name' => 'Chovatelská stanice',
                 ],
             ],
             'litter' => [
@@ -75,7 +78,7 @@ return [
                 'name' => 'Samec',
             ],
             'station' => [
-                'name' => 'Chovná stanice',
+                'name' => 'Chovatelská stanice',
             ],
             'children' => [
                 'name' => 'Jméno',

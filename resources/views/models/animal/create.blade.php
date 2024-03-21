@@ -11,6 +11,8 @@
     use App\Enums\Animal\AnimalPrimaryMarkEnum;
     use App\Enums\Animal\AnimalSecondaryMarkEnum;
     use App\Enums\GenderEnum;
+    use App\Models\Litter;
+    use App\Models\Station;
 @endphp
 
 @extends('layouts.app')
@@ -18,58 +20,113 @@
 @section('content')
     <div class="container">
 
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
-            <input type="date" class="form-control" name="animal[date_of_birth]"
-                   placeholder="{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}"
-                   value="{{ old('animal[date_of_birth]') }}" required>
-        </label>
-
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}</strong>
-            <input type="date" class="form-control" name="animal[died_on]"
-                   placeholder="{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}"
-                   value="{{ old('animal[died_on]') }}" required>
-        </label>
-
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}</strong>
-            <input type="text" class="form-control" name="animal[registration_no]"
-                   placeholder="{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}"
-                   value="{{ old('animal[registration_no]') }}">
-        </label>
-
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.breeder_name', Animal::class)) }}</strong>
-            <input type="text" class="form-control" name="animal[breeder_name]"
-                   placeholder="{{ __(sprintf('models.%s.fields.breeder_name', Animal::class)) }}"
-                   value="{{ old('animal[breeder_name]') }}">
-        </label>
-
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
-            <x-parent-select
-                name="mother_id"
-                :value="null"
-                :station-animals="$stationAnimalsFemale"
-                :other-animals="$otherAnimalsFemale"
-                i18n-field="mother"
-            />
-        </label>
-
-        <label class="form-group">
-            <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
-            <x-parent-select
-                name="father_id"
-                :value="null"
-                :station-animals="$stationAnimalsFemale"
-                :other-animals="$otherAnimalsFemale"
-                i18n-field="mother"
-            />
-        </label>
-
         <form method="POST" action="{{ route('animals.store') }}">
             @csrf
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
+                <input type="date" class="form-control" name="animal[date_of_birth]"
+                       placeholder="{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}"
+                       value="{{ old('animal[date_of_birth]') }}" required>
+            </label>
+
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}</strong>
+                <input type="date" class="form-control" name="animal[died_on]"
+                       placeholder="{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}"
+                       value="{{ old('animal[died_on]') }}" required>
+            </label>
+
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}</strong>
+                <input type="text" class="form-control" name="animal[registration_no]"
+                       placeholder="{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}"
+                       value="{{ old('animal[registration_no]') }}">
+            </label>
+
+            <div class="row align-items-center">
+                <div class="col-5">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</strong>
+                        <autocomplete
+                            type="station"
+                            name="station_id"
+                            placeholder="{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}"
+                        />
+                    </label>
+                </div>
+                <div class="col-1 text-center">nebo</div>
+                <div class="col-3">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.breeder_station_name', Animal::class)) }}</strong>
+                        <input type="text" class="form-control" name="animal[breeder_station_name]"
+                               placeholder="{{ __(sprintf('models.%s.fields.breeder_station_name', Animal::class)) }}"
+                               value="{{ old('animal[breeder_station_name]') }}">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.breeder_name', Animal::class)) }}</strong>
+                        <input type="text" class="form-control" name="animal[breeder_name]"
+                               placeholder="{{ __(sprintf('models.%s.fields.breeder_name', Animal::class)) }}"
+                               value="{{ old('animal[breeder_name]') }}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-5">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</strong>
+                        <autocomplete
+                            type="station"
+                            name="caretaker_id"
+                            placeholder="{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}"
+                        />
+                    </label>
+                </div>
+                <div class="col-1 text-center">
+                    <div class="align-self-center">nebo</div>
+                </div>
+                <div class="col-3">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}</strong>
+                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}"
+                               value="{{ old('animal[caretaker_station_name]') }}">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label class="form-group">
+                        <strong>{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}</strong>
+                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}"
+                               value="{{ old('animal[caretaker_name]') }}">
+                    </label>
+                </div>
+            </div>
+
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
+                <x-parent-select
+                    name="mother_id"
+                    :value="null"
+                    :station-animals="$stationAnimalsFemale"
+                    :other-animals="$otherAnimalsFemale"
+                    i18n-field="mother"
+                />
+            </label>
+
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
+                <x-parent-select
+                    name="father_id"
+                    :value="null"
+                    :station-animals="$stationAnimalsFemale"
+                    :other-animals="$otherAnimalsFemale"
+                    i18n-field="mother"
+                />
+            </label>
+
             <animal-editor
                 :input-prefix="'animal'"
                 :animal-builds="{{ json_encode(AnimalBuildEnum::casesWithTitles()) }}"

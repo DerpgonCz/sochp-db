@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\Flashes;
 use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
+use App\Models\Station;
 use App\Models\User;
 use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
 use App\Services\Frontend\Animal\AnimalSelectDataService;
@@ -35,38 +36,36 @@ class AnimalController extends Controller
 
     public function create(
         AnimalSelectDataService $animalSelectDataService,
-    ): View
-    {
+    ): View {
         return view(
             'models.animal.create',
             [
                 ...$animalSelectDataService->buildViewDataForParentSelection(Auth::user()?->station),
+                'stations' => Station::all(),
             ]
         );
     }
 
     public function store(Request $request)
     {
-        $animal = $request->get('animal');
-        $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animal['color']);
-        Animal::updateOrCreate(
-            ['id' => $animal['id'] ?? null],
+        $animalData = $request->get('animal');
+        $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animalData['color']);
+        $animal = Animal::create(
             [
-                ...collect($animal)->except(['id', 'color'])->toArray(),
-                'color_shaded' => $deserializedColor['shaded'],
-                'color_full' => $deserializedColor['full'],
-                'color_mink' => $deserializedColor['mink'],
-                // 'litter_id' => $litter->id,
-                // 'mother_id' => $litter->mother_id,
-                // 'father_id' => $litter->father_id,
+                ...collect($animalData)->except(['id', 'color'])->toArray(),
+                'color_shaded' => $deserializedColor['shaded'] ?? null,
+                'color_full' => $deserializedColor['full'] ?? null,
+                'color_mink' => $deserializedColor['mink'] ?? null,
             ]
         );
+
+        return response()->redirectToRoute('animals.show', ['animal' => $animal->id]);
     }
 
     public function show(Animal $animal): View
     {
         return view('models.animal.show', [
-            'animal' => $animal->load(['owner', 'owner.owner', 'litter']),
+            'animal' => $animal->load(['caretaker', 'caretaker.station', 'litter']),
         ]);
     }
 

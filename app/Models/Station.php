@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Laravel\Scout\Searchable;
 
 /**
+ * @property int|null $id
+ * @property string $name
+ * @property string $breeder_name
  * @property StationStateEnum $state
  */
 class Station extends Model
@@ -44,7 +47,7 @@ class Station extends Model
     protected function breederName(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value): ?string => $value ?? $this->owner?->name,
+            get: fn (?string $value): ?string => $value ?? $this->owner?->name,
         );
     }
 

@@ -15,9 +15,9 @@
                 <dl class="row">
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        {{ $animal->litter?->station->name ?? '--' }}
+                        {{ $animal->breeder_station_name ?? '--' }}
                         @if($animal->litter)
-                        <a href="{{ route('stations.show', $animal->litter?->station) }}"><span
+                        <a href="{{ route('stations.show', $animal->litter->station) }}"><span
                                 class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @endif
                     </dt>
@@ -25,7 +25,7 @@
                     @auth
                         <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.station.owner.name', Animal::class)) }}</dd>
                         <dt class="col-9">
-                            {{ $animal->litter?->station->breeder_name ?? '--' }}
+                            {{ $animal->breeder_name ?? '--' }}
                         </dt>
                     @endauth
                 </dl>
@@ -35,18 +35,20 @@
                 <dl class="row">
                     @auth
                         <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.name', Animal::class)) }}</dd>
-                        <dt class="col-9">{{ $animal->caretaker?->name ?: '--' }}</dt>
+                        <dt class="col-9">{{ $animal->caretaker_name ?: '--' }}</dt>
                     @endauth
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        @if($animal->caretaker?->approved_station)
-                            {{ $animal->caretaker->approved_station->name }}
-                            <a href="{{ route('stations.show', $animal->caretaker->approved_station) }}">
-                                <span class="badge badge-secondary">{{ __('Detail') }}</span>
-                            </a>
+                        @if($animal->caretaker)
+                            @if($animal->caretaker->approved_station)
+                                {{ $animal->caretaker->approved_station->name }}
+                                <a href="{{ route('stations.show', $animal->caretaker->approved_station) }}">
+                                    <span class="badge badge-secondary">{{ __('Detail') }}</span>
+                                </a>
+                            @endif
                         @else
-                            --
+                            {{ $animal->caretaker_station_name ?? '--' }}
                         @endif
                     </dt>
                 </dl>
@@ -67,7 +69,7 @@
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.litter.happened_on', Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->date_of_birth->format('j. n. Y') }}</dt>
+                    <dt class="col-9">{{ $animal->date_of_birth?->format('j. n. Y') ?? '--' }}</dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.gender', Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->gender->description }}</dt>
@@ -107,7 +109,9 @@
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.status', Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->isAlive() ? sprintf('%s (%s)', __('Alive'), $animal->date_of_birth->diff('now')->format('%yr %mm')) : sprintf('%s (%s)', __('Dead'), $animal->litter->happened_on->diff($animal->died_on)->format('%yr %mm')) }}</dt>
+                    <dt class="col-9">
+                        <x-animal-age :animal="$animal"/>
+                    </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.note', Animal::class)) }}</dd>
                     <dt class="col-9">{{ $animal->note ?: '--' }}</dt>

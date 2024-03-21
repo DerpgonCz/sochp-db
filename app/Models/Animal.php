@@ -58,6 +58,12 @@ class Animal extends Model
         'father_id',
         'registration_no',
         'caretaker_id',
+        'date_of_birth',
+        'died_on',
+        'breeder_name',
+        'breeder_station_name',
+        'caretaker_name',
+        'caretaker_station_name',
     ];
 
     protected $casts = [
@@ -94,14 +100,35 @@ class Animal extends Model
     protected function dateOfBirth(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value): ?DateTime => $this->castAttribute('date_of_birth', $value) ?? $this->litter?->happened_on
+            get: fn (?string $value): ?DateTime => $this->castAttribute('date_of_birth', $value) ?? $this->litter?->happened_on
         );
     }
 
     protected function breederName(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value): ?string => $value ?? $this->litter?->breeder_name,
+            get: fn (?string $value): ?string => $value ?? $this->litter?->breeder_name,
+        );
+    }
+
+    protected function breederStationName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value): ?string => $value ?? $this->litter?->breeder_station_name,
+        );
+    }
+
+    protected function caretakerName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value): ?string => $value ?? $this->caretaker?->name,
+        );
+    }
+
+    protected function caretakerStationName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value): ?string => $value ?? $this->caretaker?->station_name,
         );
     }
 
@@ -121,11 +148,6 @@ class Animal extends Model
     public function isAlive(): bool
     {
         return $this->died_on === null;
-    }
-
-    public function owner(): BelongsTo
-    {
-        return $this->belongsTo(Station::class, 'owner_id');
     }
 
     public function caretaker(): BelongsTo

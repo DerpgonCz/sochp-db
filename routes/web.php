@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\LitterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -42,3 +43,6 @@ Route::middleware('auth')->group(static function (): void {
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });
+
+// Autocomplete
+Route::get('/autocomplete', [AutocompleteController::class, 'autocomplete']);

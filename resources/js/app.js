@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('select2');
+$.fn.select2.amd.define('select2/i18n/cs', [], require('select2/src/js/select2/i18n/cs'));
 
 window.Vue = require('vue').default;
 

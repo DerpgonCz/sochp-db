@@ -56,7 +56,14 @@ class Litter extends Model
     protected function breederName(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value): ?string => $this->station?->breeder_name,
+            get: fn (?string $value): ?string => $this->station?->breeder_name,
+        );
+    }
+
+    protected function breederStationName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value): ?string => $this->station?->name,
         );
     }
 
