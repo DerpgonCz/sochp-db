@@ -20,13 +20,18 @@ use App\Services\Frontend\Animal\i18n\AnimalVarietyTranslationService;
 use DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 /**
+ * @property GenderEnum $gender
  * @property Litter|null $litter
+ * @property Collection $parentOfLitters
+ *
  * @method static Builder males()
  * @method static Builder females()
  * @method Builder males()
@@ -178,5 +183,13 @@ class Animal extends Model
     public function scopeFemales(Builder $query): Builder
     {
         return $query->where('gender', GenderEnum::FEMALE);
+    }
+
+    public function parentOfLitters(): HasMany
+    {
+        return match(true) {
+            $this->gender->is(GenderEnum::MALE) => $this->hasMany(Litter::class, 'father_id')->approved(),
+            $this->gender->is(GenderEnum::FEMALE) => $this->hasMany(Litter::class, 'mother_id')->approved(),
+        };
     }
 }
