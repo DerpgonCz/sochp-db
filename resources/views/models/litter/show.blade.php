@@ -35,21 +35,21 @@
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.registration_no', Litter::class)) }}</dd>
                     <dt class="col-9">{{ $litter->registration_no ?? '--' }}</dt>
 
-                    <dd class="col-3">{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</dd>
-                    <dt class="col-9">
-                        @if($litter->mother)
-                            {{ $litter->mother->name ?: '--' }}
-                            <a href="{{ route('animals.show', $litter->mother) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
-                        @else
-                            --
-                        @endif
-                    </dt>
-
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</dd>
                     <dt class="col-9">
                         @if($litter->father)
                             {{ $litter->father->name }}
                             <a href="{{ route('animals.show', $litter->father) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
+                        @else
+                            --
+                        @endif
+                    </dt>
+
+                    <dd class="col-3">{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</dd>
+                    <dt class="col-9">
+                        @if($litter->mother)
+                            {{ $litter->mother->name ?: '--' }}
+                            <a href="{{ route('animals.show', $litter->mother) }}"><span class="badge badge-secondary">{{ __('Detail') }}</span></a>
                         @else
                             --
                         @endif
