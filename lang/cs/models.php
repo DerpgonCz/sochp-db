@@ -46,10 +46,10 @@ return [
                     ],
                 ],
                 'father' => [
-                    'name' => 'Samec',
+                    'name' => 'Otec',
                 ],
                 'mother' => [
-                    'name' => 'Samice',
+                    'name' => 'Matka',
                 ],
                 'happened_on' => 'Datum narození',
             ],
