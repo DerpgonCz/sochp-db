@@ -72,10 +72,10 @@ return [
             'happened_on' => 'Datum narození',
             'registration_no' => 'Registrační číslo',
             'mother' => [
-                'name' => 'Samice',
+                'name' => 'Matka',
             ],
             'father' => [
-                'name' => 'Samec',
+                'name' => 'Otec',
             ],
             'station' => [
                 'name' => 'Chovatelská stanice',
