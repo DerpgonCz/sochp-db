@@ -37,6 +37,8 @@ class AnimalController extends Controller
     public function create(
         AnimalSelectDataService $animalSelectDataService,
     ): View {
+        $this->authorize('create', Animal::class);
+
         return view(
             'models.animal.create',
             [

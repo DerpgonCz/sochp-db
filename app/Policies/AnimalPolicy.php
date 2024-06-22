@@ -26,9 +26,9 @@ class AnimalPolicy
         //
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     public function update(User $user, Animal $animal): bool
