@@ -237,8 +237,8 @@ return [
         ],
     ],
     AnimalColorMink::class => [
-        AnimalColorMink::AMERICAN->value => 'american mink',
-        AnimalColorMink::BRITISH->value => 'british mink',
-        AnimalColorMink::AUSTRALIAN->value => 'australian mink',
+        AnimalColorMink::AMERICAN->value => 'american',
+        AnimalColorMink::BRITISH->value => 'british',
+        AnimalColorMink::AUSTRALIAN->value => 'australian',
     ],
 ];
