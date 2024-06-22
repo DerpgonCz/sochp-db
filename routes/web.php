@@ -27,8 +27,15 @@ if (app()->environment('local')) {
 
 // Resources
 Route::resource('animals', AnimalController::class);
+Route::prefix('animals/{animal}')->name('animals.')->group(function () {
+    Route::prefix('files')->name('files.')->group(function () {
+        Route::get('pedigree', [AnimalController::class, 'filePedigree'])->name('pedigree');
+    });
+})->where(['animal' => '\d+']);
+
 Route::resource('stations', StationController::class);
 Route::resource('litters', LitterController::class);
+
 
 // Dashboard
 Route::redirect('/home', '/');

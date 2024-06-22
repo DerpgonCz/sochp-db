@@ -60,7 +60,9 @@
                 </dl>
             </div>
         </div>
+
         <hr>
+
         <div class="row content-justify-center">
             <div class="col-md-6">
                 <h3>{{ __('Animal') }}</h3>
@@ -123,6 +125,7 @@
                     <dt class="col-9">{{ $animal->note ?: '--' }}</dt>
                 </dl>
             </div>
+
             <div class="col-md-6">
                 <h3>{{ __('Litter') }}</h3>
                 <dl class="row">
@@ -161,13 +164,14 @@
                     </dt>
                 </dl>
 
-                @if($animal->litter)
+                @if($animal->litter?->children->count() > 1)
                     <h4>{{ __('Siblings') }}</h4>
                     <ul class="row">
                         @foreach($animal->litter->children as $sibling)
                             @if($animal->id === $sibling->id)
                                 @continue
                             @endif
+
                             <li class="col-12">
                                 <strong>{{ $sibling->name }}</strong>
                                 ({{ (new AnimalColorTranslationService())($sibling) }})
@@ -192,7 +196,20 @@
                         @endforeach
                     </ul>
                 @endif
+            </div>
 
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h2>{{ __('Files') }}</h2>
+
+                @if($animal->file_pedigree_path)
+                    <a href="{{ route('animals.files.pedigree', $animal) }}" class="btn btn-primary">{{ __('Pedigree') }}</a>
+                @endif
             </div>
         </div>
     </div>

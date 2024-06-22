@@ -760,5 +760,8 @@
     "Alive": "Žije",
     "standard": "standardní",
     "Siblings": "Sourozenci",
-    "Litters": "Vrhy"
+    "Litters": "Vrhy",
+    "Files": "Soubory",
+    "File type": "Typ souboru",
+    "Pedigree": "Rodokmen"
 }

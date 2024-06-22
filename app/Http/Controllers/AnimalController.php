@@ -7,13 +7,17 @@ use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
 use App\Models\Station;
 use App\Models\User;
+use App\Services\FileUploadService;
 use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
 use App\Services\Frontend\Animal\AnimalSelectDataService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AnimalController extends Controller
 {
@@ -48,10 +52,13 @@ class AnimalController extends Controller
         );
     }
 
-    public function store(Request $request)
-    {
+    public function store(
+        Request $request,
+        FileUploadService $fileUploadService,
+    ) {
         $animalData = $request->get('animal');
         $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animalData['color']);
+
         $animal = Animal::create(
             [
                 ...collect($animalData)->except(['id', 'color'])->toArray(),
@@ -60,6 +67,8 @@ class AnimalController extends Controller
                 'color_mink' => $deserializedColor['mink'] ?? null,
             ]
         );
+
+        $animal->file_pedigree_path = $fileUploadService->storeAnimalPedigree(1, $request->file('files.pedigree'));
 
         return response()->redirectToRoute('animals.show', ['animal' => $animal->id]);
     }
@@ -91,7 +100,7 @@ class AnimalController extends Controller
     }
 
     /**
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function destroy(Animal $animal): Response
     {
@@ -100,5 +109,16 @@ class AnimalController extends Controller
         $animal->delete();
 
         return response()->noContent();
+    }
+
+    # Files
+    public function filePedigree(Animal $animal): Response|StreamedResponse
+    {
+        $filePath = $animal->file_pedigree_path;
+        if ($filePath === null) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
+        return Storage::download($filePath);
     }
 }

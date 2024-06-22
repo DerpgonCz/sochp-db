@@ -20,7 +20,7 @@
 @section('content')
     <div class="container">
 
-        <form method="POST" action="{{ route('animals.store') }}">
+        <form method="POST" action="{{ route('animals.store') }}" enctype="multipart/form-data">
             @csrf
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
@@ -199,6 +199,27 @@
                     {{ __('Add') }}
                 </template>
             </animal-editor>
+
+            <hr>
+
+            <h2>{{ __('Files') }}</h2>
+
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{ __('Pedigree') }}</span>
+                        </div>
+                        <div class="custom-file">
+                            <input class="custom-file-input" type="file" accept="application/pdf,application/msword" name="files[pedigree]">
+                            <label class="custom-file-label">{{ __('Choose File') }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
             <div class="row">
                 <div class="col-12 text-right">
                     <button type="submit" class="btn btn-success">{{ __('Save') }}</button>
