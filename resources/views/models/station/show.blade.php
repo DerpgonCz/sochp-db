@@ -10,6 +10,7 @@
                 <h1>{{ __('Station') }}</h1>
             </div>
         </div>
+
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <dl class="row">
@@ -28,5 +29,30 @@
                 </dl>
             </div>
         </div>
+
+        @if($station->approvedLitters->count())
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>{{ __('Litters') }}</h3>
+                    <ul>
+                        @foreach($station->approvedLitters as $litter)
+                            <li>{{ $litter->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>{{ __('Animals') }}</h3>
+                    <ul>
+                        @foreach($station->approvedLitters as $litter)
+                            @foreach($litter->children as $litterChild)
+                                <li>{{ $litterChild->name }}</li>
+                            @endforeach
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection

@@ -66,6 +66,11 @@ class Station extends Model
         return $this->hasMany(Litter::class, 'station_id');
     }
 
+    public function approvedLitters(): HasMany
+    {
+        return $this->hasMany(Litter::class, 'station_id')->approved();
+    }
+
     public function animals(): HasManyThrough
     {
         return $this->hasManyThrough(Animal::class, Litter::class, 'station_id', 'litter_id');
