@@ -69,7 +69,7 @@
                 <dl class="row">
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.name', Animal::class)) }}</dd>
-                    <dt class="col-9">{{ $animal->name }}</dt>
+                    <dt class="col-9">{{ $animal->name_with_short_titles }}</dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}</dd>
                     <dt class="col-9">

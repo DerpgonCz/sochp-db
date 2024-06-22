@@ -2257,7 +2257,8 @@ __webpack_require__.r(__webpack_exports__);
           gender: null,
           breeding_type: null,
           note: null,
-          registration_no: null
+          registration_no: null,
+          title: null
         };
       }
     },
@@ -2274,6 +2275,7 @@ __webpack_require__.r(__webpack_exports__);
     animalPrimaryMarks: Object,
     animalSecondaryMarks: Object,
     animalEffects: Object,
+    animalTitles: Object,
     animalBreedingTypes: Object,
     canManage: Boolean,
     deleteExistingAnimalMessage: String,
@@ -4337,7 +4339,7 @@ var render = function render() {
       value: _vm.animal.color
     }
   })], 1)]), _vm._v(" "), _c("div", {
-    staticClass: "card"
+    staticClass: "card mb-3"
   }, [_c("div", {
     staticClass: "card-header"
   }, [_c("strong", [_vm._t("animal-effect-header")], 2)]), _vm._v(" "), _c("div", {
@@ -4372,6 +4374,44 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.$set(_vm.animal, "effect", $event.target.value);
+      }
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_c("strong", [_vm._t("animal-title-header")], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("flag-checkboxes", {
+    attrs: {
+      "flags-with-titles": _vm.animalTitles,
+      required: false
+    },
+    model: {
+      value: _vm.animal.title,
+      callback: function callback($$v) {
+        _vm.$set(_vm.animal, "title", $$v);
+      },
+      expression: "animal.title"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.animal.title,
+      expression: "animal.title"
+    }],
+    attrs: {
+      type: "hidden",
+      name: "".concat(_vm.inputPrefix, "[title]")
+    },
+    domProps: {
+      value: _vm.animal.title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.animal, "title", $event.target.value);
       }
     }
   })], 1)])])]);

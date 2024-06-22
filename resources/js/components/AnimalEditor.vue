@@ -146,7 +146,7 @@
                     ></color-builder>
                 </div>
             </div>
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     <strong><slot name="animal-effect-header"></slot></strong>
                 </div>
@@ -159,6 +159,21 @@
                     </flag-checkboxes>
                     <input type="hidden" :name="`${inputPrefix}[effect]`"
                            v-model="animal.effect">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <strong><slot name="animal-title-header"></slot></strong>
+                </div>
+                <div class="card-body">
+                    <flag-checkboxes
+                        :flags-with-titles="animalTitles"
+                        :required="false"
+                        v-model="animal.title"
+                    >
+                    </flag-checkboxes>
+                    <input type="hidden" :name="`${inputPrefix}[title]`"
+                           v-model="animal.title">
                 </div>
             </div>
         </div>
@@ -193,6 +208,7 @@
                         breeding_type: null,
                         note: null,
                         registration_no: null,
+                        title: null,
                     };
                 },
             },
@@ -209,6 +225,7 @@
             animalPrimaryMarks: Object,
             animalSecondaryMarks: Object,
             animalEffects: Object,
+            animalTitles: Object,
             animalBreedingTypes: Object,
             canManage: Boolean,
             deleteExistingAnimalMessage: String,

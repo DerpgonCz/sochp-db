@@ -9,8 +9,12 @@ use Illuminate\Http\UploadedFile;
 
 class FileUploadService
 {
-    public function storeAnimalPedigree(Animal|int $animalOrId, UploadedFile $file): string
+    public function storeAnimalPedigree(Animal|int $animalOrId, ?UploadedFile $file): ?string
     {
+        if ($file === null) {
+            return null;
+        }
+
         $animalId = match (true) {
             is_int($animalOrId) => $animalOrId,
             default => $animalOrId->id,

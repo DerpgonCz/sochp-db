@@ -10,6 +10,7 @@ use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalFurEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
 use App\Enums\Animal\AnimalSecondaryMarkEnum;
+use App\Enums\Animal\AnimalTitleEnum;
 use App\Enums\GenderEnum;
 
 return [
@@ -240,5 +241,23 @@ return [
         AnimalColorMink::AMERICAN->value => 'americký',
         AnimalColorMink::BRITISH->value => 'britský',
         AnimalColorMink::AUSTRALIAN->value => 'australský',
+    ],
+    AnimalTitleEnum::class => [
+        'short' => [
+            AnimalTitleEnum::CV->value => 'CV',
+            AnimalTitleEnum::CH->value => 'CH',
+            AnimalTitleEnum::GCH->value => 'GCH',
+            AnimalTitleEnum::ICH->value => 'ICH',
+            AnimalTitleEnum::GICH->value => 'GICH',
+            AnimalTitleEnum::SCH->value => 'SCH',
+        ],
+        'long' => [
+            AnimalTitleEnum::CV->value => 'Celostátní vítěz',
+            AnimalTitleEnum::CH->value => 'Šampion',
+            AnimalTitleEnum::GCH->value => 'Grandšampion',
+            AnimalTitleEnum::ICH->value => 'Interšampion',
+            AnimalTitleEnum::GICH->value => 'Grandinteršamption',
+            AnimalTitleEnum::SCH->value => 'Superšampion',
+        ],
     ],
 ];

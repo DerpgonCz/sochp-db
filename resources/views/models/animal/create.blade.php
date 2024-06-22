@@ -10,6 +10,7 @@
     use App\Enums\Animal\AnimalFurEnum;
     use App\Enums\Animal\AnimalPrimaryMarkEnum;
     use App\Enums\Animal\AnimalSecondaryMarkEnum;
+    use App\Enums\Animal\AnimalTitleEnum;
     use App\Enums\GenderEnum;
     use App\Models\Litter;
     use App\Models\Station;
@@ -138,6 +139,7 @@
                 :animal-secondary-marks="{{ json_encode(AnimalSecondaryMarkEnum::casesWithTitles()) }}"
                 :animal-effects="{{ json_encode(AnimalEffectEnum::casesWithTitles()) }}"
                 :animal-breeding-types="{{ json_encode(AnimalBreedingTypeEnum::casesWithTitles()) }}"
+                :animal-titles="{{ json_encode(AnimalTitleEnum::casesWithTitles()) }}"
                 :animal-genders="{{ json_encode(GenderEnum::asSelectArray()) }}"
                 :delete-existing-animal-message="{{ json_encode(__('modals.animals.edit.delete_existing')) }}"
                 :delete-new-animal-message="{{ json_encode(__('modals.animals.edit.delete_new')) }}"
