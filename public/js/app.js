@@ -4017,7 +4017,8 @@ var render = function render() {
     attrs: {
       type: "text",
       name: "".concat(_vm.inputPrefix, "[name]"),
-      required: ""
+      required: "",
+      maxlength: "255"
     },
     domProps: {
       value: _vm.animal.name

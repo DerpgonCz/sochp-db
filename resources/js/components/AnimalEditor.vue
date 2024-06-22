@@ -10,6 +10,7 @@
                                class="form-control"
                                :name="`${inputPrefix}[name]`"
                                required
+                               maxlength="255"
                                v-model="animal.name">
                     </label>
                     <label class="form-group">
