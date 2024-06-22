@@ -106,9 +106,9 @@
             </div>
 
             <label class="form-group">
-                <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
+                <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
                 <x-parent-select
-                    name="mother_id"
+                    name="father_id"
                     :value="null"
                     :station-animals="$stationAnimalsFemale"
                     :other-animals="$otherAnimalsFemale"
@@ -117,9 +117,9 @@
             </label>
 
             <label class="form-group">
-                <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
+                <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
                 <x-parent-select
-                    name="father_id"
+                    name="mother_id"
                     :value="null"
                     :station-animals="$stationAnimalsFemale"
                     :other-animals="$otherAnimalsFemale"
