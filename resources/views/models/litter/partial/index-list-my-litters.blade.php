@@ -7,8 +7,8 @@
     <tr>
         <th>{{ __(sprintf('models.%s.fields.name', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}</th>
-        <th>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</th>
+        <th>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</th>
         <th class="text-right">{{ __(sprintf('models.%s.children_count', Litter::class)) }}</th>
         <th class="text-center">{{ __(sprintf('models.%s.fields.state', Litter::class)) }}</th>
     </tr>
@@ -22,8 +22,8 @@
                 </a>
             </th>
             <td>{{ $litter->happened_on ? $litter->happened_on->format('j. n. Y') : '--' }}</td>
-            <td>{{ $litter?->mother?->name ?? '--' }}</td>
             <td>{{ $litter?->father?->name ?? '--' }}</td>
+            <td>{{ $litter?->mother?->name ?? '--' }}</td>
             <td class="text-right">{{ $litter->children->count()}}</td>
             <td class="text-center">
                 <x-litter-state-badge :litter="$litter"/>
