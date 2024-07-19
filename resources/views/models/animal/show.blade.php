@@ -164,20 +164,12 @@
                     </dt>
                 </dl>
 
-                @if($animal->litter?->children->count() > 1)
-                    <h4>{{ __('Siblings') }}</h4>
+                @if($animal->titles()->count())
+                    <h4>{{ __('Titles') }}</h4>
                     <ul class="row">
-                        @foreach($animal->litter->children as $sibling)
-                            @if($animal->id === $sibling->id)
-                                @continue
-                            @endif
-
+                        @foreach($animal->titles() as $title)
                             <li class="col-12">
-                                <strong>{{ $sibling->name }}</strong>
-                                ({{ (new AnimalColorTranslationService())($sibling) }})
-                                <a href="{{ route('animals.show', $sibling) }}">
-                                    <span class="badge badge-secondary">{{ __('Detail') }}</span>
-                                </a>
+                                <strong>{{ $title }}</strong>
                             </li>
                         @endforeach
                     </ul>
@@ -190,6 +182,25 @@
                             <li class="col-12">
                                 <strong>{{ $parentOfLitter->name }}</strong>
                                 <a href="{{ route('litters.show', $parentOfLitter) }}">
+                                    <span class="badge badge-secondary">{{ __('Detail') }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                @if($animal->litter?->children->count() > 1)
+                    <h4>{{ __('Siblings') }}</h4>
+                    <ul class="row">
+                        @foreach($animal->litter->children as $sibling)
+                            @if($animal->id === $sibling->id)
+                                @continue
+                            @endif
+
+                            <li class="col-12">
+                                <strong>{{ $sibling->name }}</strong>
+                                ({{ (new AnimalColorTranslationService())($sibling) }})
+                                <a href="{{ route('animals.show', $sibling) }}">
                                     <span class="badge badge-secondary">{{ __('Detail') }}</span>
                                 </a>
                             </li>

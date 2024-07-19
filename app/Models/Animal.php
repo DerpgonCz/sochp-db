@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection as SupportCollection;
 use Laravel\Scout\Searchable;
 
 /**
@@ -144,13 +145,20 @@ class Animal extends Model
         return Attribute::make(
             get: function (): string {
                 $titles = collect(AnimalTitleEnum::cases())
-                    ->filter( fn(AnimalTitleEnum $title): bool => $this->title & $title->value)
+                    ->filter(fn(AnimalTitleEnum $title): bool => $this->title & $title->value)
                     ->map(static fn (AnimalTitleEnum $title): string => __(sprintf('enums.%s.short.%d', AnimalTitleEnum::class, $title->value)))
                     ->prepend($this->name);
 
                 return $titles->join(', ');
             }
         );
+    }
+
+    public function titles(): SupportCollection
+    {
+        return collect(AnimalTitleEnum::cases())
+                ->filter(fn(AnimalTitleEnum $title): bool => $this->title & $title->value)
+                ->map(static fn (AnimalTitleEnum $title): string => __(sprintf('enums.%s.long.%d', AnimalTitleEnum::class, $title->value)));        
     }
 
     public function scopeListable(Builder $query): Builder
