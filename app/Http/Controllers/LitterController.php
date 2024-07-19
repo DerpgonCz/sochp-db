@@ -62,7 +62,7 @@ class LitterController extends Controller
     {
         $this->authorize('create', Litter::class);
 
-        $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
+        $station = Auth::user()->station->with('animals', 'animals.litter')->first();
 
         return view('models.litter.create', [
             'station' => $station,
@@ -80,8 +80,8 @@ class LitterController extends Controller
         $data = $request->validated();
 
         $litter = Litter::make($data);
-        $litter->mother()->associate(Animal::find($data['mother']));
-        $litter->father()->associate(Animal::find($data['father']));
+        $litter->mother()->associate(Animal::find($data['mother_id']));
+        $litter->father()->associate(Animal::find($data['father_id']));
         $litter->station()->associate(Auth::user()->station);
         $litter->state = LitterStateEnum::DRAFT;
         $litter->save();
@@ -106,7 +106,7 @@ class LitterController extends Controller
             return response()->redirectToRoute('litters.show', $litter);
         }
 
-        $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
+        $station = Auth::user()->station->with('animals', 'animals.litter')->first();
 
         return view('models.litter.edit', [
             'litter' => $litter,
