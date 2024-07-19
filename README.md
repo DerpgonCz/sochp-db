@@ -23,8 +23,10 @@
     - `sail yarn install`
 8. Migrate the database
     - `sail artisan migrate`
-10. (optional) Seed some test data
-     - `sail artisan db:seed`
+9. (optional) Seed some test data
+     - `sail artisan db:seed`      
+10. Add auth key
+    - `sail artisan key:generate`
 
 #### Windows
 I wish you good luck
