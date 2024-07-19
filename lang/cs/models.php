@@ -42,7 +42,7 @@ return [
                 'station' => [
                     'name' => 'Název',
                     'owner' => [
-                        'name' => 'Majitel',
+                        'name' => 'Chovatel',
                     ],
                 ],
                 'father' => [
