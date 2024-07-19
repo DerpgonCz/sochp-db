@@ -14,6 +14,7 @@
     use App\Enums\GenderEnum;
     use App\Models\Litter;
     use App\Models\Station;
+    use App\Models\User;
 @endphp
 
 @extends('layouts.app')
@@ -34,7 +35,7 @@
                 <strong>{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}</strong>
                 <input type="date" class="form-control" name="animal[died_on]"
                        placeholder="{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}"
-                       value="{{ old('animal[died_on]') }}" required>
+                       value="{{ old('animal[died_on]') }}">
             </label>
 
             <label class="form-group">
@@ -77,11 +78,11 @@
             <div class="row align-items-center">
                 <div class="col-5">
                     <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}</strong>
+                        <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
                         <autocomplete
-                            type="station"
+                            type="user"
                             name="caretaker_id"
-                            placeholder="{{ __(sprintf('models.%s.fields.owner.name', Station::class)) }}"
+                            placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
                         />
                     </label>
                 </div>
