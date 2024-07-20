@@ -6,9 +6,11 @@
     <thead>
     <tr>
         <th>{{ __(sprintf('models.%s.fields.name', Litter::class)) }}</th>
+        <th>{{ __(sprintf('models.%s.fields.station.name', Litter::class)) }}</th>
         @auth
             <th>{{ __(sprintf('models.%s.fields.owner', Litter::class)) }}</th>
         @endauth
+        <th>{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.state', Litter::class)) }}</th>
     </tr>
     </thead>
@@ -20,9 +22,11 @@
                     {{ $litter->name }}
                 </a>
             </th>
+            <td>{{ $litter->station->name }}</td>
             @auth
                 <td>{{ $litter->station->owner->name }}</td>
             @endauth
+            <td class="text-right">{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
             <td>
                 <x-litter-state-badge :litter="$litter"/>
             </td>

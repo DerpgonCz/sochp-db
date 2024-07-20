@@ -26,10 +26,9 @@ class LitterController extends Controller
         $littersForRegistration = [];
 
         if (Auth::check() && Auth::user()->station) {
-            $stationLitters = Auth::user()->station?->litters()->paginate(
-                50,
-                pageName: 'stationLittersPage'
-            );
+            $stationLitters = Auth::user()->station?->litters()
+                ->orderByDesc('happened_on')
+                ->paginate(50, pageName: 'stationLittersPage');
         }
 
         $approvedLitters = Litter::approved()
@@ -40,10 +39,12 @@ class LitterController extends Controller
         if (Gate::check('approve', Station::class)) {
             $litterForApproval =
                 Litter::toApprove()
+                    ->orderByDesc('happened_on')
                     ->with('station')
                     ->paginate(50, pageName: 'littersForApprovalPage');
 
             $littersForRegistration = Litter::toRegister()
+                ->orderByDesc('happened_on')
                 ->with('station')
                 ->paginate(50, pageName: 'littersForRegistrationPage');
         }
