@@ -4143,7 +4143,7 @@ var render = function render() {
     }, [_vm._v(_vm._s(eyesName) + "\n                        ")]);
   })], 2)]), _vm._v(" "), _c("label", {
     staticClass: "form-group"
-  }, [_c("strong", [_vm._t("animal-mark-primary-header")], 2), _vm._v(" "), _c("select", {
+  }, [_c("strong", [_vm._t("animal-mark-primary-header")], 2), _vm._v("\n                    *\n                    "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4152,7 +4152,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: "".concat(_vm.inputPrefix, "[mark_primary]")
+      name: "".concat(_vm.inputPrefix, "[mark_primary]"),
+      required: ""
     },
     on: {
       change: function change($event) {
@@ -4169,7 +4170,7 @@ var render = function render() {
     domProps: {
       value: null
     }
-  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
+  }, [_vm._v("---")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
     return _c("option", {
       domProps: {
         value: primaryMarkValue
@@ -9452,7 +9453,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal {\n    background: rgba(0, 0, 0, .5);\n    transition: all .3s ease;\n}\n.modal-dialog {\n    transition: all .3s ease;\n}\n.modal-trans-enter {\n    opacity: 0;\n}\n.modal-trans-leave-active {\n    opacity: 0;\n}\n.modal-trans-enter .modal-dialog,\n.modal-trans-leave-active .modal-dialog {\n    transform: scale(1.1);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal {\r\n    background: rgba(0, 0, 0, .5);\r\n    transition: all .3s ease;\n}\n.modal-dialog {\r\n    transition: all .3s ease;\n}\n.modal-trans-enter {\r\n    opacity: 0;\n}\n.modal-trans-leave-active {\r\n    opacity: 0;\n}\n.modal-trans-enter .modal-dialog,\r\n.modal-trans-leave-active .modal-dialog {\r\n    transform: scale(1.1);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

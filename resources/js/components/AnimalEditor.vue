@@ -54,9 +54,11 @@
                     </label>
                     <label class="form-group">
                         <strong><slot name="animal-mark-primary-header"></slot></strong>
+                        *
                         <select :name="`${inputPrefix}[mark_primary]`"
-                                class="custom-select" v-model="animal.mark_primary">
-                            <option :value="null">--</option>
+                                class="custom-select" required
+                                v-model="animal.mark_primary">
+                            <option :value="null">---</option>
                             <option
                                 v-for="(primaryMarkName, primaryMarkValue) in animalPrimaryMarks"
                                 :value="primaryMarkValue">{{ primaryMarkName }}
