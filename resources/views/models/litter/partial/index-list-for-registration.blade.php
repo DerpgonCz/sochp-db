@@ -25,7 +25,7 @@
             @auth
                 <td>{{ $litter->breeder_name }}</td>
             @endauth
-            <td class="text-right">{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
+            <td>{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
         </tr>
     @endforeach
     </tbody>

@@ -26,7 +26,7 @@
             @auth
                 <td>{{ $litter->station->owner->name }}</td>
             @endauth
-            <td class="text-right">{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
+            <td>{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
             <td>
                 <x-litter-state-badge :litter="$litter"/>
             </td>
