@@ -17,4 +17,5 @@ class LitterStateEnum extends Enum implements LocalizedEnum
     public const REQUIRES_FINAL_APPROVAL = 5;
     public const FINALIZED = 6;
     public const REGISTERED = 7;
+    public const EXTERNAL = 8;
 }
