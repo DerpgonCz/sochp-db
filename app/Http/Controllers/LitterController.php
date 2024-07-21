@@ -144,21 +144,11 @@ class LitterController extends Controller
             });
 
         // State logic
-        $redirect = ['litters.edit', $litter];
         $flashMessage = 'flashes.litters.updated';
         if ($request->has('state')) {
             $toState = LitterStateEnum::fromValue((int) $request->get('state'));
             $this->authorize('updateState', [$litter, $toState]);
 
-            $redirectTransitions = [
-                LitterStateEnum::REQUIRES_DRAFT_CHANGES => ['litters.index'],
-                LitterStateEnum::REQUIRES_BREEDING_APPROVAL => ['litters.show', $litter],
-                LitterStateEnum::BREEDING => ['litters.index'],
-                LitterStateEnum::REQUIRES_BREEDING_CHANGES => ['litters.index'],
-                LitterStateEnum::REQUIRES_FINAL_APPROVAL => ['litters.show', $litter],
-                LitterStateEnum::FINALIZED => ['litters.index'],
-                LitterStateEnum::REGISTERED => ['litters.show', $litter],
-            ];
             $flashMessages = [
                 LitterStateEnum::REQUIRES_DRAFT_CHANGES => 'flashes.litters.state.requires_draft_changes',
                 LitterStateEnum::REQUIRES_BREEDING_APPROVAL => 'flashes.litters.state.requires_breeding_approval',
@@ -171,7 +161,6 @@ class LitterController extends Controller
 
             $litter->state = $toState;
 
-            $redirect = $redirectTransitions[$toState->value];
             $flashMessage = $flashMessages[$toState->value] ?: $flashMessage;
         }
 
@@ -179,7 +168,7 @@ class LitterController extends Controller
 
         Flashes::success(__($flashMessage));
 
-        return response()->redirectToRoute(...$redirect);
+        return response()->redirectToRoute('litters.show', $litter);
     }
 
     /**
