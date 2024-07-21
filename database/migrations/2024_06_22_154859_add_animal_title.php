@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::table('animals', static function(Blueprint $table): void {
+        Schema::table('animals', static function (Blueprint $table): void {
             $table->unsignedSmallInteger('title')->default(0);
         });
     }

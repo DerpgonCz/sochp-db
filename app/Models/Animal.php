@@ -145,7 +145,7 @@ class Animal extends Model
         return Attribute::make(
             get: function (): string {
                 $titles = collect(AnimalTitleEnum::cases())
-                    ->filter(fn(AnimalTitleEnum $title): bool => $this->title & $title->value)
+                    ->filter(fn (AnimalTitleEnum $title): bool => $this->title & $title->value)
                     ->map(static fn (AnimalTitleEnum $title): string => __(sprintf('enums.%s.short.%d', AnimalTitleEnum::class, $title->value)))
                     ->prepend($this->name);
 
@@ -157,8 +157,8 @@ class Animal extends Model
     public function titles(): SupportCollection
     {
         return collect(AnimalTitleEnum::cases())
-                ->filter(fn(AnimalTitleEnum $title): bool => $this->title & $title->value)
-                ->map(static fn (AnimalTitleEnum $title): string => __(sprintf('enums.%s.long.%d', AnimalTitleEnum::class, $title->value)));        
+                ->filter(fn (AnimalTitleEnum $title): bool => $this->title & $title->value)
+                ->map(static fn (AnimalTitleEnum $title): string => __(sprintf('enums.%s.long.%d', AnimalTitleEnum::class, $title->value)));
     }
 
     public function scopeListable(Builder $query): Builder

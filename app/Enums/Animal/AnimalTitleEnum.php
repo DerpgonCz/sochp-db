@@ -25,7 +25,7 @@ enum AnimalTitleEnum: int
         $short = collect(self::casesWithTitlesParent('short'));
 
         return (object) $long
-            ->mapWithKeys(static fn(string $longTitle, int $key): array => [$key => sprintf('%s (%s)', $longTitle, $short[$key])])
+            ->mapWithKeys(static fn (string $longTitle, int $key): array => [$key => sprintf('%s (%s)', $longTitle, $short[$key])])
             ->toArray();
     }
 }
