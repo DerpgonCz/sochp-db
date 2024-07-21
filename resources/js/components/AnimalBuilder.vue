@@ -32,6 +32,7 @@
                                             :animal-secondary-marks="animalSecondaryMarks"
                                             :animal-effects="animalEffects"
                                             :animal-breeding-types="animalBreedingTypes"
+                                            :animal-titles="animalTitles"
                                             :animal-genders="animalGenders"
                                             :delete-existing-animal-message="deleteExistingAnimalMessage"
                                             :delete-new-animal-message="deleteNewAnimalMessage"
@@ -164,6 +165,7 @@ export default {
         animalSecondaryMarks: Object,
         animalEffects: Object,
         animalBreedingTypes: Object,
+        animalTitles: Object,
         canManage: Boolean,
         deleteExistingAnimalMessage: String,
         deleteNewAnimalMessage: String,

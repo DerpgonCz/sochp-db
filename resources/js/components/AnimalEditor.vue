@@ -171,6 +171,7 @@
                     <flag-checkboxes
                         :flags-with-titles="animalTitles"
                         :required="false"
+                        :default="0"
                         v-model="animal.title"
                     >
                     </flag-checkboxes>

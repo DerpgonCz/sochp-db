@@ -11,6 +11,7 @@ use App\Enums\Animal\AnimalEyesEnum;
 use App\Enums\Animal\AnimalFurEnum;
 use App\Enums\Animal\AnimalPrimaryMarkEnum;
 use App\Enums\Animal\AnimalSecondaryMarkEnum;
+use App\Enums\Animal\AnimalTitleEnum;
 use App\Enums\Auth\PermissionsEnum;
 use App\Enums\GenderEnum;
 use App\Enums\LitterStateEnum;
@@ -72,7 +73,7 @@ class LitterUpdateRequest extends FormRequest
                 'array',
             ],
             'animals.*' => [
-                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,color,effect,breeding_type,note,registration_no',
+                'array:id,name,build,fur,gender,eyes,mark_primary,mark_secondary,color,effect,breeding_type,note,registration_no,title',
             ],
             'animals.*.id' => [
                 'nullable',
@@ -126,6 +127,10 @@ class LitterUpdateRequest extends FormRequest
                         LitterStateEnum::FINALIZED,
                     ])
                 ),
+            ],
+            'animals.*.title' => [
+                'numeric',
+                new FlagEnumRule(AnimalTitleEnum::class),
             ],
         ];
     }

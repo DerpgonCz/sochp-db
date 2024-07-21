@@ -22,6 +22,10 @@ export default {
             default: false,
         },
         value: Number,
+        default: {
+            type: Number,
+            default: null,
+        },
     },
     data() {
         return {
@@ -99,7 +103,7 @@ export default {
                 out |= selected ? parseInt(key) : 0;
             }
 
-            return out || null;
+            return out || this.default;
         }
     }
 }
