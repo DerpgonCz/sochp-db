@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Station;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +16,7 @@ class AutocompleteController extends Controller
     /** @var array<string, class-string<Model>> */
     private const TYPE_MAPPING = [
         'station' => Station::class,
+        'user' => User::class
     ];
 
     public function autocomplete(Request $request): JsonResponse
@@ -38,6 +40,12 @@ class AutocompleteController extends Controller
             $entity instanceof Station => [
                 'id' => $entity->id,
                 'text' => sprintf('%s (%s)', $entity->name, $entity->breeder_name),
+            ],
+            $entity instanceof User => [
+                'id' => $entity->id,
+                'text' => $entity->station !== null ?
+                    sprintf('%s (%s)', $entity->name, $entity->station->name) :
+                    sprintf($entity->name)
             ]
         };
     }
@@ -48,7 +56,10 @@ class AutocompleteController extends Controller
             $modelClass === Station::class => Station::where('name', 'like', sprintf('%%%s%%', $query))
                 ->orWhere('breeder_name', 'like', sprintf('%%%s%%', $query))
                 ->orWhereHas('owner', static fn ($q) => $q->where('name', 'like', sprintf('%%%s%%', $query)))
-                ->get()
+                ->get(),
+            $modelClass === User::class => User::where('name', 'like', sprintf('%%%s%%', $query))
+                ->orWhereHas('station', static fn ($q) => $q->where('name', 'like', sprintf('%%%s%%', $query)))
+                ->get(),
         };
     }
 }

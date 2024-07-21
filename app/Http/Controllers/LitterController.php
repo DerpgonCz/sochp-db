@@ -26,10 +26,9 @@ class LitterController extends Controller
         $littersForRegistration = [];
 
         if (Auth::check() && Auth::user()->station) {
-            $stationLitters = Auth::user()->station?->litters()->paginate(
-                50,
-                pageName: 'stationLittersPage'
-            );
+            $stationLitters = Auth::user()->station?->litters()
+                ->orderByDesc('happened_on')
+                ->paginate(50, pageName: 'stationLittersPage');
         }
 
         $approvedLitters = Litter::approved()
@@ -40,10 +39,12 @@ class LitterController extends Controller
         if (Gate::check('approve', Station::class)) {
             $litterForApproval =
                 Litter::toApprove()
+                    ->orderByDesc('happened_on')
                     ->with('station')
                     ->paginate(50, pageName: 'littersForApprovalPage');
 
             $littersForRegistration = Litter::toRegister()
+                ->orderByDesc('happened_on')
                 ->with('station')
                 ->paginate(50, pageName: 'littersForRegistrationPage');
         }
@@ -62,7 +63,7 @@ class LitterController extends Controller
     {
         $this->authorize('create', Litter::class);
 
-        $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
+        $station = Auth::user()->station->with('animals', 'animals.litter')->first();
 
         return view('models.litter.create', [
             'station' => $station,
@@ -80,8 +81,8 @@ class LitterController extends Controller
         $data = $request->validated();
 
         $litter = Litter::make($data);
-        $litter->mother()->associate(Animal::find($data['mother']));
-        $litter->father()->associate(Animal::find($data['father']));
+        $litter->mother()->associate(Animal::find($data['mother_id']));
+        $litter->father()->associate(Animal::find($data['father_id']));
         $litter->station()->associate(Auth::user()->station);
         $litter->state = LitterStateEnum::DRAFT;
         $litter->save();
@@ -106,7 +107,7 @@ class LitterController extends Controller
             return response()->redirectToRoute('litters.show', $litter);
         }
 
-        $station = Auth::user()->station()->with('animals', 'animals.litter')->first();
+        $station = Auth::user()->station->with('animals', 'animals.litter')->first();
 
         return view('models.litter.edit', [
             'litter' => $litter,

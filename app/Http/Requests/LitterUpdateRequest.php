@@ -89,7 +89,6 @@ class LitterUpdateRequest extends FormRequest
                 Rule::in(AnimalEyesEnum::values()),
             ],
             'animals.*.mark_primary' => [
-                'nullable',
                 Rule::in(AnimalPrimaryMarkEnum::values()),
             ],
             'animals.*.mark_secondary' => [

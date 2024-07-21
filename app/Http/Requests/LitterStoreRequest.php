@@ -14,8 +14,8 @@ class LitterStoreRequest extends FormRequest
         return [
             'name' => ['required'],
             // TODO: Animals are approved
-            'mother' => ['nullable', Rule::exists('animals', 'id')],
-            'father' => ['nullable', Rule::exists('animals', 'id')],
+            'mother_id' => ['nullable', Rule::exists('animals', 'id')],
+            'father_id' => ['nullable', Rule::exists('animals', 'id')],
         ];
     }
 }

@@ -21,22 +21,22 @@
                            placeholder="{{ __(sprintf('models.%s.fields.name', Litter::class)) }}"
                            value="{{ old('name') }}" required>
                 </label>
+                
+                <label class="form-group">
+                    <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
+                    <x-parent-select
+                        name="father_id"
+                        :value="null"
+                        :station-animals="$stationAnimalsMale"
+                        :other-animals="$otherAnimalsMale"
+                        i18n-field="father"
+                    />
+                </label>
 
                 <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
                     <x-parent-select
                         name="mother_id"
-                        :value="null"
-                        :station-animals="$stationAnimalsFemale"
-                        :other-animals="$otherAnimalsFemale"
-                        i18n-field="mother"
-                    />
-                </label>
-
-                <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
-                    <x-parent-select
-                        name="father_id"
                         :value="null"
                         :station-animals="$stationAnimalsFemale"
                         :other-animals="$otherAnimalsFemale"

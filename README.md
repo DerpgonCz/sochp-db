@@ -21,10 +21,12 @@
 7. Install dependencies
     - `sail composer install`
     - `sail yarn install`
-8. Migrate the database
+8. Create app key
+    - `sail artisan key:generate`
+9. Migrate the database
     - `sail artisan migrate`
 10. (optional) Seed some test data
-     - `sail artisan db:seed`
+     - `sail artisan db:seed`      
 
 #### Windows
 I wish you good luck

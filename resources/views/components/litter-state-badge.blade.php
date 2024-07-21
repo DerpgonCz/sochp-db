@@ -34,4 +34,8 @@
         <span class="badge badge-success">{{ __('Registered') }}</span>
         @break
 
+    @case(LitterStateEnum::EXTERNAL)
+        <span class="badge badge-secondary">{{ __('External') }}</span>
+        @break
+
 @endswitch

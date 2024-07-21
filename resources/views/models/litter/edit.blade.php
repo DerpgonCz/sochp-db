@@ -79,17 +79,6 @@
                 @endif
 
                 <label class="form-group">
-                    <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
-                    <x-parent-select
-                            name="mother_id"
-                            :value="$litter?->mother?->id"
-                            :station-animals="$stationAnimalsFemale"
-                            :other-animals="$otherAnimalsFemale"
-                            i18n-field="mother"
-                    />
-                </label>
-
-                <label class="form-group">
                     <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
                     <x-parent-select
                             name="father_id"
@@ -97,6 +86,17 @@
                             :station-animals="$stationAnimalsMale"
                             :other-animals="$otherAnimalsMale"
                             i18n-field="father"
+                    />
+                </label>
+
+                <label class="form-group">
+                    <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
+                    <x-parent-select
+                            name="mother_id"
+                            :value="$litter?->mother?->id"
+                            :station-animals="$stationAnimalsFemale"
+                            :other-animals="$otherAnimalsFemale"
+                            i18n-field="mother"
                     />
                 </label>
 
@@ -170,6 +170,9 @@
                         </template>
                         <template v-slot:animal-registration-no-header>
                             {{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}
+                        </template>
+                        <template v-slot:animal-title-header>
+                            {{ __(sprintf('models.%s.fields.titles', Animal::class)) }}
                         </template>
                         <template v-slot:modal-footer-close-text>
                             {{ __('Close') }}

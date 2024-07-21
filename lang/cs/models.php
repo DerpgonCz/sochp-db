@@ -3,6 +3,7 @@
 use App\Models\Animal;
 use App\Models\Litter;
 use App\Models\Station;
+use App\Models\User;
 
 return [
     'fields' => [
@@ -36,13 +37,14 @@ return [
                     'name' => 'Chovatelská stanice',
                 ],
             ],
+            'titles' => 'Tituly',
             'litter' => [
                 'name' => 'Označení',
                 'registration_no' => 'Číslo registrace',
                 'station' => [
                     'name' => 'Název',
                     'owner' => [
-                        'name' => 'Majitel',
+                        'name' => 'Chovatel',
                     ],
                 ],
                 'father' => [
@@ -87,4 +89,9 @@ return [
         ],
         'children_count' => 'Počet potomků',
     ],
+    User::class => [
+        'fields' => [
+            'name' => 'Vlastník'
+        ]
+    ]
 ];

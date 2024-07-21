@@ -6,9 +6,7 @@
     <thead>
     <tr>
         <th></th>
-        @auth
-            <th>{{ __(sprintf('models.%s.fields.station.name', Litter::class)) }}</th>
-        @endauth
+        <th>{{ __(sprintf('models.%s.fields.station.name', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</th>
         <th>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</th>
@@ -23,10 +21,8 @@
                     {{ $litter->name }}
                 </a>
             </th>
-            @auth
-                <td>{{ $litter->station->name }}</td>
-            @endauth
-            <td class="text-right">{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
+            <td>{{ $litter->station->name }}</td>
+            <td>{!! str_replace(' ', '&nbsp;', $litter->happened_on->format('j. n. Y')) !!}</td>
             <td>{{ $litter?->father?->name ?? '--' }}</td>
             <td>{{ $litter?->mother?->name ?? '--' }}</td>
             <td class="text-right">{{ $litter->children->count()}}</td>

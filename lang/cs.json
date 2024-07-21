@@ -735,6 +735,7 @@
     "Sent for final approval": "Odesláno k finálnímu schválení",
     "Requires changes before breeding": "Vyžaduje změny před krytím",
     "Requires changes before final approval": "Vyžaduje změny před finálním schválením",
+    "External": "Externí",
     "Create a new station": "Vytvořit novou ChS",
     "Edit a station": "Upravit ChS",
     "Edit a litter": "Upravit vrh",
@@ -763,5 +764,6 @@
     "Litters": "Vrhy",
     "Files": "Soubory",
     "File type": "Typ souboru",
-    "Pedigree": "Rodokmen"
+    "Pedigree": "Rodokmen",
+    "Titles": "Tituly"
 }

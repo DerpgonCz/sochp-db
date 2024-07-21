@@ -4143,7 +4143,7 @@ var render = function render() {
     }, [_vm._v(_vm._s(eyesName) + "\n                        ")]);
   })], 2)]), _vm._v(" "), _c("label", {
     staticClass: "form-group"
-  }, [_c("strong", [_vm._t("animal-mark-primary-header")], 2), _vm._v(" "), _c("select", {
+  }, [_c("strong", [_vm._t("animal-mark-primary-header")], 2), _vm._v("\n                    *\n                    "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4152,7 +4152,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: "".concat(_vm.inputPrefix, "[mark_primary]")
+      name: "".concat(_vm.inputPrefix, "[mark_primary]"),
+      required: ""
     },
     on: {
       change: function change($event) {
@@ -4169,7 +4170,7 @@ var render = function render() {
     domProps: {
       value: null
     }
-  }, [_vm._v("--")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
+  }, [_vm._v("---")]), _vm._v(" "), _vm._l(_vm.animalPrimaryMarks, function (primaryMarkName, primaryMarkValue) {
     return _c("option", {
       domProps: {
         value: primaryMarkValue
