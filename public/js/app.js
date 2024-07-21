@@ -2103,6 +2103,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     animalSecondaryMarks: Object,
     animalEffects: Object,
     animalBreedingTypes: Object,
+    animalTitles: Object,
     canManage: Boolean,
     deleteExistingAnimalMessage: String,
     deleteNewAnimalMessage: String,
@@ -3447,7 +3448,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       type: Boolean,
       "default": false
     },
-    value: Number
+    value: Number,
+    "default": {
+      type: Number,
+      "default": null
+    }
   },
   data: function data() {
     return {
@@ -3535,7 +3540,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           selected = _Object$entries2$_i[1].selected;
         out |= selected ? parseInt(key) : 0;
       }
-      return out || null;
+      return out || this["default"];
     }
   }
 });
@@ -3779,6 +3784,7 @@ var render = function render() {
               "animal-secondary-marks": _vm.animalSecondaryMarks,
               "animal-effects": _vm.animalEffects,
               "animal-breeding-types": _vm.animalBreedingTypes,
+              "animal-titles": _vm.animalTitles,
               "animal-genders": _vm.animalGenders,
               "delete-existing-animal-message": _vm.deleteExistingAnimalMessage,
               "delete-new-animal-message": _vm.deleteNewAnimalMessage,
@@ -3867,6 +3873,12 @@ var render = function render() {
               key: "animal-registration-no-header",
               fn: function fn() {
                 return [_vm._t("animal-registration-no-header")];
+              },
+              proxy: true
+            }, {
+              key: "animal-title-header",
+              fn: function fn() {
+                return [_vm._t("animal-title-header")];
               },
               proxy: true
             }, {
@@ -4388,7 +4400,8 @@ var render = function render() {
   }, [_c("flag-checkboxes", {
     attrs: {
       "flags-with-titles": _vm.animalTitles,
-      required: false
+      required: false,
+      "default": 0
     },
     model: {
       value: _vm.animal.title,

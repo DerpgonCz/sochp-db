@@ -12,12 +12,12 @@ enum AnimalTitleEnum: int
     }
     use Arrayable;
 
-    case CV = 0b1;
-    case CH = 0b10;
-    case GCH = 0b100;
-    case ICH = 0b1000;
-    case GICH = 0b10000;
-    case SCH = 0b100000;
+    case FLAG_CV = 0b1;
+    case FLAG_CH = 0b10;
+    case FLAG_GCH = 0b100;
+    case FLAG_ICH = 0b1000;
+    case FLAG_GICH = 0b10000;
+    case FLAG_SCH = 0b100000;
 
     public static function casesWithTitles(string $prefix = ''): object
     {
@@ -27,5 +27,19 @@ enum AnimalTitleEnum: int
         return (object) $long
             ->mapWithKeys(static fn (string $longTitle, int $key): array => [$key => sprintf('%s (%s)', $longTitle, $short[$key])])
             ->toArray();
+    }
+
+    public static function selectableGroups(): array
+    {
+        return [
+            [
+                self::FLAG_CV,
+                self::FLAG_CH,
+                self::FLAG_GCH,
+                self::FLAG_ICH,
+                self::FLAG_GICH,
+                self::FLAG_SCH,
+            ]
+        ];
     }
 }
