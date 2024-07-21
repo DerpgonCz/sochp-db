@@ -107,14 +107,14 @@
                 </div>
             </div>
 
-            <label class="form-group">
+            <!-- <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
                 <x-parent-select
                     name="father_id"
                     :value="null"
-                    :station-animals="$stationAnimalsFemale"
-                    :other-animals="$otherAnimalsFemale"
-                    i18n-field="mother"
+                    :station-animals="$stationAnimalsMale"
+                    :other-animals="$otherAnimalsMale"
+                    i18n-field="father"
                 />
             </label>
 
@@ -127,8 +127,28 @@
                     :other-animals="$otherAnimalsFemale"
                     i18n-field="mother"
                 />
+            </label> -->
+
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
+                <autocomplete
+                    type="animal"
+                    gender="male"
+                    name="father_id"
+                    placeholder="{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}"
+                />
             </label>
 
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
+                <autocomplete
+                    type="animal"
+                    gender="female"
+                    name="mother_id"
+                    placeholder="{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}"
+                />
+            </label>
+            
             <animal-editor
                 :input-prefix="'animal'"
                 :animal-builds="{{ json_encode(AnimalBuildEnum::casesWithTitles()) }}"
