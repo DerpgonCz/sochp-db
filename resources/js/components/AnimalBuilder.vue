@@ -83,6 +83,9 @@
                                             <template v-slot:animal-registration-no-header>
                                                 <slot name="animal-registration-no-header"></slot>
                                             </template>
+                                            <template v-slot:animal-title-header>
+                                                <slot name="animal-title-header"></slot>
+                                            </template>
                                             <template v-slot:modal-footer-close-text>
                                                 <slot name="modal-footer-close-text"></slot>
                                             </template>

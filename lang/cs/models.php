@@ -37,6 +37,7 @@ return [
                     'name' => 'Chovatelská stanice',
                 ],
             ],
+            'titles' => 'Tituly',
             'litter' => [
                 'name' => 'Označení',
                 'registration_no' => 'Číslo registrace',

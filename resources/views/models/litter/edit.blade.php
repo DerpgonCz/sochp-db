@@ -171,6 +171,9 @@
                         <template v-slot:animal-registration-no-header>
                             {{ __(sprintf('models.%s.fields.registration_no', Animal::class)) }}
                         </template>
+                        <template v-slot:animal-title-header>
+                            {{ __(sprintf('models.%s.fields.titles', Animal::class)) }}
+                        </template>
                         <template v-slot:modal-footer-close-text>
                             {{ __('Close') }}
                         </template>
