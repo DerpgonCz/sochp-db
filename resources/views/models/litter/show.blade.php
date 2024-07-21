@@ -7,8 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h1>{{ __('Litter') }} {{ $litter->name }}
-                    , {{ __(sprintf('models.%s.fields.station.name', Litter::class)) }} {{ $litter->station->name }}</h1>
+                <h1>{{ __('Litter') }} {{ $litter->name }}</h1>
+                <h2>{{ __(sprintf('models.%s.fields.station.name', Litter::class)) }} {{ $litter->station->name }}</h2>
             </div>
             <div class="col-md-3 text-right">
                 @can('update', $litter)
