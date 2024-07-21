@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -49,5 +50,10 @@ class LoginController extends Controller
         Auth::login($user);
 
         return response()->redirectToRoute('home');
+    }
+
+    protected function loggedOut(Request $request): RedirectResponse
+    {
+        return response()->redirectToRoute('login');
     }
 }

@@ -42,13 +42,15 @@ class LitterUpdateRequest extends FormRequest
                 ),
                 'date',
             ],
-            'mother_id' => [
-                'nullable',
-                Rule::exists('animals', 'id'),
-            ],
             'father_id' => [
                 'nullable',
-                Rule::exists('animals', 'id'),
+                Rule::exists('animals', 'id')
+                    ->where('gender', GenderEnum::MALE),
+            ],
+            'mother_id' => [
+                'nullable',
+                Rule::exists('animals', 'id')
+                    ->where('gender', GenderEnum::FEMALE),
             ],
             'state' => [
                 'integer',

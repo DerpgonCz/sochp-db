@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Enums\GenderEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,8 +15,16 @@ class LitterStoreRequest extends FormRequest
         return [
             'name' => ['required'],
             // TODO: Animals are approved
-            'mother_id' => ['nullable', Rule::exists('animals', 'id')],
-            'father_id' => ['nullable', Rule::exists('animals', 'id')],
+            'father_id' => [
+                'nullable',
+                Rule::exists('animals', 'id')
+                    ->where('gender', GenderEnum::MALE),
+            ],
+            'mother_id' => [
+                'nullable',
+                Rule::exists('animals', 'id')
+                    ->where('gender', GenderEnum::FEMALE),
+            ],
         ];
     }
 }
