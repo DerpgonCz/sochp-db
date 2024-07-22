@@ -60,7 +60,7 @@ class AutocompleteController extends Controller
         };
     }
 
-    private function findEntities(string $modelClass, string $gender, string $query): Collection
+    private function findEntities(string $modelClass, ?string $gender, string $query): Collection
     {
         return match (true) {
             $modelClass === Station::class => Station::where('name', 'like', sprintf('%%%s%%', $query))

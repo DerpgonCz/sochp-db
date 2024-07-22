@@ -26,6 +26,7 @@
             @csrf
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
+                *
                 <input type="date" class="form-control" name="animal[date_of_birth]"
                        placeholder="{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}"
                        value="{{ old('animal[date_of_birth]') }}" required>
@@ -81,7 +82,7 @@
                         <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
                         <autocomplete
                             type="user"
-                            name="caretaker_id"
+                            name="animal[caretaker_id]"
                             placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
                         />
                     </label>
@@ -134,7 +135,7 @@
                 <autocomplete
                     type="animal"
                     gender="male"
-                    name="father_id"
+                    name="animal[father_id]"
                     placeholder="{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}"
                 />
             </label>
@@ -144,7 +145,7 @@
                 <autocomplete
                     type="animal"
                     gender="female"
-                    name="mother_id"
+                    name="animal[mother_id]"
                     placeholder="{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}"
                 />
             </label>
