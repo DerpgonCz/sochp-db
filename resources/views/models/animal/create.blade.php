@@ -52,7 +52,7 @@
                         <strong>{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</strong>
                         <autocomplete
                             type="station"
-                            name="station_id"
+                            name="animal[station_id]"
                             placeholder="{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}"
                         />
                     </label>
@@ -107,28 +107,6 @@
                     </label>
                 </div>
             </div>
-
-            <!-- <label class="form-group">
-                <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
-                <x-parent-select
-                    name="father_id"
-                    :value="null"
-                    :station-animals="$stationAnimalsMale"
-                    :other-animals="$otherAnimalsMale"
-                    i18n-field="father"
-                />
-            </label>
-
-            <label class="form-group">
-                <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
-                <x-parent-select
-                    name="mother_id"
-                    :value="null"
-                    :station-animals="$stationAnimalsFemale"
-                    :other-animals="$otherAnimalsFemale"
-                    i18n-field="mother"
-                />
-            </label> -->
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>

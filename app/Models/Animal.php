@@ -32,6 +32,7 @@ use Laravel\Scout\Searchable;
 /**
  * @property GenderEnum $gender
  * @property Litter|null $litter
+ * @property Station|null $station
  * @property Collection $parentOfLitters
  *
  * @method static Builder males()
@@ -67,6 +68,7 @@ class Animal extends Model
         'caretaker_id',
         'date_of_birth',
         'died_on',
+        'station_id',
         'breeder_name',
         'breeder_station_name',
         'caretaker_name',
@@ -115,14 +117,14 @@ class Animal extends Model
     protected function breederName(): Attribute
     {
         return Attribute::make(
-            get: fn (?string $value): ?string => $value ?? $this->litter?->breeder_name,
+            get: fn (?string $value): ?string => $value ?? $this->station?->breeder_name ?? $this->litter?->breeder_name,
         );
     }
 
     protected function breederStationName(): Attribute
     {
         return Attribute::make(
-            get: fn (?string $value): ?string => $value ?? $this->litter?->breeder_station_name,
+            get: fn (?string $value): ?string => $value ?? $this->station?->name ?? $this->litter?->breeder_station_name,
         );
     }
 
@@ -187,6 +189,11 @@ class Animal extends Model
     public function litter(): BelongsTo
     {
         return $this->belongsTo(Litter::class, 'litter_id');
+    }
+
+    public function station(): BelongsTo
+    {
+        return $this->belongsTo(Station::class, 'station_id');
     }
 
     public function mother(): BelongsTo
