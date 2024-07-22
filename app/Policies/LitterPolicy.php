@@ -107,4 +107,13 @@ class LitterPolicy
 
         return $ownerCanUpdate || $adminCanUpdate;
     }
+
+    public function destroy(User $user, Litter $litter): bool
+    {
+        return $this->owns($user, $litter)
+            && $litter->state->in([
+                LitterStateEnum::DRAFT,
+                LitterStateEnum::REQUIRES_DRAFT_CHANGES,
+            ]);
+    }
 }

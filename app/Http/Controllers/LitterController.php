@@ -171,13 +171,14 @@ class LitterController extends Controller
         return response()->redirectToRoute('litters.show', $litter);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param \App\Models\Litter $litter
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Litter $litter)
+    public function destroy(Litter $litter): RedirectResponse
     {
-        //
+        $this->authorize('destroy', $litter);
+
+        $litter->delete();
+
+        Flashes::success(__('flashes.litters.deleted'));
+
+        return response()->redirectToRoute('litters.index');
     }
 }

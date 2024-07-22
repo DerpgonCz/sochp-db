@@ -13,6 +13,7 @@ return [
     'litters' => [
         'created' => 'Vrh úspěšně vytvořen',
         'updated' => 'Vrh úspěšně upraven',
+        'deleted' => 'Vrh úspěšně smazán',
         'state' => [
             'requires_draft_changes' => 'Vrh úspěšně odeslán na vyžádání změn',
             'requires_breeding_approval' => 'Vrh úspěšně odeslán ke schválení ke krytí',

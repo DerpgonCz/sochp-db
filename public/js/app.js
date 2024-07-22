@@ -2259,7 +2259,7 @@ __webpack_require__.r(__webpack_exports__);
           breeding_type: null,
           note: null,
           registration_no: null,
-          title: null
+          title: 0
         };
       }
     },

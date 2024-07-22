@@ -211,7 +211,7 @@
                         breeding_type: null,
                         note: null,
                         registration_no: null,
-                        title: null,
+                        title: 0,
                     };
                 },
             },
