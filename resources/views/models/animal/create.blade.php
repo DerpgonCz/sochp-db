@@ -25,6 +25,7 @@
             @csrf
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
+                *
                 <input type="date" class="form-control" name="animal[date_of_birth]"
                        placeholder="{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}"
                        value="{{ old('animal[date_of_birth]') }}" required>
@@ -50,7 +51,7 @@
                         <strong>{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}</strong>
                         <autocomplete
                             type="station"
-                            name="station_id"
+                            name="animal[station_id]"
                             placeholder="{{ __(sprintf('models.%s.fields.caretaker.station.name', Animal::class)) }}"
                         />
                     </label>
@@ -73,6 +74,15 @@
                     </label>
                 </div>
             </div>
+            
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.litter_name', Animal::class)) }}</strong>
+                <autocomplete
+                    type="litter"
+                    name="animal[litter_id]"
+                    placeholder="{{ __(sprintf('models.%s.fields.litter_name', Animal::class)) }}"
+                />
+            </label>
 
             @can('manage', Animal::class)
                 <div class="row align-items-center">
@@ -112,26 +122,24 @@
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
-                <x-parent-select
-                    name="father_id"
-                    :value="null"
-                    :station-animals="$stationAnimalsMale"
-                    :other-animals="$otherAnimalsMale"
-                    i18n-field="mother"
+                <autocomplete
+                    type="animal"
+                    gender="male"
+                    name="animal[father_id]"
+                    placeholder="{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}"
                 />
             </label>
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}</strong>
-                <x-parent-select
-                    name="mother_id"
-                    :value="null"
-                    :station-animals="$stationAnimalsFemale"
-                    :other-animals="$otherAnimalsFemale"
-                    i18n-field="mother"
+                <autocomplete
+                    type="animal"
+                    gender="female"
+                    name="animal[mother_id]"
+                    placeholder="{{ __(sprintf('models.%s.fields.mother.name', Litter::class)) }}"
                 />
             </label>
-
+            
             <animal-editor
                 :input-prefix="'animal'"
                 :animal-builds="{{ json_encode(AnimalBuildEnum::casesWithTitles()) }}"

@@ -2321,6 +2321,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     name: String,
     type: String,
+    gender: String,
     defaultValue: {
       type: String,
       "default": null
@@ -2354,7 +2355,8 @@ __webpack_require__.r(__webpack_exports__);
         data: function data(params) {
           return {
             q: params.term,
-            type: _this.type
+            type: _this.type,
+            gender: _this.gender
           };
         }
       }

@@ -9,6 +9,7 @@
         props: {
             name: String,
             type: String,
+            gender: String,
             defaultValue: {
                 type: String,
                 default: null,
@@ -41,6 +42,7 @@
                     data: params => ({
                         q: params.term,
                         type: this.type,
+                        gender: this.gender
                     }),
                 },
             });
