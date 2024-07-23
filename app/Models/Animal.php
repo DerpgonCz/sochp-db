@@ -156,6 +156,17 @@ class Animal extends Model
         );
     }
 
+    protected function markings(): Attribute
+    {
+        return Attribute::make(
+            get: function (): string {
+                return $this->mark_secondary !== null ?
+                    sprintf('%s %s', __(sprintf('enums.%s.%s', AnimalPrimaryMarkEnum::class, $this->mark_primary->value)), __(sprintf('enums.%s.%s', AnimalSecondaryMarkEnum::class, $this->mark_secondary->value))) :
+                    __(sprintf('enums.%s.%s', AnimalPrimaryMarkEnum::class, $this->mark_primary->value));
+            }
+        );
+    }
+
     public function titles(): SupportCollection
     {
         return collect(AnimalTitleEnum::cases())

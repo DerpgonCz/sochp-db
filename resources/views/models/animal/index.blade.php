@@ -25,6 +25,7 @@
                         <th>{{ __(sprintf('models.%s.fields.fur', Animal::class)) }}</th>
                         <th>{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</th>
                         <th>{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</th>
+                        <th>{{ __(sprintf('models.%s.fields.mark', Animal::class)) }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,7 @@
                             <td>{{ (new AnimalFurTranslationService())($animal) }}</td>
                             <td>{{ (new AnimalColorTranslationService())($animal) ?: '--' }}</td>
                             <td>{{ (new AnimalEffectTranslationService())($animal)  ?: '--'}}</td>
+                            <td>{{ $animal?->markings ?: '--' }}</td>
                         </tr>
                     @endforeach
                     </tbody>

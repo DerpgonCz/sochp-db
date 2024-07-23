@@ -100,15 +100,7 @@
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.mark', Animal::class)) }}</dd>
                     <dt class="col-9">
-                        @if($animal->mark_primary === null && $animal->mark_secondary === null)
-                            --
-                        @endif
-                        @if($animal->mark_primary !== null)
-                            {{ __(sprintf('enums.%s.%s', AnimalPrimaryMarkEnum::class, $animal->mark_primary->value)) }}
-                        @endif
-                        @if($animal->mark_secondary !== null)
-                            {{ __(sprintf('enums.%s.%s', AnimalSecondaryMarkEnum::class, $animal->mark_secondary->value)) }}
-                        @endif
+                        {{ $animal->markings }}
                     </dt>
 
                     <dd class="col-3">{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</dd>
