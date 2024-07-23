@@ -29,6 +29,7 @@ return [
             'died_on' => 'Datum smrti',
             'breeder_name' => 'Jméno chovatele',
             'breeder_station_name' => 'ChS chovatele',
+            'litter_name' => 'Vrh',
             'caretaker_name' => 'Jméno vlastníka',
             'caretaker_station_name' => 'ChS vlastníka',
             'caretaker' => [

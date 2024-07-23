@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\GenderEnum;
 use App\Models\Animal;
+use App\Models\Litter;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,8 @@ class AutocompleteController extends Controller
     private const TYPE_MAPPING = [
         'station' => Station::class,
         'user' => User::class,
-        'animal' => Animal::class
+        'animal' => Animal::class,
+        'litter' => Litter::class
     ];
 
     public function autocomplete(Request $request): JsonResponse
@@ -56,6 +58,14 @@ class AutocompleteController extends Controller
                 'text' => $entity->registration_no !== null ?
                     sprintf('%s (%s)', $entity->nameWithShortTitles, $entity->registration_no) :
                     sprintf($entity->nameWithShortTitles)
+            ],
+            $entity instanceof Litter => [
+                'id' => $entity->id,
+                'text' => $entity->registration_no !== null ?
+                    ($entity->father !== null || $entity->mother !== null ?
+                        sprintf('%s (%s, %s x %s)', $entity->name, $entity->registration_no, $entity->father?->name, $entity->mother?->name) :
+                        sprintf('%s (%s)', $entity->name, $entity->registration_no)) :
+                    sprintf($entity->name)
             ]
         };
     }
@@ -73,6 +83,10 @@ class AutocompleteController extends Controller
             $modelClass === Animal::class => Animal::where('name', 'like', sprintf('%%%s%%', $query))
                 ->where('gender', '=', $gender === 'male' ? GenderEnum::MALE : ($gender === 'female' ? GenderEnum::FEMALE : ''))
                 ->orWhere('registration_no', 'like', sprintf('%%%s%%', $query))
+                ->get(),
+            $modelClass === Litter::class => Litter::where('name', 'like', sprintf('%%%s%%', $query))
+                ->orWhere('registration_no', 'like', sprintf('%%%s%%', $query))
+                ->orderBy('happened_on', 'DESC')
                 ->get(),
         };
     }

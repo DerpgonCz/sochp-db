@@ -76,6 +76,15 @@
                 </div>
             </div>
 
+            <label class="form-group">
+                <strong>{{ __(sprintf('models.%s.fields.litter_name', Animal::class)) }}</strong>
+                <autocomplete
+                    type="litter"
+                    name="animal[litter_id]"
+                    placeholder="{{ __(sprintf('models.%s.fields.litter_name', Animal::class)) }}"
+                />
+            </label>
+
             <div class="row align-items-center">
                 <div class="col-5">
                     <label class="form-group">
