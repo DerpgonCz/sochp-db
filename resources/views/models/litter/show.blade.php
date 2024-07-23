@@ -15,7 +15,7 @@
                     <a href="{{ route('litters.edit', $litter) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 @endcan
                 @can('destroy', $litter)
-                    <form class="d-inline" method="POST" action="{{ route('litters.destroy', $litter) }}">
+                    <form class="d-inline" method="POST" action="{{ route('litters.destroy', $litter) }}" onsubmit="return confirm('{{ __('Are you sure you want to delete this litter?') }}')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
