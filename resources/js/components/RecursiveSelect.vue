@@ -1,21 +1,48 @@
 <template>
     <div>
-        <label>
-            <!-- Only values -->
-            <select
-                :name="name"
-                class="custom-select" v-if="typeof options === 'object' && Array.isArray(options)"
-                v-model="selectedValue"
-            >
-                <!-- Default value -->
-                <option :value="null">--</option>
+        <!-- Only values -->
+        <select
+            :name="name"
+            class="custom-select" v-if="typeof options === 'object' && Array.isArray(options)"
+            v-model="selectedValue"
+        >
+            <!-- Default value -->
+            <option :value="null">{{ defaultValueLabel }}</option>
 
-                <!-- Actual values -->
+            <!-- Actual values -->
+            <option
+                v-for="[key, row] of Object.entries(options)"
+                v-if="row !== null && (typeof row === 'object' && !Array.isArray(row))"
+                :value="('value' in row) ? row.value : key"
+            >
+                {{ row.label }}
+            </option>
+            <option
+                v-else
+                :value="row"
+            >
+                {{ row }}
+            </option>
+        </select>
+
+        <!-- Option groups -->
+        <select
+            :name="name"
+            class="custom-select" v-if="typeof options === 'object' && !Array.isArray(options)"
+            v-model="selectedValue"
+        >
+            <!-- Default value -->
+            <option :value="null">--</option>
+
+            <!-- Actual values -->
+            <optgroup
+                v-for="[optGroupLabel, optGroupOptions] of Object.entries(options)"
+                :label="optGroupLabel"
+            >
                 <option
-                    v-for="[key, row] of Object.entries(options)"
+                    v-for="row of optGroupOptions"
                     v-if="row !== null && (typeof row === 'object' && !Array.isArray(row))"
-                    :value="('value' in row) ? row.value : key"
-                    v-model="selectedValue"
+                    :value="'value' in row ? row.value : null"
                 >
                     {{ row.label }}
                 </option>
@@ -25,51 +52,23 @@
                 >
                     {{ row }}
                 </option>
-            </select>
+            </optgroup>
+        </select>
 
-            <!-- Option groups -->
-            <select
-                :name="name"
-                class="custom-select" v-if="typeof options === 'object' && !Array.isArray(options)"
-                v-model="selectedValue"
-            >
-                <!-- Default value -->
-                <option :value="null">--</option>
-
-                <!-- Actual values -->
-                <optgroup
-                    v-for="[optGroupLabel, optGroupOptions] of Object.entries(options)"
-                    :label="optGroupLabel"
-                >
-                    <option
-                        v-for="row of optGroupOptions"
-                        v-if="row !== null && (typeof row === 'object' && !Array.isArray(row))"
-                        :value="'value' in row ? row.value : null"
-                    >
-                        {{ row.label }}
-                    </option>
-                    <option
-                        v-else
-                        :value="row"
-                    >
-                        {{ row }}
-                    </option>
-                </optgroup>
-            </select>
-        </label>
-
-        <label
+        <div
+            class="mt-2"
             v-for="[key, row] of Object.entries(options)"
-            v-if="typeof row === 'object' && !Array.isArray(row) && 'values' in row"
+            v-if="typeof row === 'object' && !Array.isArray(row) && 'values' in row && row.values.length !== 0"
         >
             <recursive-select
                 v-if="selectedValue === (typeof row === 'object' && !Array.isArray(row) && 'value' in row ? row.value : key)"
                 :name="name"
                 :options="row.values"
                 :value="value.slice(1) || []"
+                :default-value-label="row.defaultValueLabel"
                 v-model="subSelectedValues"
             ></recursive-select>
-        </label>
+        </div>
     </div>
 </template>
 
@@ -87,6 +86,10 @@ export default {
         },
         options: {},
         value: {},
+        defaultValueLabel: {
+            type: String,
+            default: '--'
+        }
     },
     data() {
         return {

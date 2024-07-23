@@ -17,12 +17,17 @@ export default {
         name: String,
         shadedLabel: String,
         fullColorLabel: String,
+        minkColorLabel: String,
         mostUsedLabel: String,
         othersLabel: String,
+        fullColors: Array,
+        fullColorMinks: Array,
         fullColorLabels: Object,
+        shadedColors: Array,
         shadedColorLabels: Object,
-        minkColorLabels: Array,
-        siameseHimalayanColorLabels: Object,
+        minkColors: Array,
+        minkColorLabels: Object,
+
         value: {
             type: Array,
             value: () => [],
@@ -35,27 +40,41 @@ export default {
                 {
                     label: this.shadedLabel,
                     value: 'shaded',
-                    values: Object.entries(this.shadedColorLabels)
-                        .filter(([k]) => Number.isInteger(+k))
-                        .map(([i, e]) => ({
-                            label: e,
-                            value: i,
-                            values: Object.entries(this.fullColorLabels)
-                                .filter(([k]) => Number.isInteger(+k))
-                                .map(([i, e]) => ({
-                                    label: e,
-                                    value: i,
+                    values: this.shadedColors
+                        .map(shadedColorValue => ({
+                            label: this.shadedColorLabels[shadedColorValue],
+                            value: shadedColorValue,
+                            defaultValueLabel: `-- ${this.fullColorLabel.toLocaleLowerCase()} --`,
+                            values: this.fullColors
+                                .map(fullColorValue => ({
+                                    label: this.fullColorLabels[fullColorValue],
+                                    value: fullColorValue,
+                                    defaultValueLabel: `-- ${this.minkColorLabel.toLocaleLowerCase()} --`,
+                                    values: this.fullColorMinks.includes(fullColorValue)
+                                        ? this.minkColors
+                                            .map(minkColorValue => ({
+                                                label: this.minkColorLabels[minkColorValue],
+                                                value: minkColorValue,
+                                            }))
+                                        : [],
                                 }))
                     })),
                 },
                 {
                     label: this.fullColorLabel,
                     value: 'full',
-                    values: Object.entries(this.fullColorLabels)
-                        .filter(([k]) => Number.isInteger(+k))
-                        .map(([i, e]) => ({
-                            label: e,
-                            value: i,
+                    values: this.fullColors
+                        .map(fullColorValue => ({
+                            label: this.fullColorLabels[fullColorValue],
+                            value: fullColorValue,
+                            defaultValueLabel: `-- ${this.minkColorLabel.toLocaleLowerCase()} --`,
+                            values: this.fullColorMinks.includes(fullColorValue)
+                                ? this.minkColors
+                                    .map(minkColorValue => ({
+                                        label: this.minkColorLabels[minkColorValue],
+                                        value: minkColorValue,
+                                    }))
+                                : [],
                         }))
                 }
             ]

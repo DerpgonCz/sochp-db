@@ -138,12 +138,16 @@
                         :name="`${inputPrefix}[color]`"
                         :shaded-label="colorBuilderShadedLabel"
                         :full-color-label="colorBuilderFullColorLabel"
+                        :mink-color-label="colorBuilderMinkColorLabel"
                         :most-used-label="colorBuilderMostUsedLabel"
                         :others-label="colorBuilderOthersLabel"
+                        :full-colors="fullColors"
+                        :full-color-minks="fullColorMinks"
                         :full-color-labels="fullColorLabels"
+                        :shaded-colors="shadedColors"
                         :shaded-color-labels="shadedColorLabels"
+                        :mink-colors="minkColors"
                         :mink-color-labels="minkColorLabels"
-                        :siamese-himalayan-color-labels="siameseHimalayanColorLabels"
                         :value="animal.color"
                     ></color-builder>
                 </div>
@@ -237,10 +241,14 @@
             colorBuilderOthersLabel: String,
             colorBuilderShadedLabel: String,
             colorBuilderFullColorLabel: String,
+            colorBuilderMinkColorLabel: String,
+            fullColors: Array,
+            fullColorMinks: Array,
             fullColorLabels: Object,
+            shadedColors: Array,
             shadedColorLabels: Object,
-            minkColorLabels: Array,
-            siameseHimalayanColorLabels: Object,
+            minkColors: Array,
+            minkColorLabels: Object,
             showRegistrationNo: {
                 type: Boolean,
                 default: false,
