@@ -238,10 +238,10 @@ return [
         ],
     ],
     AnimalColorMink::class => [
-        AnimalColorMink::INDETERMINABLE->value => 'indeterminable',
-        AnimalColorMink::AMERICAN->value => 'american',
-        AnimalColorMink::BRITISH->value => 'british',
-        AnimalColorMink::AUSTRALIAN->value => 'australian',
+        AnimalColorMink::INDETERMINABLE->value => 'indeterminable mink',
+        AnimalColorMink::AMERICAN->value => 'american mink',
+        AnimalColorMink::BRITISH->value => 'british mink',
+        AnimalColorMink::AUSTRALIAN->value => 'australian mink',
     ],
     AnimalTitleEnum::class => [
         'short' => [

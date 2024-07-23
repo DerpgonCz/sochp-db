@@ -238,10 +238,10 @@ return [
         ],
     ],
     AnimalColorMink::class => [
-        AnimalColorMink::INDETERMINABLE->value => 'neurčitelný',
-        AnimalColorMink::AMERICAN->value => 'americký',
-        AnimalColorMink::BRITISH->value => 'britský',
-        AnimalColorMink::AUSTRALIAN->value => 'australský',
+        AnimalColorMink::INDETERMINABLE->value => 'neurčitelný mink',
+        AnimalColorMink::AMERICAN->value => 'americký mink',
+        AnimalColorMink::BRITISH->value => 'britský mink',
+        AnimalColorMink::AUSTRALIAN->value => 'australský mink',
     ],
     AnimalTitleEnum::class => [
         'short' => [
