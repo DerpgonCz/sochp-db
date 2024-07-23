@@ -81,7 +81,7 @@
                             <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
                             <autocomplete
                                 type="user"
-                                name="caretaker_id"
+                                name="animal[caretaker_id]"
                                 placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
                                 :default-value="'{{ Auth::user()->id }}'"
                                 :default-label="'{{ Auth::user()->name }}'"
