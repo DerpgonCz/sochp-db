@@ -31,11 +31,11 @@
         </div>
 
         @if($errors->isNotEmpty())
-        <div class="row justify-content-center">
-            <div class="col">
-                {!! implode('', $errors->all('<div>:message</div>')) !!}
+            <div class="row justify-content-center">
+                <div class="col">
+                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                </div>
             </div>
-        </div>
         @endif
 
         <div class="row justify-content-center">
