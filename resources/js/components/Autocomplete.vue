@@ -1,5 +1,7 @@
 <template>
-    <select :name="name" ref="select" class="custom-select"></select>
+    <select :name="name" ref="select" class="custom-select">
+        <option v-if="defaultValue !== null" :value="defaultValue" selected>{{ defaultLabel }}</option>
+    </select>
 </template>
 
 <script>
@@ -8,6 +10,14 @@
             name: String,
             type: String,
             gender: String,
+            defaultValue: {
+                type: String,
+                default: null,
+            },
+            defaultLabel: {
+                type: String,
+                default: '',
+            },
             placeholder: {
                 type: String,
                 default: '',

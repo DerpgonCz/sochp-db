@@ -2111,10 +2111,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     colorBuilderOthersLabel: String,
     colorBuilderShadedLabel: String,
     colorBuilderFullColorLabel: String,
+    colorBuilderMinkColorLabel: String,
+    fullColors: Array,
+    fullColorMinks: Array,
     fullColorLabels: Object,
+    shadedColors: Array,
     shadedColorLabels: Object,
-    minkColorLabels: Array,
-    siameseHimalayanColorLabels: Object,
+    minkColors: Array,
+    minkColorLabels: Object,
     showRegistrationNo: {
       type: Boolean,
       "default": false
@@ -2285,10 +2289,14 @@ __webpack_require__.r(__webpack_exports__);
     colorBuilderOthersLabel: String,
     colorBuilderShadedLabel: String,
     colorBuilderFullColorLabel: String,
+    colorBuilderMinkColorLabel: String,
+    fullColors: Array,
+    fullColorMinks: Array,
     fullColorLabels: Object,
+    shadedColors: Array,
     shadedColorLabels: Object,
-    minkColorLabels: Array,
-    siameseHimalayanColorLabels: Object,
+    minkColors: Array,
+    minkColorLabels: Object,
     showRegistrationNo: {
       type: Boolean,
       "default": false
@@ -2314,6 +2322,14 @@ __webpack_require__.r(__webpack_exports__);
     name: String,
     type: String,
     gender: String,
+    defaultValue: {
+      type: String,
+      "default": null
+    },
+    defaultLabel: {
+      type: String,
+      "default": ''
+    },
     placeholder: {
       type: String,
       "default": ''
@@ -2362,12 +2378,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _RecursiveSelect_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecursiveSelect.vue */ "./resources/js/components/RecursiveSelect.vue");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2377,12 +2387,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     name: String,
     shadedLabel: String,
     fullColorLabel: String,
+    minkColorLabel: String,
     mostUsedLabel: String,
     othersLabel: String,
+    fullColors: Array,
+    fullColorMinks: Array,
     fullColorLabels: Object,
+    shadedColors: Array,
     shadedColorLabels: Object,
-    minkColorLabels: Array,
-    siameseHimalayanColorLabels: Object,
+    minkColors: Array,
+    minkColorLabels: Object,
     value: {
       type: Array,
       value: function value() {
@@ -2397,28 +2411,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       selections: [{
         label: this.shadedLabel,
         value: 'shaded',
-        values: Object.entries(this.shadedColorLabels).filter(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 1),
-            k = _ref2[0];
-          return Number.isInteger(+k);
-        }).map(function (_ref3) {
-          var _ref4 = _slicedToArray(_ref3, 2),
-            i = _ref4[0],
-            e = _ref4[1];
+        required: true,
+        values: this.shadedColors.map(function (shadedColorValue) {
           return {
-            label: e,
-            value: i,
-            values: Object.entries(_this.fullColorLabels).filter(function (_ref5) {
-              var _ref6 = _slicedToArray(_ref5, 1),
-                k = _ref6[0];
-              return Number.isInteger(+k);
-            }).map(function (_ref7) {
-              var _ref8 = _slicedToArray(_ref7, 2),
-                i = _ref8[0],
-                e = _ref8[1];
+            label: _this.shadedColorLabels[shadedColorValue],
+            value: shadedColorValue,
+            defaultValueLabel: "-- ".concat(_this.fullColorLabel.toLocaleLowerCase(), " --"),
+            required: true,
+            values: _this.fullColors.map(function (fullColorValue) {
               return {
-                label: e,
-                value: i
+                label: _this.fullColorLabels[fullColorValue],
+                value: fullColorValue,
+                defaultValueLabel: "-- ".concat(_this.minkColorLabel.toLocaleLowerCase(), " --"),
+                required: true,
+                values: _this.fullColorMinks.includes(fullColorValue) ? _this.minkColors.map(function (minkColorValue) {
+                  return {
+                    label: _this.minkColorLabels[minkColorValue],
+                    value: minkColorValue
+                  };
+                }) : []
               };
             })
           };
@@ -2426,17 +2437,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }, {
         label: this.fullColorLabel,
         value: 'full',
-        values: Object.entries(this.fullColorLabels).filter(function (_ref9) {
-          var _ref10 = _slicedToArray(_ref9, 1),
-            k = _ref10[0];
-          return Number.isInteger(+k);
-        }).map(function (_ref11) {
-          var _ref12 = _slicedToArray(_ref11, 2),
-            i = _ref12[0],
-            e = _ref12[1];
+        required: true,
+        values: this.fullColors.map(function (fullColorValue) {
           return {
-            label: e,
-            value: i
+            label: _this.fullColorLabels[fullColorValue],
+            value: fullColorValue,
+            defaultValueLabel: "-- ".concat(_this.minkColorLabel.toLocaleLowerCase(), " --"),
+            required: true,
+            values: _this.fullColorMinks.includes(fullColorValue) ? _this.minkColors.map(function (minkColorValue) {
+              return {
+                label: _this.minkColorLabels[minkColorValue],
+                value: minkColorValue
+              };
+            }) : []
           };
         })
       }]
@@ -2754,7 +2767,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       "default": null
     },
     options: {},
-    value: {}
+    value: {},
+    required: {
+      type: Boolean,
+      "default": false
+    },
+    defaultValueLabel: {
+      type: String,
+      "default": '--'
+    }
   },
   data: function data() {
     var _, _slice;
@@ -2861,10 +2882,14 @@ var render = function render() {
               "color-builder-others-label": _vm.colorBuilderOthersLabel,
               "color-builder-shaded-label": _vm.colorBuilderShadedLabel,
               "color-builder-full-color-label": _vm.colorBuilderFullColorLabel,
+              "color-builder-mink-color-label": _vm.colorBuilderMinkColorLabel,
+              "full-colors": _vm.fullColors,
+              "full-color-minks": _vm.fullColorMinks,
               "full-color-labels": _vm.fullColorLabels,
+              "shaded-colors": _vm.shadedColors,
               "shaded-color-labels": _vm.shadedColorLabels,
-              "mink-color-labels": _vm.minkColorLabels,
-              "siamese-himalayan-color-labels": _vm.siameseHimalayanColorLabels
+              "mink-colors": _vm.minkColors,
+              "mink-color-labels": _vm.minkColorLabels
             },
             scopedSlots: _vm._u([{
               key: "modal-header",
@@ -3414,12 +3439,16 @@ var render = function render() {
       name: "".concat(_vm.inputPrefix, "[color]"),
       "shaded-label": _vm.colorBuilderShadedLabel,
       "full-color-label": _vm.colorBuilderFullColorLabel,
+      "mink-color-label": _vm.colorBuilderMinkColorLabel,
       "most-used-label": _vm.colorBuilderMostUsedLabel,
       "others-label": _vm.colorBuilderOthersLabel,
+      "full-colors": _vm.fullColors,
+      "full-color-minks": _vm.fullColorMinks,
       "full-color-labels": _vm.fullColorLabels,
+      "shaded-colors": _vm.shadedColors,
       "shaded-color-labels": _vm.shadedColorLabels,
+      "mink-colors": _vm.minkColors,
       "mink-color-labels": _vm.minkColorLabels,
-      "siamese-himalayan-color-labels": _vm.siameseHimalayanColorLabels,
       value: _vm.animal.color
     }
   })], 1)]), _vm._v(" "), _c("div", {
@@ -3528,7 +3557,14 @@ var render = function render() {
     attrs: {
       name: _vm.name
     }
-  });
+  }, [_vm.defaultValue !== null ? _c("option", {
+    attrs: {
+      selected: ""
+    },
+    domProps: {
+      value: _vm.defaultValue
+    }
+  }, [_vm._v(_vm._s(_vm.defaultLabel))]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3553,7 +3589,8 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("recursive-select", {
     attrs: {
-      options: _vm.selections
+      options: _vm.selections,
+      required: true
     },
     model: {
       value: _vm.selectedColor,
@@ -3908,7 +3945,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("label", [_typeof(_vm.options) === "object" && Array.isArray(_vm.options) ? _c("select", {
+  return _c("div", [_typeof(_vm.options) === "object" && Array.isArray(_vm.options) ? _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3917,7 +3954,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: _vm.name
+      name: _vm.name,
+      required: _vm.required
     },
     on: {
       change: function change($event) {
@@ -3934,26 +3972,19 @@ var render = function render() {
     domProps: {
       value: null
     }
-  }, [_vm._v("--")]), _vm._v(" "), _vm._l(Object.entries(_vm.options), function (_ref) {
+  }, [_vm._v(_vm._s(_vm.defaultValueLabel))]), _vm._v(" "), _vm._l(Object.entries(_vm.options), function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
       key = _ref2[0],
       row = _ref2[1];
     return row !== null && _typeof(row) === "object" && !Array.isArray(row) ? _c("option", {
       domProps: {
         value: "value" in row ? row.value : key
-      },
-      model: {
-        value: _vm.selectedValue,
-        callback: function callback($$v) {
-          _vm.selectedValue = $$v;
-        },
-        expression: "selectedValue"
       }
-    }, [_vm._v("\n                " + _vm._s(row.label) + "\n            ")]) : _c("option", {
+    }, [_vm._v("\n            " + _vm._s(row.label) + "\n        ")]) : _c("option", {
       domProps: {
         value: row
       }
-    }, [_vm._v("\n                " + _vm._s(row) + "\n            ")]);
+    }, [_vm._v("\n            " + _vm._s(row) + "\n        ")]);
   })], 2) : _vm._e(), _vm._v(" "), _typeof(_vm.options) === "object" && !Array.isArray(_vm.options) ? _c("select", {
     directives: [{
       name: "model",
@@ -3963,7 +3994,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: _vm.name
+      name: _vm.name,
+      required: _vm.required
     },
     on: {
       change: function change($event) {
@@ -3993,21 +4025,25 @@ var render = function render() {
         domProps: {
           value: "value" in row ? row.value : null
         }
-      }, [_vm._v("\n                    " + _vm._s(row.label) + "\n                ")]) : _c("option", {
+      }, [_vm._v("\n                " + _vm._s(row.label) + "\n            ")]) : _c("option", {
         domProps: {
           value: row
         }
-      }, [_vm._v("\n                    " + _vm._s(row) + "\n                ")]);
+      }, [_vm._v("\n                " + _vm._s(row) + "\n            ")]);
     }), 0);
-  })], 2) : _vm._e()]), _vm._v(" "), _vm._l(Object.entries(_vm.options), function (_ref5) {
+  })], 2) : _vm._e(), _vm._v(" "), _vm._l(Object.entries(_vm.options), function (_ref5) {
     var _ref6 = _slicedToArray(_ref5, 2),
       key = _ref6[0],
       row = _ref6[1];
-    return _typeof(row) === "object" && !Array.isArray(row) && "values" in row ? _c("label", [_vm.selectedValue === (_typeof(row) === "object" && !Array.isArray(row) && "value" in row ? row.value : key) ? _c("recursive-select", {
+    return _typeof(row) === "object" && !Array.isArray(row) && "values" in row && row.values.length !== 0 ? _c("div", {
+      staticClass: "mt-2"
+    }, [_vm.selectedValue === (_typeof(row) === "object" && !Array.isArray(row) && "value" in row ? row.value : key) ? _c("recursive-select", {
       attrs: {
         name: _vm.name,
         options: row.values,
-        value: _vm.value.slice(1) || []
+        value: _vm.value.slice(1) || [],
+        "default-value-label": row.defaultValueLabel,
+        required: row.required
       },
       model: {
         value: _vm.subSelectedValues,

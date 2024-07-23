@@ -31,11 +31,11 @@
         </div>
 
         @if($errors->isNotEmpty())
-        <div class="row justify-content-center">
-            <div class="col">
-                {!! implode('', $errors->all('<div>:message</div>')) !!}
+            <div class="row justify-content-center">
+                <div class="col">
+                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                </div>
             </div>
-        </div>
         @endif
 
         <div class="row justify-content-center">
@@ -127,11 +127,15 @@
                             :color-builder-most-used-label="{{ json_encode(__('modals.animals.edit.labels.most_used')) }}"
                             :color-builder-others-label="{{ json_encode(__('modals.animals.edit.labels.others')) }}"
                             :color-builder-shaded-label="{{ json_encode(__('modals.animals.edit.labels.shaded')) }}"
-                            :color-builder-full-color-label="{{ json_encode(__('modals.animals.edit.labels.full_color')) }}"
-                            :full-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class)) }}"
-                            :shaded-color-labels="{{ json_encode(__('enums.' . AnimalColorShaded::class)) }}"
-                            :mink-color-labels="{{ json_encode(__('enums.' . AnimalColorMink::class)) }}"
-                            :siamese-himalayan-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class . '.siamese_himalayan')) }}"
+                            :color-builder-full-color-label="{{ json_encode(__('modals.animals.edit.labels.full')) }}"
+                            :color-builder-mink-color-label="{{ json_encode(__('modals.animals.edit.labels.mink')) }}"
+                            :full-colors="{{ json_encode(AnimalColorFull::cases()) }}"
+                            :full-color-minks="{{ json_encode(AnimalColorFull::MINK_COLORS) }}"
+                            :full-color-labels="{{ json_encode((object) __('enums.' . AnimalColorFull::class)) }}"
+                            :shaded-colors="{{ json_encode(AnimalColorShaded::cases()) }}"
+                            :shaded-color-labels="{{ json_encode((object) __('enums.' . AnimalColorShaded::class)) }}"
+                            :mink-colors="{{ json_encode(AnimalColorMink::cases()) }}"
+                            :mink-color-labels="{{ json_encode((object) __('enums.' . AnimalColorMink::class)) }}"
                             :show-registration-no="{{ json_encode($litter->state->is(LitterStateEnum::FINALIZED)) }}"
                     >
                         <template v-slot:modal-header>

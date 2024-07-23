@@ -7,19 +7,23 @@
     @if($userStation)
         @switch($userStation->state->value)
             @case(StationStateEnum::DRAFT)
-                <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-secondary">{{ __('Edit') }}</a>
+                <a href="{{ route('stations.edit', $userStation) }}">{{ $userStation->name }}</a>
+                <span class="badge badge-secondary">{{ __('Created') }}</span>
                 @break
 
             @case(StationStateEnum::FOR_APPROVAL)
-                <a href="{{ route('stations.show', $userStation) }}" class="btn btn-primary">{{ __('Sent for approval') }}</a>
+                <a href="{{ route('stations.show', $userStation) }}">{{ $userStation->name }}</a>
+                <span class="badge badge-primary">{{ __('Sent for approval') }}</span>
                 @break
 
             @case(StationStateEnum::REQUIRES_CHANGES)
-                <a href="{{ route('stations.edit', $userStation) }}" class="btn btn-warning">{{ __('Requires changes') }}</a>
+                <a href="{{ route('stations.edit', $userStation) }}">{{ $userStation->name }}</a>
+                <span class="badge badge-warning">{{ __('Requires changes') }}</span>
                 @break
 
             @case(StationStateEnum::APPROVED)
-                <a href="{{ route('stations.show', $userStation) }}" class="btn btn-success">{{ __('Approved') }}</a>
+                <a href="{{ route('stations.show', $userStation) }}">{{ $userStation->name }}</a>
+                <span class="badge badge-success">{{ __('Approved') }}</span>
                 @break
         @endswitch
     @else

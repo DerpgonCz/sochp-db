@@ -40,10 +40,14 @@
                                             :color-builder-others-label="colorBuilderOthersLabel"
                                             :color-builder-shaded-label="colorBuilderShadedLabel"
                                             :color-builder-full-color-label="colorBuilderFullColorLabel"
+                                            :color-builder-mink-color-label="colorBuilderMinkColorLabel"
+                                            :full-colors="fullColors"
+                                            :full-color-minks="fullColorMinks"
                                             :full-color-labels="fullColorLabels"
+                                            :shaded-colors="shadedColors"
                                             :shaded-color-labels="shadedColorLabels"
+                                            :mink-colors="minkColors"
                                             :mink-color-labels="minkColorLabels"
-                                            :siamese-himalayan-color-labels="siameseHimalayanColorLabels"
                                         >
                                             <template v-slot:modal-header>
                                                 <slot name="modal-header"></slot>
@@ -173,10 +177,14 @@ export default {
         colorBuilderOthersLabel: String,
         colorBuilderShadedLabel: String,
         colorBuilderFullColorLabel: String,
+        colorBuilderMinkColorLabel: String,
+        fullColors: Array,
+        fullColorMinks: Array,
         fullColorLabels: Object,
+        shadedColors: Array,
         shadedColorLabels: Object,
-        minkColorLabels: Array,
-        siameseHimalayanColorLabels: Object,
+        minkColors: Array,
+        minkColorLabels: Object,
         showRegistrationNo: {
             type: Boolean,
             default: false,

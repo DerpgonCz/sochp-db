@@ -13,7 +13,6 @@
     use App\Enums\Animal\AnimalTitleEnum;
     use App\Enums\GenderEnum;
     use App\Models\Litter;
-    use App\Models\Station;
     use App\Models\User;
 @endphp
 
@@ -75,7 +74,7 @@
                     </label>
                 </div>
             </div>
-
+            
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.litter_name', Animal::class)) }}</strong>
                 <autocomplete
@@ -85,37 +84,41 @@
                 />
             </label>
 
-            <div class="row align-items-center">
-                <div class="col-5">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
-                        <autocomplete
-                            type="user"
-                            name="animal[caretaker_id]"
-                            placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
-                        />
-                    </label>
+            @can('manage', Animal::class)
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
+                            <autocomplete
+                                type="user"
+                                name="caretaker_id"
+                                placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
+                                :default-value="'{{ Auth::user()->id }}'"
+                                :default-label="'{{ Auth::user()->name }}'"
+                            />
+                        </label>
+                    </div>
+                    <div class="col-1 text-center">
+                        <div class="align-self-center">nebo</div>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}</strong>
+                            <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                                   placeholder="{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}"
+                                   value="{{ old('animal[caretaker_station_name]') }}">
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}</strong>
+                            <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                                   placeholder="{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}"
+                                   value="{{ old('animal[caretaker_name]') }}">
+                        </label>
+                    </div>
                 </div>
-                <div class="col-1 text-center">
-                    <div class="align-self-center">nebo</div>
-                </div>
-                <div class="col-3">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}</strong>
-                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
-                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}"
-                               value="{{ old('animal[caretaker_station_name]') }}">
-                    </label>
-                </div>
-                <div class="col-3">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}</strong>
-                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
-                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}"
-                               value="{{ old('animal[caretaker_name]') }}">
-                    </label>
-                </div>
-            </div>
+            @endcan
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
@@ -155,11 +158,15 @@
                 :color-builder-most-used-label="{{ json_encode(__('modals.animals.edit.labels.most_used')) }}"
                 :color-builder-others-label="{{ json_encode(__('modals.animals.edit.labels.others')) }}"
                 :color-builder-shaded-label="{{ json_encode(__('modals.animals.edit.labels.shaded')) }}"
-                :color-builder-full-color-label="{{ json_encode(__('modals.animals.edit.labels.full_color')) }}"
-                :full-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class)) }}"
-                :shaded-color-labels="{{ json_encode(__('enums.' . AnimalColorShaded::class)) }}"
-                :mink-color-labels="{{ json_encode(__('enums.' . AnimalColorMink::class)) }}"
-                :siamese-himalayan-color-labels="{{ json_encode(__('enums.' . AnimalColorFull::class . '.siamese_himalayan')) }}"
+                :color-builder-full-color-label="{{ json_encode(__('modals.animals.edit.labels.full')) }}"
+                :color-builder-mink-color-label="{{ json_encode(__('modals.animals.edit.labels.mink')) }}"
+                :full-colors="{{ json_encode(AnimalColorFull::cases()) }}"
+                :full-color-minks="{{ json_encode(AnimalColorFull::MINK_COLORS) }}"
+                :full-color-labels="{{ json_encode((object) __('enums.' . AnimalColorFull::class)) }}"
+                :shaded-colors="{{ json_encode(AnimalColorShaded::cases()) }}"
+                :shaded-color-labels="{{ json_encode((object) __('enums.' . AnimalColorShaded::class)) }}"
+                :mink-colors="{{ json_encode(AnimalColorMink::cases()) }}"
+                :mink-color-labels="{{ json_encode((object) __('enums.' . AnimalColorMink::class)) }}"
             >
                 <template v-slot:modal-header>
                     {{ __('Edit an animal') }}

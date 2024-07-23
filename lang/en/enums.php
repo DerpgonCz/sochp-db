@@ -238,6 +238,7 @@ return [
         ],
     ],
     AnimalColorMink::class => [
+        AnimalColorMink::INDETERMINABLE->value => 'indeterminable',
         AnimalColorMink::AMERICAN->value => 'american',
         AnimalColorMink::BRITISH->value => 'british',
         AnimalColorMink::AUSTRALIAN->value => 'australian',

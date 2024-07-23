@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Flashes;
+use App\Http\Requests\AnimalCreateRequest;
 use App\Http\Requests\AnimalUpdateRequest;
 use App\Models\Animal;
 use App\Models\Station;
@@ -12,11 +13,11 @@ use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
 use App\Services\Frontend\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AnimalController extends Controller
@@ -53,9 +54,9 @@ class AnimalController extends Controller
     }
 
     public function store(
-        Request $request,
+        AnimalCreateRequest $request,
         FileUploadService $fileUploadService,
-    ) {
+    ): RedirectResponse {
         $animalData = $request->get('animal');
         $deserializedColor = AnimalColorBuilderValueSerializer::deserialize($animalData['color']);
 

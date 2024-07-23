@@ -22,39 +22,22 @@ class AnimalColorBuilderValueSerializer
             return ['full', $full, $mink];
         }
 
-        return ['shaded', $shaded, $full];
+        return ['shaded', $shaded, $full, $mink];
     }
 
     public static function deserialize(array $colors): array
     {
-        $count = count($colors);
-
-        return match ($count) {
-            2 => match ($colors[0]) {
-                'shaded' => [
-                    'shaded' => $colors[1],
-                    'full' => null,
-                    'mink' => null,
-                ],
-                'full' => [
-                    'shaded' => null,
-                    'full' => $colors[1],
-                    'mink' => null,
-                ],
-            },
-            3 => match ($colors[0]) {
-                'shaded' => [
-                    'shaded' => $colors[1],
-                    'full' => $colors[2],
-                    'mink' => null,
-                ],
-                'full' => [
-                    'shaded' => null,
-                    'full' => $colors[1],
-                    'mink' => $colors[2],
-                ],
-            },
-            default => [],
+        return match ($colors[0]) {
+            'shaded' => [
+                'shaded' => $colors[1],
+                'full' => $colors[2],
+                'mink' => $colors[3] ?? null,
+            ],
+            'full' => [
+                'shaded' => null,
+                'full' => $colors[1],
+                'mink' => $colors[2] ?? null,
+            ],
         };
     }
 }

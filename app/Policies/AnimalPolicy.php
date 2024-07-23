@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\Auth\PermissionsEnum;
 use App\Enums\LitterStateEnum;
 use App\Models\Animal;
 use App\Models\User;
@@ -14,6 +15,15 @@ class AnimalPolicy
     private function owns(?User $user, Animal $animal): bool
     {
         return $user?->id === $animal->litter->station->owner_id;
+    }
+
+    public function manage(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $user->hasPermissionTo(PermissionsEnum::MANAGE_ANIMALS->value);
     }
 
     public function viewAny(User $user)
