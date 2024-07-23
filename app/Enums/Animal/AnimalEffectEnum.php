@@ -18,4 +18,18 @@ enum AnimalEffectEnum: int
     case FLAG_SILVERMANE = 0b001000;
     case FLAG_SILVERED = 0b010000;
     case FLAG_ODD_EYED = 0b100000;
+
+    public static function selectableGroups(): array
+    {
+        return [
+            [
+                self::FLAG_ROAN,
+                self::FLAG_MARBLE,
+                self::FLAG_MERLE,
+                self::FLAG_SILVERMANE,
+                self::FLAG_SILVERED,
+                self::FLAG_ODD_EYED,
+            ],
+        ];
+    }
 }

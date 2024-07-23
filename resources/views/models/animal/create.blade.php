@@ -13,7 +13,6 @@
     use App\Enums\Animal\AnimalTitleEnum;
     use App\Enums\GenderEnum;
     use App\Models\Litter;
-    use App\Models\Station;
     use App\Models\User;
 @endphp
 
@@ -22,6 +21,9 @@
 @section('content')
     <div class="container">
 
+        <div>
+            {{ $errors }}
+        </div>
         <form method="POST" action="{{ route('animals.store') }}" enctype="multipart/form-data">
             @csrf
             <label class="form-group">
@@ -75,45 +77,49 @@
                 </div>
             </div>
 
-            <div class="row align-items-center">
-                <div class="col-5">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
-                        <autocomplete
-                            type="user"
-                            name="caretaker_id"
-                            placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
-                        />
-                    </label>
+            @can('manage', Animal::class)
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.name', User::class)) }}</strong>
+                            <autocomplete
+                                type="user"
+                                name="caretaker_id"
+                                placeholder="{{ __(sprintf('models.%s.fields.name', User::class)) }}"
+                                :default-value="'{{ Auth::user()->id }}'"
+                                :default-label="'{{ Auth::user()->name }}'"
+                            />
+                        </label>
+                    </div>
+                    <div class="col-1 text-center">
+                        <div class="align-self-center">nebo</div>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}</strong>
+                            <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                                   placeholder="{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}"
+                                   value="{{ old('animal[caretaker_station_name]') }}">
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        <label class="form-group">
+                            <strong>{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}</strong>
+                            <input type="text" class="form-control" name="animal[caretaker_station_name]"
+                                   placeholder="{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}"
+                                   value="{{ old('animal[caretaker_name]') }}">
+                        </label>
+                    </div>
                 </div>
-                <div class="col-1 text-center">
-                    <div class="align-self-center">nebo</div>
-                </div>
-                <div class="col-3">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}</strong>
-                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
-                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_station_name', Animal::class)) }}"
-                               value="{{ old('animal[caretaker_station_name]') }}">
-                    </label>
-                </div>
-                <div class="col-3">
-                    <label class="form-group">
-                        <strong>{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}</strong>
-                        <input type="text" class="form-control" name="animal[caretaker_station_name]"
-                               placeholder="{{ __(sprintf('models.%s.fields.caretaker_name', Animal::class)) }}"
-                               value="{{ old('animal[caretaker_name]') }}">
-                    </label>
-                </div>
-            </div>
+            @endcan
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.father.name', Litter::class)) }}</strong>
                 <x-parent-select
                     name="father_id"
                     :value="null"
-                    :station-animals="$stationAnimalsFemale"
-                    :other-animals="$otherAnimalsFemale"
+                    :station-animals="$stationAnimalsMale"
+                    :other-animals="$otherAnimalsMale"
                     i18n-field="mother"
                 />
             </label>

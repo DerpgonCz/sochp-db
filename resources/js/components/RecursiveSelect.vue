@@ -5,6 +5,7 @@
             :name="name"
             class="custom-select" v-if="typeof options === 'object' && Array.isArray(options)"
             v-model="selectedValue"
+            :required="required"
         >
             <!-- Default value -->
             <option :value="null">{{ defaultValueLabel }}</option>
@@ -30,6 +31,7 @@
             :name="name"
             class="custom-select" v-if="typeof options === 'object' && !Array.isArray(options)"
             v-model="selectedValue"
+            :required="required"
         >
             <!-- Default value -->
             <option :value="null">--</option>
@@ -66,6 +68,7 @@
                 :options="row.values"
                 :value="value.slice(1) || []"
                 :default-value-label="row.defaultValueLabel"
+                :required="row.required"
                 v-model="subSelectedValues"
             ></recursive-select>
         </div>
@@ -86,6 +89,10 @@ export default {
         },
         options: {},
         value: {},
+        required: {
+            type: Boolean,
+            default: false,
+        },
         defaultValueLabel: {
             type: String,
             default: '--'

@@ -3,6 +3,7 @@
         <recursive-select
             :options="selections"
             v-model="selectedColor"
+            :required="true"
         ></recursive-select>
         <input type="hidden" v-for="item of selectedColor" :name="`${name}[]`" :value="item">
     </div>
@@ -40,16 +41,19 @@ export default {
                 {
                     label: this.shadedLabel,
                     value: 'shaded',
+                    required: true,
                     values: this.shadedColors
                         .map(shadedColorValue => ({
                             label: this.shadedColorLabels[shadedColorValue],
                             value: shadedColorValue,
                             defaultValueLabel: `-- ${this.fullColorLabel.toLocaleLowerCase()} --`,
+                            required: true,
                             values: this.fullColors
                                 .map(fullColorValue => ({
                                     label: this.fullColorLabels[fullColorValue],
                                     value: fullColorValue,
                                     defaultValueLabel: `-- ${this.minkColorLabel.toLocaleLowerCase()} --`,
+                                    required: true,
                                     values: this.fullColorMinks.includes(fullColorValue)
                                         ? this.minkColors
                                             .map(minkColorValue => ({
@@ -63,11 +67,13 @@ export default {
                 {
                     label: this.fullColorLabel,
                     value: 'full',
+                    required: true,
                     values: this.fullColors
                         .map(fullColorValue => ({
                             label: this.fullColorLabels[fullColorValue],
                             value: fullColorValue,
                             defaultValueLabel: `-- ${this.minkColorLabel.toLocaleLowerCase()} --`,
+                            required: true,
                             values: this.fullColorMinks.includes(fullColorValue)
                                 ? this.minkColors
                                     .map(minkColorValue => ({

@@ -27,26 +27,27 @@ class AnimalColorTranslationService
                 __(sprintf('enums.%s.eyes.%s', AnimalColorShaded::class, $animal->eyes->value), locale: $locale)
             );
         }
+
         if (
             $animal->color_shaded === null
             && $animal->color_full !== null
-            && $animal->color_mink === null
+            && ($animal->color_mink === null || $animal->color_mink === AnimalColorMink::INDETERMINABLE)
         ) {
             return __(sprintf('enums.%s.%s', AnimalColorFull::class, $animal->color_full->value), locale: $locale);
         }
 
         if (
             $animal->color_shaded !== null
-            && $animal->color_full === null
-            && $animal->color_mink === null
+            && ($animal->color_full === null || $animal->color_full === AnimalColorFull::INDETERMINABLE)
+            && ($animal->color_mink === null || $animal->color_mink === AnimalColorMink::INDETERMINABLE)
         ) {
             return $prependEyes . __(sprintf('enums.%s.%s', AnimalColorShaded::class, $animal->color_shaded->value), locale: $locale);
         }
 
         if (
             $animal->color_shaded !== null
-            && $animal->color_full !== null
-            && $animal->color_mink === null
+            && ($animal->color_full !== null && $animal->color_full !== AnimalColorFull::INDETERMINABLE)
+            && ($animal->color_mink === null || $animal->color_mink === AnimalColorMink::INDETERMINABLE)
         ) {
             if (in_array($animal->color_shaded, [AnimalColorShaded::SIAMESE, AnimalColorShaded::HIMALAYAN])) {
                 return sprintf(
@@ -67,8 +68,8 @@ class AnimalColorTranslationService
 
         if (
             $animal->color_shaded === null
-            && $animal->color_full !== null
-            && $animal->color_mink !== null
+            && ($animal->color_full !== null && $animal->color_full !== AnimalColorFull::INDETERMINABLE)
+            && ($animal->color_mink !== null && $animal->color_mink !== AnimalColorMink::INDETERMINABLE)
         ) {
             return sprintf(
                 '%s %s',
@@ -77,6 +78,11 @@ class AnimalColorTranslationService
             );
         }
 
-        return '';
+        return sprintf(
+            '%s %s %s',
+            __(sprintf('enums.%s.%s', AnimalColorShaded::class, $animal->color_shaded->value), locale: $locale),
+            __(sprintf('enums.%s.%s', AnimalColorFull::class, $animal->color_full->value), locale: $locale),
+            __(sprintf('enums.%s.%s', AnimalColorMink::class, $animal->color_mink->value), locale: $locale),
+        );
     }
 }

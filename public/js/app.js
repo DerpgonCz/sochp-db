@@ -2321,6 +2321,14 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     name: String,
     type: String,
+    defaultValue: {
+      type: String,
+      "default": null
+    },
+    defaultLabel: {
+      type: String,
+      "default": ''
+    },
     placeholder: {
       type: String,
       "default": ''
@@ -2401,16 +2409,19 @@ __webpack_require__.r(__webpack_exports__);
       selections: [{
         label: this.shadedLabel,
         value: 'shaded',
+        required: true,
         values: this.shadedColors.map(function (shadedColorValue) {
           return {
             label: _this.shadedColorLabels[shadedColorValue],
             value: shadedColorValue,
             defaultValueLabel: "-- ".concat(_this.fullColorLabel.toLocaleLowerCase(), " --"),
+            required: true,
             values: _this.fullColors.map(function (fullColorValue) {
               return {
                 label: _this.fullColorLabels[fullColorValue],
                 value: fullColorValue,
                 defaultValueLabel: "-- ".concat(_this.minkColorLabel.toLocaleLowerCase(), " --"),
+                required: true,
                 values: _this.fullColorMinks.includes(fullColorValue) ? _this.minkColors.map(function (minkColorValue) {
                   return {
                     label: _this.minkColorLabels[minkColorValue],
@@ -2424,11 +2435,13 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         label: this.fullColorLabel,
         value: 'full',
+        required: true,
         values: this.fullColors.map(function (fullColorValue) {
           return {
             label: _this.fullColorLabels[fullColorValue],
             value: fullColorValue,
             defaultValueLabel: "-- ".concat(_this.minkColorLabel.toLocaleLowerCase(), " --"),
+            required: true,
             values: _this.fullColorMinks.includes(fullColorValue) ? _this.minkColors.map(function (minkColorValue) {
               return {
                 label: _this.minkColorLabels[minkColorValue],
@@ -2753,6 +2766,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     options: {},
     value: {},
+    required: {
+      type: Boolean,
+      "default": false
+    },
     defaultValueLabel: {
       type: String,
       "default": '--'
@@ -3538,7 +3555,14 @@ var render = function render() {
     attrs: {
       name: _vm.name
     }
-  });
+  }, [_vm.defaultValue !== null ? _c("option", {
+    attrs: {
+      selected: ""
+    },
+    domProps: {
+      value: _vm.defaultValue
+    }
+  }, [_vm._v(_vm._s(_vm.defaultLabel))]) : _vm._e()]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3563,7 +3587,8 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("recursive-select", {
     attrs: {
-      options: _vm.selections
+      options: _vm.selections,
+      required: true
     },
     model: {
       value: _vm.selectedColor,
@@ -3927,7 +3952,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: _vm.name
+      name: _vm.name,
+      required: _vm.required
     },
     on: {
       change: function change($event) {
@@ -3966,7 +3992,8 @@ var render = function render() {
     }],
     staticClass: "custom-select",
     attrs: {
-      name: _vm.name
+      name: _vm.name,
+      required: _vm.required
     },
     on: {
       change: function change($event) {
@@ -4013,7 +4040,8 @@ var render = function render() {
         name: _vm.name,
         options: row.values,
         value: _vm.value.slice(1) || [],
-        "default-value-label": row.defaultValueLabel
+        "default-value-label": row.defaultValueLabel,
+        required: row.required
       },
       model: {
         value: _vm.subSelectedValues,

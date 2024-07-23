@@ -220,6 +220,8 @@
 
                 @if($animal->file_pedigree_path)
                     <a href="{{ route('animals.files.pedigree', $animal) }}" class="btn btn-primary">{{ __('Pedigree') }}</a>
+                @else
+                    <button type="button" class="btn btn-secondary" disabled>{{ __('Pedigree') }}</button>
                 @endif
             </div>
         </div>
