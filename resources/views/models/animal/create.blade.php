@@ -21,9 +21,6 @@
 @section('content')
     <div class="container">
 
-        <div>
-            {{ $errors }}
-        </div>
         <form method="POST" action="{{ route('animals.store') }}" enctype="multipart/form-data">
             @csrf
             <label class="form-group">
