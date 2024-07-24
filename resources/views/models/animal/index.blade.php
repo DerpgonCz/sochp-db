@@ -1,5 +1,8 @@
 @php
-    use App\Models\Animal;use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;
+    use App\Models\Animal;
+    use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;
+    use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;
+    use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;
 @endphp
 @extends('layouts.app')
 
@@ -21,7 +24,7 @@
                     <thead>
                     <tr>
                         <th>{{ __(sprintf('models.%s.fields.name', Animal::class)) }}</th>
-                        <th>{{ __('Station') }}</th>
+                        <th>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</th>
                         <th>{{ __(sprintf('models.%s.fields.fur', Animal::class)) }}</th>
                         <th>{{ __(sprintf('models.%s.fields.color', Animal::class)) }}</th>
                         <th>{{ __(sprintf('models.%s.fields.effect', Animal::class)) }}</th>
@@ -37,11 +40,11 @@
                                     {{ $animal->name }}
                                 </a>
                             </th>
-                            <td>{{ $animal?->litter?->station->name }}</td>
+                            <td>{{ $animal->date_of_birth?->format('j. n. Y') ?: '--' }}</td>
                             <td>{{ (new AnimalFurTranslationService())($animal) }}</td>
                             <td>{{ (new AnimalColorTranslationService())($animal) ?: '--' }}</td>
                             <td>{{ (new AnimalEffectTranslationService())($animal)  ?: '--'}}</td>
-                            <td>{{ $animal?->markings ?: '--' }}</td>
+                            <td>{{ $animal->markings ?: '--' }}</td>
                         </tr>
                     @endforeach
                     </tbody>

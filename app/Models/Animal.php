@@ -107,13 +107,6 @@ class Animal extends Model
         ];
     }
 
-    protected function dateOfBirth(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?string $value): ?DateTime => $this->castAttribute('date_of_birth', $value) ?? $this->litter?->happened_on
-        );
-    }
-
     protected function breederName(): Attribute
     {
         return Attribute::make(

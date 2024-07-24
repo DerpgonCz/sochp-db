@@ -99,6 +99,9 @@ class AnimalCreateRequest extends FormRequest
                 'numeric',
                 new FlagEnumRule(AnimalTitleEnum::class),
             ],
+            'animal.date_of_birth' => [
+                'date'
+            ]
         ];
     }
 }
