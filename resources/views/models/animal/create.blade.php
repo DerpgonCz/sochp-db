@@ -26,14 +26,14 @@
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}</strong>
                 *
-                <input type="date" class="form-control" name="animal[date_of_birth]"
+                <input type="date" class="form-control" name="animal[date_of_birth]" max={{ $today }}
                        placeholder="{{ __(sprintf('models.%s.fields.date_of_birth', Animal::class)) }}"
                        value="{{ old('animal[date_of_birth]') }}" required>
             </label>
 
             <label class="form-group">
                 <strong>{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}</strong>
-                <input type="date" class="form-control" name="animal[died_on]"
+                <input type="date" class="form-control" name="animal[died_on]" max={{ $today }}
                        placeholder="{{ __(sprintf('models.%s.fields.died_on', Animal::class)) }}"
                        value="{{ old('animal[died_on]') }}">
             </label>

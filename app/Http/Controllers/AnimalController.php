@@ -49,6 +49,7 @@ class AnimalController extends Controller
             [
                 ...$animalSelectDataService->buildViewDataForParentSelection(Auth::user()?->station),
                 'stations' => Station::all(),
+                'today' => date('Y-m-d'),
             ]
         );
     }

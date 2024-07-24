@@ -72,7 +72,7 @@
                 )
                     <label class="form-group">
                         <strong>{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}</strong>
-                        <input type="date" class="form-control" name="happened_on"
+                        <input type="date" class="form-control" name="happened_on" max={{ $today }}
                                placeholder="{{ __(sprintf('models.%s.fields.happened_on', Litter::class)) }}"
                                value="{{ optional($litter->happened_on ?? old('happened_on'))->format('Y-m-d') }}"
                                required>
