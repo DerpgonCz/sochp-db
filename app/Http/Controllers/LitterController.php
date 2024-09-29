@@ -36,7 +36,7 @@ class LitterController extends Controller
             ->with(['children', 'father', 'mother', 'station'])
             ->paginate(50, pageName: 'littersPage');
 
-        if (Gate::check('approve', Station::class)) {
+        if (Gate::check('approve', Litter::class)) {
             $litterForApproval =
                 Litter::toApprove()
                     ->orderByDesc('happened_on')
