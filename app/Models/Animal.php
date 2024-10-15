@@ -18,7 +18,6 @@ use App\Services\Frontend\Animal\i18n\AnimalColorTranslationService;
 use App\Services\Frontend\Animal\i18n\AnimalEffectTranslationService;
 use App\Services\Frontend\Animal\i18n\AnimalFurTranslationService;
 use App\Services\Frontend\Animal\i18n\AnimalVarietyTranslationService;
-use DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;

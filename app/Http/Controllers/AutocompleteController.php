@@ -31,7 +31,7 @@ class AutocompleteController extends Controller
         $gender = $request->get('gender');
 
         $modelClass = self::TYPE_MAPPING[$type];
-        
+
         return response()->json(
             [
                 'results' => $this->findEntities($modelClass, $gender, $query)

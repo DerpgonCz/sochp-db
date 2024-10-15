@@ -8,7 +8,6 @@ use App\Http\Requests\LitterStoreRequest;
 use App\Http\Requests\LitterUpdateRequest;
 use App\Models\Animal;
 use App\Models\Litter;
-use App\Models\Station;
 use App\Services\Frontend\Animal\AnimalColorBuilderValueSerializer;
 use App\Services\Frontend\Animal\AnimalSelectDataService;
 use Illuminate\Auth\Access\AuthorizationException;
