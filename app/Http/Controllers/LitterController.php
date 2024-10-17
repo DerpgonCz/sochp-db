@@ -106,7 +106,7 @@ class LitterController extends Controller
             return response()->redirectToRoute('litters.show', $litter);
         }
 
-        $station = Auth::user()->station->with('animals', 'animals.litter')->first();
+        $station = Auth::user()->station?->with('animals', 'animals.litter')->first();
 
         return view('models.litter.edit', [
             'litter' => $litter,
