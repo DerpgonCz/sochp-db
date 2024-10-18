@@ -53,7 +53,7 @@ class LitterPolicy
             return false;
         }
 
-        return $user->hasPermissionTo(PermissionsEnum::MANAGE_STATIONS->value);
+        return $user->hasPermissionTo(PermissionsEnum::MANAGE_LITTERS->value);
     }
 
     public function updateState(User $user, Litter $litter, LitterStateEnum $toState): bool
