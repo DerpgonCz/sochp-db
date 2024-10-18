@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\StationStateEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,5 +62,10 @@ class User extends Authenticatable
         return $this
             ->station()
             ->where('state', '=', StationStateEnum::APPROVED);
+    }
+
+    public function animals(): HasMany
+    {
+        return $this->hasMany(Animal::class, 'caretaker_id');
     }
 }

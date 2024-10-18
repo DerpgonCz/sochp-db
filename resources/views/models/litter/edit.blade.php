@@ -84,7 +84,7 @@
                     <x-parent-select
                             name="father_id"
                             :value="$litter?->father?->id"
-                            :station-animals="$stationAnimalsMale"
+                            :owned-animals="$ownedAnimalsMale"
                             :other-animals="$otherAnimalsMale"
                             i18n-field="father"
                     />
@@ -95,7 +95,7 @@
                     <x-parent-select
                             name="mother_id"
                             :value="$litter?->mother?->id"
-                            :station-animals="$stationAnimalsFemale"
+                            :owned-animals="$ownedAnimalsFemale"
                             :other-animals="$otherAnimalsFemale"
                             i18n-field="mother"
                     />

@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace App\Services\Frontend\Animal;
 
+use Illuminate\Support\Facades\Auth;
 use App\Enums\GenderEnum;
+use App\Enums\Auth\PermissionsEnum;
 use App\Models\Animal;
-use App\Models\Station;
 
 class AnimalSelectDataService
 {
-    public function buildViewDataForParentSelection(?Station $station = null): array
+    public function buildViewDataForParentSelection(): array
     {
-        $stationAnimals = collect();
+        $ownedAnimals = collect();
         $otherAnimals = Animal::listable()->with('litter', 'litter.station')->get()
             ->sortBy('litter.happened_on');
+        $user = Auth::user();
+        $canManageLitters = $user->hasPermissionTo(PermissionsEnum::MANAGE_LITTERS->value);
 
-
-        if ($station) {
-            $stationAnimals = $station->animals()->listable()->get()->sortBy('litter.happened_on');
-            $otherAnimals = $otherAnimals->except($stationAnimals->pluck('id')->toArray());
-        }
+        $ownedAnimals = $user->animals()->listable()->get()->sortBy('litter.happened_on');
+        $otherAnimals = $otherAnimals->except($ownedAnimals->pluck('id')->toArray());
 
         return [
-            'stationAnimalsMale' => $stationAnimals->where('gender', GenderEnum::MALE()),
-            'stationAnimalsFemale' => $stationAnimals->where('gender', GenderEnum::FEMALE()),
+            'ownedAnimalsMale' => $ownedAnimals->where('gender', GenderEnum::MALE()),
+            'ownedAnimalsFemale' => $ownedAnimals->where('gender', GenderEnum::FEMALE()),
             'otherAnimalsMale' => $otherAnimals->where('gender', GenderEnum::MALE()),
-            'otherAnimalsFemale' => $otherAnimals->where('gender', GenderEnum::FEMALE()),
+            'otherAnimalsFemale' => $canManageLitters ? $otherAnimals->where('gender', GenderEnum::FEMALE()) : [],
         ];
     }
 }

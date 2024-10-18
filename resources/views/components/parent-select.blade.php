@@ -3,15 +3,15 @@
 @endphp
 <select name="{{ $name }}" class="custom-select">
     <option value="">-- {{ __(sprintf('models.%s.fields.%s.name', Litter::class, $i18nField)) }} --</option>
-    @if(count($stationAnimals))
+    @if(count($ownedAnimals))
         <optgroup label="{{ __('My animals') }}">
     @endif
-    @foreach($stationAnimals as $animal)
+    @foreach($ownedAnimals as $animal)
             <option value="{{ $animal->id }}" @selected($animal->id === $value)>{{ $animal->name }}
                 ({{ $animal->litter?->name }})
             </option>
     @endforeach
-    @if(count($stationAnimals))
+    @if(count($otherAnimals))
         </optgroup>
 
         <optgroup label="{{ __('Other animals') }}">
@@ -27,7 +27,7 @@
             @endif
         </option>
     @endforeach
-    @if(count($stationAnimals))
+    @if(count($otherAnimals))
         </optgroup>
     @endif
 </select>

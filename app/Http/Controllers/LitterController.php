@@ -66,7 +66,7 @@ class LitterController extends Controller
 
         return view('models.litter.create', [
             'station' => $station,
-            ...$animalSelectDataService->buildViewDataForParentSelection($station),
+            ...$animalSelectDataService->buildViewDataForParentSelection(),
         ]);
     }
 
@@ -110,7 +110,7 @@ class LitterController extends Controller
 
         return view('models.litter.edit', [
             'litter' => $litter,
-            ...$animalSelectDataService->buildViewDataForParentSelection($station),
+            ...$animalSelectDataService->buildViewDataForParentSelection(),
             'today' => date('Y-m-d'),
         ]);
     }

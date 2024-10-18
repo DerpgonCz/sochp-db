@@ -47,7 +47,7 @@ class AnimalController extends Controller
         return view(
             'models.animal.create',
             [
-                ...$animalSelectDataService->buildViewDataForParentSelection(Auth::user()?->station),
+                ...$animalSelectDataService->buildViewDataForParentSelection(),
                 'stations' => Station::all(),
                 'today' => date('Y-m-d'),
             ]
